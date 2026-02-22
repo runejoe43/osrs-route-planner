@@ -1,11 +1,11 @@
 import { Box } from "@mantine/core";
 import "leaflet/dist/leaflet.css";
-import "../style/Map.css";
+import "../../style/Map.css";
 import { MapContainer, Marker, Popup, TileLayer, useMapEvents } from "react-leaflet";
-import { leafletToWorldPoint } from "../util/Coordinates";
+import { leafletToWorldPoint } from "../../util/Coordinates";
 import { useState } from "react";
 import L, { LatLngBounds } from "leaflet";
-import type { MapPin } from "../types/MapPin";
+import type { MapPin } from "../../types/MapPin";
 
 export default function OSRSMap() {
   const bounds = new LatLngBounds([0, 0], [-1428, 405]);
