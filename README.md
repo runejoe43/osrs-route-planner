@@ -95,7 +95,7 @@ Encode the current route into the URL (compressed query param or hash) so users 
 
 ### Data Preparation
 
-1. Write a build-time script that fetches `ItemID.java`, `NpcID.java`, and `ObjectID.java` from runelite/runelite (runelite-api/gameval), parses each to extract id and display name, and writes `npcs-summary.json`, `objects-summary.json`, and `items-summary.json` into `/public/data/`. Each constant in the gameval files has a Javadoc comment immediately above it (e.g. `/** \n * Crate \n */` before `public static final int MCANNONCRATEBOY = 1;`) — parse that comment for the human-readable name so the JSON has in-game-style names for autocomplete.
+1. ~~Write a build-time script that fetches the OSRS Wiki [NPC_IDs](https://oldschool.runescape.wiki/w/NPC_IDs) and [Item_IDs](https://oldschool.runescape.wiki/w/Item_IDs) pages via the MediaWiki API, parses the main table on each page (name = first column split on `#` using only the first segment; only numeric IDs from the second column), and writes `npcs-summary.json` and `items-summary.json` into `/public/data/`. Object IDs are out of scope for now. Run with `npm run build:data` or as part of `npm run build`.~~
 2. Write a Java-source parser (Node script) that reads Quest Helper quest files and extracts `WorldPoint`, step type, entity ID, and instruction text into structured JSON files — one per quest.
 3. Verify the extracted quest step coordinates against Explv's Map to confirm accuracy before committing the JSON.
 4. Generate a `quest-index.json` manifest listing all available pre-loaded quests (name, filename, and quest point value) so the quest picker UI can populate without hardcoding quest names.
