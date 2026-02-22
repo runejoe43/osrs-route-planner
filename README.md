@@ -11,17 +11,15 @@ The end goal is a shareable, exportable route that can be imported into RuneLite
 ## Data Sources
 
 
-| Data                                                            | Source                                                  | Access Method                      | Notes                                                                                                                                                                              |
-| --------------------------------------------------------------- | ------------------------------------------------------- | ---------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| OSRS map tiles                                                  | JoeGandy/RSMap                                          | Fetched in browser via Leaflet     | Static tile hosting at joegandy.github.io/RSMap; pre-generated from game cache, no auth needed                                                                                     |
-| WorldPoint coordinate math                                      | Jagex native tile grid                                  | Pure arithmetic in JS              | Linear fitting from five reference points (least-squares calibration); reference points are listed in the table below. Same system used by RuneLite, Explv's Map, and Quest Helper |
-| NPC IDs + names                                                 | osrsbox-db `npcs-summary.json`                          | `fetch()` from GitHub Pages CDN    | Matches `NpcID.java` constants in RuneLite exactly                                                                                                                                 |
-| Object IDs + names                                              | osrsbox-db `objects-summary.json`                       | `fetch()` from GitHub Pages CDN    | Matches `ObjectID.java` constants in RuneLite exactly                                                                                                                              |
-| Item IDs + names                                                | osrsbox-db `items-summary.json`                         | `fetch()` from GitHub Pages CDN    | Same pattern as NPC/Object files                                                                                                                                                   |
-| Quest metadata (requirements, difficulty, quest points, length) | OSRS Wiki MediaWiki API                                 | Public REST API, no auth required  | Parsed from `{{QuestDetails}}` infobox in section 0 of each quest page                                                                                                             |
-| Quest step coordinates + instructions                           | Quest Helper GitHub source (`WaterfallQuest.java` etc.) | Parse Java source from public repo | No pre-built data resource exists; must extract and convert to JSON                                                                                                                |
-| Grand Exchange pricing + general game data                      | OSRS Wiki Weird Gloop API                               | Public REST API                    | Structured and clean; useful for item enrichment                                                                                                                                   |
-| Player quest completion status                                  | WikiSync API                                            | **Off limits** for third-party use | Wiki internal use only — do not use                                                                                                                                                |
+| Data                                                            | Source                                                                   | Access Method                                                                             | Notes                                                                                                                                                                              |
+| --------------------------------------------------------------- | ------------------------------------------------------------------------ | ----------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| OSRS map tiles                                                  | JoeGandy/RSMap                                                           | Fetched in browser via Leaflet                                                            | Static tile hosting at joegandy.github.io/RSMap; pre-generated from game cache, no auth needed                                                                                     |
+| WorldPoint coordinate math                                      | Jagex native tile grid                                                   | Pure arithmetic in JS                                                                     | Linear fitting from five reference points (least-squares calibration); reference points are listed in the table below. Same system used by RuneLite, Explv's Map, and Quest Helper |
+| NPC, Object, and Item IDs + names                               | RuneLite runelite-api `gameval` (NpcID.java, ObjectID.java, ItemID.java) | Build-time script fetches raw Java from GitHub, parses to JSON, writes to `/public/data/` | Each constant has a Javadoc comment above it with the human-readable name (e.g. "Crate", "Bank chest"). Matches Quest Helper's `NpcID` / `ObjectID` / `ItemID` exactly.            |
+| Quest metadata (requirements, difficulty, quest points, length) | OSRS Wiki MediaWiki API                                                  | Public REST API, no auth required                                                         | Parsed from `{{QuestDetails}}` infobox in section 0 of each quest page                                                                                                             |
+| Quest step coordinates + instructions                           | Quest Helper GitHub source (`WaterfallQuest.java` etc.)                  | Parse Java source from public repo                                                        | No pre-built data resource exists; must extract and convert to JSON                                                                                                                |
+| Grand Exchange pricing + general game data                      | OSRS Wiki Weird Gloop API                                                | Public REST API                                                                           | Structured and clean; useful for item enrichment                                                                                                                                   |
+| Player quest completion status                                  | WikiSync API                                                             | **Off limits** for third-party use                                                        | Wiki internal use only — do not use                                                                                                                                                |
 
 
 ### Coordinate calibration reference points
@@ -35,6 +33,19 @@ The end goal is a shareable, exportable route that can be imported into RuneLite
 | Wintertodt door           | [-1080.375, 83.8125]    | [1630, 3965]               | Far west of map  |
 | Weiss Salt Mine           | [-283.65625, 236.46875] | [2851, 10338]              | Far north of map |
 
+
+### RuneLite gameval ID files (build script reference)
+
+The gameval Java files (`NpcID.java`, `ObjectID.java`, `ItemID.java`) are auto-generated and contain one Javadoc block per constant. Use the comment for the human-readable display name when generating the summary JSON:
+
+```java
+ /**
+ * Human readable name
+ */
+ public static final int CONSTANT_NAME = id;
+```
+
+Parse the line matching  `\* (.+)` (the comment body) as the display name and `public static final int (\w+) = (\d+);` for constant name and id. That gives in-game-style names for autocomplete without calling the OSRS Wiki.
 
 ---
 
@@ -53,7 +64,7 @@ The end goal is a shareable, exportable route that can be imported into RuneLite
 
 ### Data Fetching & Parsing
 
-- **Native `fetch()`** — sufficient for all external data sources (osrsbox CDN, Wiki API); no dedicated HTTP client library needed
+- **Native `fetch()`** — sufficient for all external data sources (static JSON in `/public/data/`, Wiki API); no dedicated HTTP client library needed
 - **A wikitext parser** (e.g. `wtf_wikipedia` npm package) — for parsing `{{QuestDetails}}` infobox fields from the Wiki MediaWiki API response
 
 ### Export / Sharing
@@ -75,7 +86,7 @@ Allow users to click the map to place a step pin. Each pin is stored with its na
 
 ### NPC / Object / Item Attachment
 
-Searchable dropdowns populated from osrsbox-db let users attach a named, ID-backed entity to each step — matching exactly how Quest Helper's `NpcStep` and `ObjectStep` reference `NpcID` and `ObjectID` constants.
+Searchable dropdowns populated from the RuneLite-derived JSON in `/public/data/` let users attach a named, ID-backed entity to each step — matching exactly how Quest Helper's `NpcStep` and `ObjectStep` reference `NpcID` and `ObjectID` constants.
 
 ### Pre-loaded Quest Steps
 
@@ -99,7 +110,7 @@ Encode the current route into the URL (compressed query param or hash) so users 
 
 ### Data Preparation
 
-1. Write a script to fetch and cache `npcs-summary.json`, `objects-summary.json`, and `items-summary.json` from osrsbox-db into a local `/public/data/` directory at build time.
+1. Write a build-time script that fetches `ItemID.java`, `NpcID.java`, and `ObjectID.java` from runelite/runelite (runelite-api/gameval), parses each to extract id and display name, and writes `npcs-summary.json`, `objects-summary.json`, and `items-summary.json` into `/public/data/`. Each constant in the gameval files has a Javadoc comment immediately above it (e.g. `/** \n * Crate \n */` before `public static final int MCANNONCRATEBOY = 1;`) — parse that comment for the human-readable name so the JSON has in-game-style names for autocomplete.
 2. Write a Java-source parser (Node script) that reads Quest Helper quest files and extracts `WorldPoint`, step type, entity ID, and instruction text into structured JSON files — one per quest.
 3. Verify the extracted quest step coordinates against Explv's Map to confirm accuracy before committing the JSON.
 4. Generate a `quest-index.json` manifest listing all available pre-loaded quests (name, filename, and quest point value) so the quest picker UI can populate without hardcoding quest names.
@@ -124,12 +135,12 @@ Encode the current route into the URL (compressed query param or hash) so users 
 
 1. Define Zustand store slices: map state (current plane, viewport), route state (ordered list of steps), and reference data (NPC/object/item lookup tables).
 2. Implement data-loading logic that hydrates the NPC, object, and item lookup tables from the static JSON files on app startup.
-3. Add loading and error state fields to the reference data store slice so that UI components can show appropriate spinners or fallback messages while the osrsbox JSON files are being fetched.
+3. Add loading and error state fields to the reference data store slice so that UI components can show appropriate spinners or fallback messages while the NPC/object/item JSON files are being fetched.
 
 ### Step Builder UI
 
 1. Build the step pin placement flow — click map → open step editor panel → fill in type, instruction, and optional entity.
-2. Build the entity search component with autocomplete backed by the in-memory osrsbox lookup tables.
+2. Build the entity search component with autocomplete backed by the in-memory reference data lookup tables (NPC/object/item).
 3. Build the step list sidebar showing all route steps in order with edit and reorder controls.
 4. Implement drag-and-drop reordering of steps in the sidebar (e.g. using `@dnd-kit/sortable`). Reordering must update step indices in the store and re-number the corresponding map markers atomically.
 5. Implement route import — allow users to load a previously exported route JSON file back into the app, validating it against the canonical schema before writing it to the store.
@@ -156,9 +167,9 @@ Encode the current route into the URL (compressed query param or hash) so users 
 
 ### Backend vs Single-Page App
 
-A backend is not needed for the initial version. All data sources are either static files (osrsbox JSON, pre-extracted quest step JSON) that can be bundled or served from the `/public` directory, or public APIs (OSRS Wiki) that can be called directly from the browser. Zustand handles all runtime state, and route export/sharing works entirely client-side via file download and URL encoding.
+A backend is not needed for the initial version. All data sources are either static files (RuneLite-derived NPC/object/item JSON, pre-extracted quest step JSON) that can be bundled or served from the `/public` directory, or public APIs (OSRS Wiki) that can be called directly from the browser. Zustand handles all runtime state, and route export/sharing works entirely client-side via file download and URL encoding.
 
-The case for adding a backend later would be route persistence (saving named routes to a user account), community sharing (a gallery of public routes), or if the osrsbox CDN becomes unreliable and you want to self-host the data behind your own API. For now, a fully static SPA deployed to GitHub Pages or Vercel covers all the described features without any server infrastructure.
+The case for adding a backend later would be route persistence (saving named routes to a user account), community sharing (a gallery of public routes), or if the RuneLite GitHub source or your static data becomes unavailable and you want to self-host the entity ID data behind your own API. For now, a fully static SPA deployed to GitHub Pages or Vercel covers all the described features without any server infrastructure.
 
 The one CORS caveat: the OSRS Wiki MediaWiki API must be called with an appropriate `User-Agent` header per their guidelines. This is possible from the browser but if they ever restrict cross-origin requests, a lightweight serverless function (Vercel Edge Function or Cloudflare Worker) acting as a proxy would be the minimal addition needed — not a full backend.
 
