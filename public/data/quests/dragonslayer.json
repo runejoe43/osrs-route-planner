@@ -1,0 +1,420 @@
+{
+  "name": "Dragon Slayer",
+  "questPoints": 2,
+  "experienceRewards": [
+    {
+      "skill": "STRENGTH",
+      "xp": 18650
+    },
+    {
+      "skill": "DEFENCE",
+      "xp": 18650
+    }
+  ],
+  "lampRewards": null,
+  "skillRequirements": [],
+  "questRequirements": [],
+  "questPointRequirement": 32,
+  "itemRequirements": [
+    "Unfired bowl",
+    "Wizard's mind bomb",
+    "Lobster pot",
+    "Silk",
+    "Hammer",
+    "Planks",
+    "Steel nails",
+    "Coins",
+    "Combat equipment"
+  ],
+  "steps": [
+    {
+      "panelName": "Starting off",
+      "steps": [
+        {
+          "stepDescription": "Talk to the Guildmaster in the Champions' Guild, south of Varrock.",
+          "worldpoint": {
+            "x": 3190,
+            "y": 3360,
+            "plane": 0
+          }
+        },
+        {
+          "stepDescription": "Talk to Oziach in his house in north western Edgeville.",
+          "worldpoint": {
+            "x": 3068,
+            "y": 3517,
+            "plane": 0
+          }
+        },
+        {
+          "stepDescription": "Return to the Guildmaster and ask him all the available questions.",
+          "worldpoint": {
+            "x": 3190,
+            "y": 3360,
+            "plane": 0
+          }
+        }
+      ]
+    },
+    {
+      "panelName": "Thalzar's map piece",
+      "steps": [
+        {
+          "stepDescription": "Talk to the Oracle on top of Ice Mountain.",
+          "worldpoint": {
+            "x": 3014,
+            "y": 3501,
+            "plane": 0
+          }
+        },
+        {
+          "stepDescription": "Go down the ladder in the dwarven camp to the south into the Dwarven Mines.",
+          "worldpoint": {
+            "x": 3019,
+            "y": 3450,
+            "plane": 0
+          }
+        },
+        {
+          "stepDescription": "Go to the north east of the Dwarven Mines and use the silk on the magic door.",
+          "worldpoint": {
+            "x": 3050,
+            "y": 9840,
+            "plane": 0
+          }
+        },
+        {
+          "stepDescription": "Go to the north east of the Dwarven Mines and use the lobster pot on the magic door.",
+          "worldpoint": {
+            "x": 3050,
+            "y": 9840,
+            "plane": 0
+          }
+        },
+        {
+          "stepDescription": "Go to the north east of the Dwarven Mines and use the unfired bowl on the magic door.",
+          "worldpoint": {
+            "x": 3050,
+            "y": 9840,
+            "plane": 0
+          }
+        },
+        {
+          "stepDescription": "Go to the north east of the Dwarven Mines and use the wizard's mind bomb on the magic door (BE CAREFUL NOT TO DRINK IT).",
+          "worldpoint": {
+            "x": 3050,
+            "y": 9840,
+            "plane": 0
+          }
+        },
+        {
+          "stepDescription": "Search the chest for Thalzar's map piece.",
+          "worldpoint": {
+            "x": 3057,
+            "y": 9841,
+            "plane": 0
+          }
+        }
+      ]
+    },
+    {
+      "panelName": "Lozar's map piece",
+      "steps": [
+        {
+          "stepDescription": "Go to Port Sarim Jail. You can either pay Wormbrain there 10,000 coins for Lozar's map piece, or kill him with ranged/mage and telegrab it with level 33 magic.",
+          "worldpoint": {
+            "x": 3015,
+            "y": 3195,
+            "plane": 0
+          }
+        }
+      ]
+    },
+    {
+      "panelName": "Melzar's map piece",
+      "steps": [
+        {
+          "stepDescription": "Enter Melzar's Maze north of Rimmington. Be prepared to fight multiple monsters up to a level 82 lesser demon.",
+          "worldpoint": {
+            "x": 2941,
+            "y": 3248,
+            "plane": 0
+          }
+        },
+        {
+          "stepDescription": "Kill the marked zombie rat for a key.",
+          "worldpoint": {
+            "x": 2933,
+            "y": 3250,
+            "plane": 0
+          }
+        },
+        {
+          "stepDescription": "Go through the north west red door",
+          "worldpoint": {
+            "x": 2926,
+            "y": 3253,
+            "plane": 0
+          }
+        },
+        {
+          "stepDescription": "Climb up the ladder.",
+          "worldpoint": {
+            "x": 2928,
+            "y": 3256,
+            "plane": 0
+          }
+        },
+        {
+          "stepDescription": "Kill the marked ghost for a key.",
+          "worldpoint": {
+            "x": 2927,
+            "y": 3253,
+            "plane": 1
+          }
+        },
+        {
+          "stepDescription": "Go through second yellow door from the north.",
+          "worldpoint": {
+            "x": 2931,
+            "y": 3253,
+            "plane": 1
+          }
+        },
+        {
+          "stepDescription": "Climb up the ladder.",
+          "worldpoint": {
+            "x": 2934,
+            "y": 3254,
+            "plane": 1
+          }
+        },
+        {
+          "stepDescription": "Kill the marked skeleton for a key",
+          "worldpoint": {
+            "x": 2927,
+            "y": 3253,
+            "plane": 2
+          }
+        },
+        {
+          "stepDescription": "Go through south west yellow door.",
+          "worldpoint": {
+            "x": 2924,
+            "y": 3249,
+            "plane": 2
+          }
+        },
+        {
+          "stepDescription": "Climb down the ladder.",
+          "worldpoint": {
+            "x": 2940,
+            "y": 3240,
+            "plane": 2
+          }
+        },
+        {
+          "stepDescription": "Climb down again.",
+          "worldpoint": {
+            "x": 2937,
+            "y": 3240,
+            "plane": 1
+          }
+        },
+        {
+          "stepDescription": "Climb down the ladder into the basement.",
+          "worldpoint": {
+            "x": 2932,
+            "y": 3240,
+            "plane": 0
+          }
+        },
+        {
+          "stepDescription": "Kill the marked zombie for a key",
+          "worldpoint": {
+            "x": 2932,
+            "y": 9643,
+            "plane": 0
+          }
+        },
+        {
+          "stepDescription": "Go through the blue door in the north west corner.",
+          "worldpoint": {
+            "x": 2931,
+            "y": 9644,
+            "plane": 0
+          }
+        },
+        {
+          "stepDescription": "Kill Melzar the Mad for a magenta key.",
+          "worldpoint": {
+            "x": 2929,
+            "y": 9649,
+            "plane": 0
+          }
+        },
+        {
+          "stepDescription": "Go through the magenta door.",
+          "worldpoint": {
+            "x": 2929,
+            "y": 9652,
+            "plane": 0
+          }
+        },
+        {
+          "stepDescription": "Kill the lesser demon. You can safe spot it from the spot east of the magenta door.",
+          "worldpoint": {
+            "x": 2936,
+            "y": 9652,
+            "plane": 0
+          }
+        },
+        {
+          "stepDescription": "Go through the green door.",
+          "worldpoint": {
+            "x": 2936,
+            "y": 9655,
+            "plane": 0
+          }
+        },
+        {
+          "stepDescription": "Open the chest and get Melzar's map part.",
+          "worldpoint": {
+            "x": 2935,
+            "y": 9657,
+            "plane": 0
+          }
+        }
+      ]
+    },
+    {
+      "panelName": "Get an anti-dragon shield",
+      "steps": [
+        {
+          "stepDescription": "Talk to Duke Horacio on the first floor of Lumbridge castle for the anti-dragon shield if you don't have one.",
+          "worldpoint": {
+            "x": 3210,
+            "y": 3220,
+            "plane": 1
+          }
+        }
+      ]
+    },
+    {
+      "panelName": "Get a boat",
+      "steps": [
+        {
+          "stepDescription": "Talk to Klarense on the south Port Sarim docks and buy his boat.",
+          "worldpoint": {
+            "x": 3044,
+            "y": 3203,
+            "plane": 0
+          }
+        },
+        {
+          "stepDescription": "Board your new ship.",
+          "worldpoint": {
+            "x": 3047,
+            "y": 3205,
+            "plane": 0
+          }
+        },
+        {
+          "stepDescription": "Go down into the ship's hull.",
+          "worldpoint": {
+            "x": 3049,
+            "y": 3208,
+            "plane": 1
+          }
+        },
+        {
+          "stepDescription": "Repair the hole in the hull 3 times.",
+          "worldpoint": {
+            "x": 3047,
+            "y": 9639,
+            "plane": 1
+          }
+        }
+      ]
+    },
+    {
+      "panelName": "Get a captain ready",
+      "steps": [
+        {
+          "stepDescription": "Bring Ned your map and ask him to be your captain.",
+          "worldpoint": {
+            "x": 3098,
+            "y": 3257,
+            "plane": 0
+          }
+        }
+      ]
+    },
+    {
+      "panelName": "Slaying Elvarg",
+      "steps": [
+        {
+          "stepDescription": "Prepare to fight Elvarg (level 83). When you're ready, go board your boat in Port Sarim and talk to Ned.",
+          "worldpoint": {
+            "x": 3047,
+            "y": 3205,
+            "plane": 0
+          }
+        },
+        {
+          "stepDescription": "Go to the center of the island and go down the hole.",
+          "worldpoint": {
+            "x": 2834,
+            "y": 3256,
+            "plane": 0
+          }
+        },
+        {
+          "stepDescription": "Go all the way south and through the wall to unlock the shortcut to return here if needed.",
+          "worldpoint": {
+            "x": 2836,
+            "y": 9600,
+            "plane": 0
+          }
+        },
+        {
+          "stepDescription": "Return back through the shortcut.",
+          "worldpoint": {
+            "x": 2836,
+            "y": 9600,
+            "plane": 0
+          }
+        },
+        {
+          "stepDescription": "Enter Elvarg's area and kill her.",
+          "worldpoint": {
+            "x": 2846,
+            "y": 9635,
+            "plane": 0
+          }
+        },
+        {
+          "stepDescription": "Kill Elvarg.",
+          "worldpoint": {
+            "x": 2855,
+            "y": 9637,
+            "plane": 0
+          }
+        }
+      ]
+    },
+    {
+      "panelName": "Finish the quest",
+      "steps": [
+        {
+          "stepDescription": "Talk to Oziach in his house in north western Edgeville to finish the quest.",
+          "worldpoint": {
+            "x": 3068,
+            "y": 3517,
+            "plane": 0
+          }
+        }
+      ]
+    }
+  ]
+}

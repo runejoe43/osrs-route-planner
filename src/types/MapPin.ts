@@ -4,4 +4,5 @@ import type L from "leaflet";
 export interface MapPin {
   worldPoint: WorldPoint;
   leafletLatLng: L.LatLng;
+  description?: string;
 }

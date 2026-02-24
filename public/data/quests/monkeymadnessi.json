@@ -1,0 +1,484 @@
+{
+  "name": "Monkey Madness I",
+  "questPoints": 3,
+  "experienceRewards": [],
+  "lampRewards": {
+    "skills": "Any",
+    "value": 0,
+    "quantity": 1
+  },
+  "skillRequirements": [],
+  "questRequirements": [
+    "THE GRAND TREE",
+    "TREE GNOME VILLAGE"
+  ],
+  "questPointRequirement": null,
+  "itemRequirements": [
+    "Gold bar",
+    "Ball of wool",
+    "Banana",
+    "Monkey bones or corpse"
+  ],
+  "steps": [
+    {
+      "panelName": "Starting off",
+      "steps": [
+        {
+          "stepDescription": "Talk to King Narnode Shareen in the Tree Gnome Stronghold.",
+          "worldpoint": {
+            "x": 2465,
+            "y": 3496,
+            "plane": 0
+          }
+        }
+      ]
+    },
+    {
+      "panelName": "Investigate the shipyard",
+      "steps": [
+        {
+          "stepDescription": "Fly with Captain Errdo to Gandius.",
+          "worldpoint": {
+            "x": 2464,
+            "y": 3501,
+            "plane": 3
+          }
+        },
+        {
+          "stepDescription": "Talk to G.L.O. Caranock in the shipyard.",
+          "worldpoint": {
+            "x": 2955,
+            "y": 3025,
+            "plane": 0
+          }
+        },
+        {
+          "stepDescription": "Return to King Narnode Shareen in the Tree Gnome Stronghold.",
+          "worldpoint": {
+            "x": 2465,
+            "y": 3496,
+            "plane": 0
+          }
+        }
+      ]
+    },
+    {
+      "panelName": "Traveling to Ape Atoll",
+      "steps": [
+        {
+          "stepDescription": "Talk to Daero on the 1st floor of the Tree Gnome Stronghold. Make sure to go through all of the Chat Options until you're given a 'Leave...' option.",
+          "worldpoint": {
+            "x": 2482,
+            "y": 3486,
+            "plane": 1
+          }
+        },
+        {
+          "stepDescription": "Talk to Daero in the hangar.",
+          "worldpoint": {
+            "x": 2392,
+            "y": 9889,
+            "plane": 0
+          }
+        },
+        {
+          "stepDescription": "Operate the reinitialisation panel and solve the puzzle.",
+          "worldpoint": {
+            "x": 2394,
+            "y": 9883,
+            "plane": 0
+          }
+        },
+        {
+          "stepDescription": "Talk to Daero in the hangar again.",
+          "worldpoint": {
+            "x": 2648,
+            "y": 4513,
+            "plane": 0
+          }
+        },
+        {
+          "stepDescription": "Talk to Waydar.",
+          "worldpoint": {
+            "x": 2648,
+            "y": 4518,
+            "plane": 0
+          }
+        },
+        {
+          "stepDescription": "Talk to Lumdo.",
+          "worldpoint": {
+            "x": 2891,
+            "y": 2724,
+            "plane": 0
+          }
+        },
+        {
+          "stepDescription": "Talk to Waydar on Crash Island.",
+          "worldpoint": {
+            "x": 2898,
+            "y": 2726,
+            "plane": 0
+          }
+        }
+      ]
+    },
+    {
+      "panelName": "Finding Garkor",
+      "steps": [
+        {
+          "stepDescription": "Stick to the east edge of the town, and make your way to Garkor to the south east.",
+          "worldpoint": {
+            "x": 2807,
+            "y": 2762,
+            "plane": 0
+          }
+        }
+      ]
+    },
+    {
+      "panelName": "Getting amulet parts",
+      "steps": [
+        {
+          "stepDescription": "Head west and enter the large open building via the south door. DO NOT STAND ON THE LIGHT FLOOR IN THE BUILDING.",
+          "worldpoint": {
+            "x": 2764,
+            "y": 2764,
+            "plane": 0
+          }
+        },
+        {
+          "stepDescription": "DO NOT WALK ON THE LIGHT FLOOR. Search the stacked crates for monkey dentures.",
+          "worldpoint": {
+            "x": 2767,
+            "y": 2769,
+            "plane": 0
+          }
+        },
+        {
+          "stepDescription": "Search the crate in the south east corner and go down into the cavern.",
+          "worldpoint": {
+            "x": 2769,
+            "y": 2765,
+            "plane": 0
+          }
+        },
+        {
+          "stepDescription": "Search the crate in the north west of the room for a M'amulet mould.",
+          "worldpoint": {
+            "x": 2782,
+            "y": 9172,
+            "plane": 0
+          }
+        }
+      ]
+    },
+    {
+      "panelName": "Making an Enchanted Bar",
+      "steps": [
+        {
+          "stepDescription": "Get food, antipoison, energy / stamina / prayer potions, and return to Ape Atoll.",
+          "worldpoint": {
+            "x": 2466,
+            "y": 3495,
+            "plane": 0
+          }
+        },
+        {
+          "stepDescription": "Enter the dungeon in south Ape Atoll.",
+          "worldpoint": {
+            "x": 2763,
+            "y": 2703,
+            "plane": 0
+          }
+        },
+        {
+          "stepDescription": "Talk to Zooknock in the north east of the dungeon.",
+          "worldpoint": {
+            "x": 2805,
+            "y": 9143,
+            "plane": 0
+          }
+        },
+        {
+          "stepDescription": "Use the monkey dentures on Zooknock in the north east of the dungeon. If you've already done so, open the quest journal to re-sync your current state.",
+          "worldpoint": {
+            "x": 2805,
+            "y": 9143,
+            "plane": 0
+          }
+        },
+        {
+          "stepDescription": "Use the m'amulet mould on Zooknock in the north east of the dungeon. If you've already done so, open the quest journal to re-sync your current state.",
+          "worldpoint": {
+            "x": 2805,
+            "y": 9143,
+            "plane": 0
+          }
+        },
+        {
+          "stepDescription": "Use the gold bar on Zooknock in the north east of the dungeon. If you've already done so, open the quest journal to re-sync your current state.",
+          "worldpoint": {
+            "x": 2805,
+            "y": 9143,
+            "plane": 0
+          }
+        }
+      ]
+    },
+    {
+      "panelName": "Making an amulet",
+      "steps": [
+        {
+          "stepDescription": "Get food, antipoison, prayer potions, and return to Ape Atoll.",
+          "worldpoint": {
+            "x": 2466,
+            "y": 3495,
+            "plane": 0
+          }
+        },
+        {
+          "stepDescription": "Wait for the gorilla guard to start going away from the prison cell, then sneak out and go to the north side of the prison. Afterwards, head into the temple's basement.",
+          "worldpoint": {
+            "x": 2807,
+            "y": 2785,
+            "plane": 0
+          }
+        },
+        {
+          "stepDescription": "Use the enchanted bar on the wall of flame.",
+          "worldpoint": {
+            "x": 2810,
+            "y": 9209,
+            "plane": 0
+          }
+        }
+      ]
+    },
+    {
+      "panelName": "Getting the talisman",
+      "steps": [
+        {
+          "stepDescription": "Climb the rope out. If you plan on doing Recipe for Disaster, also kill a Zombie Monkey for its bones whilst here, and a gorilla upstairs.",
+          "worldpoint": {
+            "x": 2808,
+            "y": 9201,
+            "plane": 0
+          }
+        },
+        {
+          "stepDescription": "Go to the north west of the island and talk to the monkey child there a few times. Eventually you'll give him 5 bananas, and he'll give you a monkey talisman.",
+          "worldpoint": {
+            "x": 2743,
+            "y": 2794,
+            "plane": 0
+          }
+        },
+        {
+          "stepDescription": "Talk to the monkey child again.",
+          "worldpoint": {
+            "x": 2743,
+            "y": 2794,
+            "plane": 0
+          }
+        },
+        {
+          "stepDescription": "Talk to the monkey child again.",
+          "worldpoint": {
+            "x": 2743,
+            "y": 2794,
+            "plane": 0
+          }
+        },
+        {
+          "stepDescription": "Give the monkey child 5 bananas.",
+          "worldpoint": {
+            "x": 2743,
+            "y": 2794,
+            "plane": 0
+          }
+        },
+        {
+          "stepDescription": "Wait for the aunt to make another round, then talk to the monkey child for the talisman.",
+          "worldpoint": {
+            "x": 2743,
+            "y": 2794,
+            "plane": 0
+          }
+        }
+      ]
+    },
+    {
+      "panelName": "Bones for RFD (optional)",
+      "steps": [
+        {
+          "stepDescription": "This section will help you get ready for Recipe for Disaster. If you aren't interested in this, tick the box for this section in the sidebar to skip it.",
+          "worldpoint": {
+            "x": 2743,
+            "y": 2794,
+            "plane": 0
+          }
+        },
+        {
+          "stepDescription": "Kill a monkey archer for their bones.",
+          "worldpoint": {
+            "x": 2756,
+            "y": 2789,
+            "plane": 0
+          }
+        },
+        {
+          "stepDescription": "Kill a gorilla in the temple for their bones.",
+          "worldpoint": {
+            "x": 2801,
+            "y": 2785,
+            "plane": 0
+          }
+        },
+        {
+          "stepDescription": "Enter into the temple's basement to kill a zombie monkey for their bones.",
+          "worldpoint": {
+            "x": 2807,
+            "y": 2785,
+            "plane": 0
+          }
+        },
+        {
+          "stepDescription": "Kill a zombie monkey for their bones.",
+          "worldpoint": {
+            "x": 2808,
+            "y": 9201,
+            "plane": 0
+          }
+        }
+      ]
+    },
+    {
+      "panelName": "Making a greegree",
+      "steps": [
+        {
+          "stepDescription": "Get food, antipoison, prayer potions, and return to Ape Atoll.",
+          "worldpoint": {
+            "x": 2466,
+            "y": 3495,
+            "plane": 0
+          }
+        },
+        {
+          "stepDescription": "Enter the dungeon in south Ape Atoll.",
+          "worldpoint": {
+            "x": 2763,
+            "y": 2703,
+            "plane": 0
+          }
+        },
+        {
+          "stepDescription": "Use the monkey talisman on Zooknock in the north east of the dungeon. If you've already done so, open the quest journal to re-sync your current state.",
+          "worldpoint": {
+            "x": 2805,
+            "y": 9143,
+            "plane": 0
+          }
+        },
+        {
+          "stepDescription": "Use the monkey bones on Zooknock in the north east of the dungeon. If you've already done so, open the quest journal to re-sync your current state.",
+          "worldpoint": {
+            "x": 2805,
+            "y": 9143,
+            "plane": 0
+          }
+        }
+      ]
+    },
+    {
+      "panelName": "Save a monkey",
+      "steps": [
+        {
+          "stepDescription": "Talk to the Monkey Minder in the Ardougne Zoo whilst wielding the Karamjan monkey greegree.",
+          "worldpoint": {
+            "x": 2608,
+            "y": 3278,
+            "plane": 0
+          }
+        },
+        {
+          "stepDescription": "Talk to a monkey in the pen.",
+          "worldpoint": {
+            "x": 2603,
+            "y": 3278,
+            "plane": 0
+          }
+        },
+        {
+          "stepDescription": "UNEQUIP the greegree, then talk to the Monkey Minder again to leave.",
+          "worldpoint": {
+            "x": 2608,
+            "y": 3278,
+            "plane": 0
+          }
+        },
+        {
+          "stepDescription": "WALK/RUN to Daero to return to Ape Atoll. If you teleport, you'll have to start again.",
+          "worldpoint": {
+            "x": 2466,
+            "y": 3495,
+            "plane": 0
+          }
+        },
+        {
+          "stepDescription": "Talk to Garkor.",
+          "worldpoint": {
+            "x": 2807,
+            "y": 2762,
+            "plane": 0
+          }
+        },
+        {
+          "stepDescription": "Talk to a guard outside the building in the south east of Marim. If you already have, open the quest guide to resync.",
+          "worldpoint": {
+            "x": 2802,
+            "y": 2758,
+            "plane": 0
+          }
+        },
+        {
+          "stepDescription": "Talk to Kruk in the north west of the island.",
+          "worldpoint": {
+            "x": 2729,
+            "y": 2764,
+            "plane": 0
+          }
+        },
+        {
+          "stepDescription": "Talk to Awowogei twice.",
+          "worldpoint": {
+            "x": 2803,
+            "y": 2765,
+            "plane": 0
+          }
+        },
+        {
+          "stepDescription": "Talk to Garkor.",
+          "worldpoint": {
+            "x": 2807,
+            "y": 2762,
+            "plane": 0
+          }
+        }
+      ]
+    },
+    {
+      "panelName": "Defeat the demon",
+      "steps": [
+        {
+          "stepDescription": "Return to King Narnode Shareen in the Tree Gnome Stronghold.",
+          "worldpoint": {
+            "x": 2465,
+            "y": 3496,
+            "plane": 0
+          }
+        }
+      ]
+    }
+  ]
+}

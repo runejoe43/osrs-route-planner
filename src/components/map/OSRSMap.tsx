@@ -3,15 +3,20 @@ import "leaflet/dist/leaflet.css";
 import "../../style/Map.css";
 import { MapContainer, Marker, Popup, TileLayer, useMapEvents } from "react-leaflet";
 import { leafletToWorldPoint } from "../../util/Coordinates";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import L, { LatLngBounds } from "leaflet";
 import type { MapPin } from "../../types/MapPin";
+import { loadQuestMarkers } from "../../util/loadQuestMarkers";
 
 export default function OSRSMap() {
   const bounds = new LatLngBounds([0, 0], [-1428, 405]);
   const center: [number, number] = [-1173, 273];
 
   const [markers, setMarkers] = useState<MapPin[]>([]);
+
+  useEffect(() => {
+    loadQuestMarkers().then(setMarkers);
+  }, []);
 
   const LocationFinder = () => {
     useMapEvents({
@@ -42,10 +47,10 @@ export default function OSRSMap() {
       >
         <LocationFinder />
 
-        {markers.map((position, idx) => 
-          <Marker key={`marker-${idx}`} position={position.leafletLatLng}>
+        {markers.map((pin, idx) => 
+          <Marker key={`marker-${idx}`} position={pin.leafletLatLng}>
           <Popup>
-            <span>A pretty CSS3 popup. <br/> Easily customizable.</span>
+            {pin.description ? <span>{pin.description}</span> : <span>No description</span>}
           </Popup>
         </Marker>
         )}
