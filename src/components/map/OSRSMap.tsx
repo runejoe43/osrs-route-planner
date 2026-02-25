@@ -7,6 +7,7 @@ import { useState, useEffect } from "react";
 import L, { LatLngBounds } from "leaflet";
 import type { MapPin } from "../../types/MapPin";
 import { loadQuestMarkers } from "../../util/loadQuestMarkers";
+import WorldMapLabels from "./WorldMapLabels";
 
 export default function OSRSMap() {
   const bounds = new LatLngBounds([0, 0], [-1428, 405]);
@@ -65,6 +66,8 @@ export default function OSRSMap() {
           attribution="OSRS Map Data"
           crossOrigin="anonymous"
         />
+
+        <WorldMapLabels />
       </MapContainer>
     </Box>
   );

@@ -1,0 +1,259 @@
+[
+  {
+    "name": "Kingdom of<br/>Misthalin",
+    "worldPoint": {
+      "x": 3217,
+      "y": 3321,
+      "plane": 0
+    }
+  },
+  {
+    "name": "Karamja",
+    "worldPoint": {
+      "x": 2860,
+      "y": 3059,
+      "plane": 0
+    }
+  },
+  {
+    "name": "Kingdom of<br/>Asgarnia",
+    "worldPoint": {
+      "x": 2988,
+      "y": 3412,
+      "plane": 0
+    }
+  },
+  {
+    "name": "Wilderness",
+    "worldPoint": {
+      "x": 3144,
+      "y": 3781,
+      "plane": 0
+    }
+  },
+  {
+    "name": "Kingdom of<br/>Kandarin",
+    "worldPoint": {
+      "x": 2578,
+      "y": 3370,
+      "plane": 0
+    }
+  },
+  {
+    "name": "Feldip<br/>Hills",
+    "worldPoint": {
+      "x": 2546,
+      "y": 2950,
+      "plane": 0
+    }
+  },
+  {
+    "name": "Morytania",
+    "worldPoint": {
+      "x": 3552,
+      "y": 3432,
+      "plane": 0
+    }
+  },
+  {
+    "name": "Tirannwn",
+    "worldPoint": {
+      "x": 2240,
+      "y": 3264,
+      "plane": 0
+    }
+  },
+  {
+    "name": "Fremennik<br/>Province",
+    "worldPoint": {
+      "x": 2679,
+      "y": 3646,
+      "plane": 0
+    }
+  },
+  {
+    "name": "Ape Atoll",
+    "worldPoint": {
+      "x": 2755,
+      "y": 2755,
+      "plane": 0
+    }
+  },
+  {
+    "name": "Kharidian<br/>Desert",
+    "worldPoint": {
+      "x": 3311,
+      "y": 2930,
+      "plane": 0
+    }
+  },
+  {
+    "name": "Mos Le'Harmless",
+    "worldPoint": {
+      "x": 3725,
+      "y": 3028,
+      "plane": 0
+    }
+  },
+  {
+    "name": "Lunar<br/>Isle",
+    "worldPoint": {
+      "x": 2141,
+      "y": 3877,
+      "plane": 0
+    }
+  },
+  {
+    "name": "Fremennik<br/>Isles",
+    "worldPoint": {
+      "x": 2367,
+      "y": 3879,
+      "plane": 0
+    }
+  },
+  {
+    "name": "Kingdom of<br/>Great Kourend",
+    "worldPoint": {
+      "x": 1600,
+      "y": 3700,
+      "plane": 0
+    }
+  },
+  {
+    "name": "Fossil<br/>Island",
+    "worldPoint": {
+      "x": 3721,
+      "y": 3781,
+      "plane": 0
+    }
+  },
+  {
+    "name": "Kebos<br/>Lowlands",
+    "worldPoint": {
+      "x": 1265,
+      "y": 3649,
+      "plane": 0
+    }
+  },
+  {
+    "name": "Isle of Souls",
+    "worldPoint": {
+      "x": 2209,
+      "y": 2878,
+      "plane": 0
+    }
+  },
+  {
+    "name": "Troll<br/>Country",
+    "worldPoint": {
+      "x": 2846,
+      "y": 3736,
+      "plane": 0
+    }
+  },
+  {
+    "name": "Kingdom of<br/>Varlamore",
+    "worldPoint": {
+      "x": 1510,
+      "y": 3195,
+      "plane": 0
+    }
+  },
+  {
+    "name": "Cursed<br/>Archipelago",
+    "worldPoint": {
+      "x": 3767,
+      "y": 2581,
+      "plane": 0
+    }
+  },
+  {
+    "name": "The Great<br/>Conch",
+    "worldPoint": {
+      "x": 3187,
+      "y": 2455,
+      "plane": 0
+    }
+  },
+  {
+    "name": "Ardent<br/>Ocean",
+    "worldPoint": {
+      "x": 2916,
+      "y": 2790,
+      "plane": 0
+    },
+    "sailing": true
+  },
+  {
+    "name": "Unquiet<br/>Ocean",
+    "worldPoint": {
+      "x": 2865,
+      "y": 2436,
+      "plane": 0
+    },
+    "sailing": true
+  },
+  {
+    "name": "Shrouded<br/>Ocean",
+    "worldPoint": {
+      "x": 2104,
+      "y": 2491,
+      "plane": 0
+    },
+    "sailing": true
+  },
+  {
+    "name": "Western<br/>Ocean",
+    "worldPoint": {
+      "x": 1996,
+      "y": 3331,
+      "plane": 0
+    },
+    "sailing": true
+  },
+  {
+    "name": "Northern<br/>Ocean",
+    "worldPoint": {
+      "x": 2477,
+      "y": 4085,
+      "plane": 0
+    },
+    "sailing": true
+  },
+  {
+    "name": "Sunset<br/>Ocean",
+    "worldPoint": {
+      "x": 1387,
+      "y": 2629,
+      "plane": 0
+    },
+    "sailing": true
+  },
+  {
+    "name": "Forgotten<br/>Ocean",
+    "worldPoint": {
+      "x": 1251,
+      "y": 3991,
+      "plane": 0
+    },
+    "sailing": true
+  },
+  {
+    "name": "Untamed<br/>Ocean",
+    "worldPoint": {
+      "x": 3575,
+      "y": 3911,
+      "plane": 0
+    },
+    "sailing": true
+  },
+  {
+    "name": "Eastern<br/>Ocean",
+    "worldPoint": {
+      "x": 3682,
+      "y": 2854,
+      "plane": 0
+    },
+    "sailing": true
+  }
+]

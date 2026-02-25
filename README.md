@@ -2,7 +2,7 @@
 
 ## App Description
 
-A web app that renders the Old School RuneScape world map and allows users to plan routes through the game. Users can place pins tied to the native OSRS coordinate system, attach NPCs, objects, and items to each step, and compose multi-step routes or quest walkthroughs. The app draws on existing quest step data from Quest Helper and metadata from the OSRS Wiki to pre-populate known quests and diary steps.
+A web app that renders the Old School RuneScape world map and allows users to plan routes through the game. Users can place pins tied to the native OSRS coordinate system, attach NPCs, objects, and items to each step, and compose multi-step routes or quest walkthroughs. The app draws on existing quest step data from Quest Helper including step descriptions and coordinates as well as diary steps.
 
 The end goal is a shareable, exportable route that can be imported into RuneLite — either directly into the Quest Helper plugin or a complementary plugin — to guide a player through their planned route in-game with on-screen arrows and tile highlights.
 
@@ -96,7 +96,7 @@ Encode the current route into the URL (compressed query param or hash) so users 
 
 1. ~~Write a build-time script that fetches the OSRS Wiki [NPC_IDs](https://oldschool.runescape.wiki/w/NPC_IDs) and [Item_IDs](https://oldschool.runescape.wiki/w/Item_IDs) pages via the MediaWiki API, parses the main table on each page (name = first column split on `#` using only the first segment; only numeric IDs from the second column), and writes `npcs-summary.json` and `items-summary.json` into `/public/data/`. Object IDs are out of scope for now. Run with `npm run build:data` or as part of `npm run build`.~~
 2. ~~Write a Java-source parser (Node script) that reads Quest Helper quest files and extracts details such as rewards, requirements, and `WorldPoint` into structured JSON files — one per quest.~~
-3. Verify the extracted quest step coordinates against Explv's Map to confirm accuracy before committing the JSON.
+3. ~~Verify the extracted quest step coordinates against Explv's Map to confirm accuracy before committing the JSON.~~
 4. Generate a `quest-index.json` manifest listing all available pre-loaded quests (name, filename, and quest point value) so the quest picker UI can populate without hardcoding quest names.
 5. Define and document the canonical JSON schema for a Route file — covering `WorldPoint`, step type enum, entity ID, instruction text, and optional metadata — so that the parser output, the Zustand store shape, and the export format all stay in sync from the start.
 
