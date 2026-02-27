@@ -661,7 +661,8 @@
       "x": 3015,
       "y": 2847,
       "plane": 0
-    }
+    },
+    "sailing": true
   },
   {
     "name": "Northern<br/>Tundras",
@@ -1435,7 +1436,8 @@
       "x": 2593,
       "y": 3724,
       "plane": 0
-    }
+    },
+    "sailing": true
   },
   {
     "name": "Grandroot<br/>Bay",

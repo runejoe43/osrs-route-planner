@@ -64,3 +64,21 @@ export function labelsToMarkers(labels: LoadedWorldMapLabel[]): MapMarker[] {
     };
   });
 }
+
+/** Single icon entry from icons.json (coordinates + icon path + label). */
+export interface MapIconEntry {
+  lat: number;
+  lng: number;
+  iconPath: string;
+  label: string;
+}
+
+/**
+ * Load map icons from public/icons/icons.json.
+ * Coordinates are in the same Leaflet CRS as the world map.
+ */
+export async function loadMapIcons(): Promise<MapIconEntry[]> {
+  const response = await fetch('/icons/icons.json');
+  if (!response.ok) throw new Error(`Failed to load icons: ${response.statusText}`);
+  return response.json();
+}

@@ -1,3 +1,8 @@
 .map-container {
   cursor: crosshair;
 }
+
+.worldmap-icon-marker {
+  background: none !important;
+  border: none !important;
+}
