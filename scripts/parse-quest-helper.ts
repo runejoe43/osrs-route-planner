@@ -9,6 +9,7 @@
 import * as fs from "fs";
 import * as path from "path";
 import type { QuestData, WorldPoint, ExperienceReward, LampReward, SkillRequirement, QuestPanel } from "../src/types/QuestData";
+import { Skill } from "../src/types/QuestData";
 
 const QUEST_HELPER_RAW_BASE =
   "https://raw.githubusercontent.com/Zoinkwiz/quest-helper/master/src/main/java/com/questhelper/helpers/quests";
@@ -82,7 +83,7 @@ function parseExperienceRewards(java: string): ExperienceReward[] {
   const regex = /new\s+ExperienceReward\s*\(\s*Skill\.(\w+)\s*,\s*(\d+)\s*\)/g;
   let m: RegExpExecArray | null;
   while ((m = regex.exec(body)) !== null) {
-    rewards.push({ skill: m[1], xp: parseInt(m[2], 10) });
+    rewards.push({ skill: m[1] as Skill, xp: parseInt(m[2], 10) });
   }
   return rewards;
 }
@@ -106,11 +107,6 @@ function parseLampRewards(java: string): LampReward | null {
   };
 }
 
-/** Skill enum constant to display name. */
-function skillEnumToDisplay(s: string): string {
-  return s.charAt(0).toUpperCase() + s.slice(1).toLowerCase();
-}
-
 /** Parse getGeneralRequirements(). */
 function parseGeneralRequirements(java: string): {
   skillRequirements: SkillRequirement[];
@@ -128,7 +124,7 @@ function parseGeneralRequirements(java: string): {
   let m: RegExpExecArray | null;
   while ((m = skillRegex.exec(body)) !== null) {
     skillRequirements.push({
-      skillName: skillEnumToDisplay(m[1]),
+      skill: m[1] as Skill,
       level: parseInt(m[2], 10),
     });
   }
@@ -241,11 +237,28 @@ function parsePanels(java: string): { panelName: string; stepVarNames: string[] 
   return panels;
 }
 
+/** Parse WorldPoint variable declarations in setupSteps: WorldPoint varName = new WorldPoint(x, y, z); */
+function parseWorldPointVariables(body: string): Map<string, WorldPoint> {
+  const wpMap = new Map<string, WorldPoint>();
+  const wpRegex = /WorldPoint\s+([a-zA-Z_][a-zA-Z0-9_]*)\s*=\s*new\s+WorldPoint\s*\(\s*(\d+)\s*,\s*(\d+)\s*,\s*(\d+)\s*\)/g;
+  let m: RegExpExecArray | null;
+  while ((m = wpRegex.exec(body)) !== null) {
+    wpMap.set(m[1], {
+      x: parseInt(m[2], 10),
+      y: parseInt(m[3], 10),
+      plane: parseInt(m[4], 10),
+    });
+  }
+  return wpMap;
+}
+
 /** Parse setupSteps() → stepVarName → { stepDescription, worldpoint }. */
 function parseSetupSteps(java: string): Map<string, { stepDescription: string; worldpoint: WorldPoint }> {
   const body = extractMethodBody(java, "setupSteps");
   const map = new Map<string, { stepDescription: string; worldpoint: WorldPoint }>();
   if (!body) return map;
+
+  const wpVariables = parseWorldPointVariables(body);
 
   // Merge Java string concatenation: "first" + "second" by parsing from opening " position
   const readConcatenatedString = (openQuoteIndex: number): string => {
@@ -277,35 +290,60 @@ function parseSetupSteps(java: string): Map<string, { stepDescription: string; w
     return parts.join("");
   };
 
+  const resolveWorldPoint = (
+    explicit: { x: number; y: number; plane: number } | null,
+    varName: string | null
+  ): WorldPoint | null => {
+    if (explicit) return explicit;
+    if (varName) return wpVariables.get(varName) ?? null;
+    return null;
+  };
+
+  // Steps with explicit new WorldPoint(x, y, z)
   const stepAssignRegex = /([a-zA-Z_][a-zA-Z0-9_]*)\s*=\s*new\s+(?:NpcStep|ObjectStep)\s*\(\s*this\s*,\s*[^,]+,\s*new\s+WorldPoint\s*\(\s*(\d+)\s*,\s*(\d+)\s*,\s*(\d+)\s*\)\s*,\s*"/g;
   let m: RegExpExecArray | null;
   while ((m = stepAssignRegex.exec(body)) !== null) {
     const strStart = m.index + m[0].length - 1;
     const desc = readConcatenatedString(strStart);
-    map.set(m[1], {
-      stepDescription: desc,
-      worldpoint: {
-        x: parseInt(m[2], 10),
-        y: parseInt(m[3], 10),
-        plane: parseInt(m[4], 10),
-      },
-    });
+    const wp = resolveWorldPoint({ x: parseInt(m[2], 10), y: parseInt(m[3], 10), plane: parseInt(m[4], 10) }, null);
+    if (wp) {
+      map.set(m[1], { stepDescription: desc, worldpoint: wp });
+    }
   }
 
+  // Steps with WorldPoint variable reference: stepVar = new NpcStep/ObjectStep(this, id, varName, "
+  const stepWithVarRegex = /([a-zA-Z_][a-zA-Z0-9_]*)\s*=\s*new\s+(?:NpcStep|ObjectStep)\s*\(\s*this\s*,\s*[^,]+,\s*([a-zA-Z_][a-zA-Z0-9_]*)\s*,\s*"/g;
+  while ((m = stepWithVarRegex.exec(body)) !== null) {
+    if (map.has(m[1])) continue; // already parsed with explicit WorldPoint
+    const wp = resolveWorldPoint(null, m[2]);
+    if (!wp) continue; // variable not a known WorldPoint (could be Zone, etc.)
+    const strStart = m.index + m[0].length - 1;
+    const desc = readConcatenatedString(strStart);
+    map.set(m[1], { stepDescription: desc, worldpoint: wp });
+  }
+
+  // ObjectStep with explicit WorldPoint (fallback for any missed)
   const objectStepRegex = /([a-zA-Z_][a-zA-Z0-9_]*)\s*=\s*new\s+ObjectStep\s*\(\s*this\s*,\s*[^,]+,\s*new\s+WorldPoint\s*\(\s*(\d+)\s*,\s*(\d+)\s*,\s*(\d+)\s*\)\s*,\s*"/g;
   while ((m = objectStepRegex.exec(body)) !== null) {
     if (!map.has(m[1])) {
       const strStart = m.index + m[0].length - 1;
       const desc = readConcatenatedString(strStart);
-      map.set(m[1], {
-        stepDescription: desc,
-        worldpoint: {
-          x: parseInt(m[2], 10),
-          y: parseInt(m[3], 10),
-          plane: parseInt(m[4], 10),
-        },
-      });
+      const wp = resolveWorldPoint({ x: parseInt(m[2], 10), y: parseInt(m[3], 10), plane: parseInt(m[4], 10) }, null);
+      if (wp) {
+        map.set(m[1], { stepDescription: desc, worldpoint: wp });
+      }
     }
+  }
+
+  // ObjectStep with WorldPoint variable reference
+  const objectStepWithVarRegex = /([a-zA-Z_][a-zA-Z0-9_]*)\s*=\s*new\s+ObjectStep\s*\(\s*this\s*,\s*[^,]+,\s*([a-zA-Z_][a-zA-Z0-9_]*)\s*,\s*"/g;
+  while ((m = objectStepWithVarRegex.exec(body)) !== null) {
+    if (map.has(m[1])) continue;
+    const wp = resolveWorldPoint(null, m[2]);
+    if (!wp) continue;
+    const strStart = m.index + m[0].length - 1;
+    const desc = readConcatenatedString(strStart);
+    map.set(m[1], { stepDescription: desc, worldpoint: wp });
   }
 
   return map;
@@ -401,6 +439,7 @@ async function main(): Promise<void> {
       questPointRequirement,
       itemRequirements,
       steps,
+      activeStep: 0,
     };
 
     try {

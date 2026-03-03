@@ -1,0 +1,33 @@
+{
+  "name": "Tree Gnome Village",
+  "questPoints": 2,
+  "experienceRewards": [
+    {
+      "skill": "ATTACK",
+      "xp": 11450
+    }
+  ],
+  "lampRewards": null,
+  "skillRequirements": [],
+  "questRequirements": [],
+  "questPointRequirement": null,
+  "itemRequirements": [
+    "Logs",
+    "Combat gear (magic is best)"
+  ],
+  "steps": [
+    {
+      "panelName": "Getting started",
+      "steps": []
+    },
+    {
+      "panelName": "The three trackers",
+      "steps": []
+    },
+    {
+      "panelName": "Retrieving the orbs",
+      "steps": []
+    }
+  ],
+  "activeStep": 0
+}

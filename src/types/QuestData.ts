@@ -10,8 +10,38 @@ export interface WorldPoint {
   plane: number;
 }
 
+/** OSRS skill — maps to string value for JSON serialization. */
+export const Skill = {
+  ATTACK: "ATTACK",
+  STRENGTH: "STRENGTH",
+  DEFENCE: "DEFENCE",
+  RANGED: "RANGED",
+  PRAYER: "PRAYER",
+  MAGIC: "MAGIC",
+  RUNECRAFT: "RUNECRAFT",
+  HITPOINTS: "HITPOINTS",
+  CRAFTING: "CRAFTING",
+  MINING: "MINING",
+  SMITHING: "SMITHING",
+  FISHING: "FISHING",
+  COOKING: "COOKING",
+  FIREMAKING: "FIREMAKING",
+  WOODCUTTING: "WOODCUTTING",
+  AGILITY: "AGILITY",
+  HERBLORE: "HERBLORE",
+  THIEVING: "THIEVING",
+  FLETCHING: "FLETCHING",
+  SLAYER: "SLAYER",
+  FARMING: "FARMING",
+  CONSTRUCTION: "CONSTRUCTION",
+  HUNTER: "HUNTER",
+  SAILING: "SAILING",
+} as const;
+
+export type Skill = (typeof Skill)[keyof typeof Skill];
+
 export interface ExperienceReward {
-  skill: string;
+  skill: Skill;
   xp: number;
 }
 
@@ -22,7 +52,7 @@ export interface LampReward {
 }
 
 export interface SkillRequirement {
-  skillName: string;
+  skill: Skill;
   level: number;
 }
 
@@ -46,4 +76,5 @@ export interface QuestData {
   questPointRequirement: number | null;
   itemRequirements: string[];
   steps: QuestPanel[];
+  activeStep: number;
 }

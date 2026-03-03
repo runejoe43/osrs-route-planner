@@ -1,0 +1,157 @@
+{
+  "name": "The Grand Tree",
+  "questPoints": 5,
+  "experienceRewards": [
+    {
+      "skill": "ATTACK",
+      "xp": 18400
+    },
+    {
+      "skill": "AGILITY",
+      "xp": 7900
+    },
+    {
+      "skill": "MAGIC",
+      "xp": 2150
+    }
+  ],
+  "lampRewards": null,
+  "skillRequirements": [
+    {
+      "skill": "AGILITY",
+      "level": 25
+    }
+  ],
+  "questRequirements": [],
+  "questPointRequirement": null,
+  "itemRequirements": [],
+  "steps": [
+    {
+      "panelName": "Getting started",
+      "steps": [
+        {
+          "stepDescription": "Talk to King Narnode Shareen in the Grand Tree(Make sure to have two empty inventory slots to start the quest).",
+          "worldpoint": {
+            "x": 2466,
+            "y": 3495,
+            "plane": 0
+          }
+        }
+      ]
+    },
+    {
+      "panelName": "Hazelmere",
+      "steps": [
+        {
+          "stepDescription": "Go up to Hazelmere, on the island east of Yanille. Fairy ring CLS or minigame teleport near Yanille.",
+          "worldpoint": {
+            "x": 2677,
+            "y": 3087,
+            "plane": 0
+          }
+        }
+      ]
+    },
+    {
+      "panelName": "Investigation",
+      "steps": [
+        {
+          "stepDescription": "Return to King Narnode in the Grand Tree.",
+          "worldpoint": {
+            "x": 2466,
+            "y": 3495,
+            "plane": 0
+          }
+        },
+        {
+          "stepDescription": "Go up to Glough in the Tree Gnome Stronghold.",
+          "worldpoint": {
+            "x": 2476,
+            "y": 3463,
+            "plane": 0
+          }
+        },
+        {
+          "stepDescription": "Talk to King Narnode again in the Grand Tree.",
+          "worldpoint": {
+            "x": 2466,
+            "y": 3495,
+            "plane": 0
+          }
+        },
+        {
+          "stepDescription": "Talk to Charlie.",
+          "worldpoint": {
+            "x": 2464,
+            "y": 3495,
+            "plane": 3
+          }
+        },
+        {
+          "stepDescription": "Travel with the glider to escape.",
+          "worldpoint": {
+            "x": 2466,
+            "y": 3495,
+            "plane": 3
+          }
+        }
+      ]
+    },
+    {
+      "panelName": "Karamja",
+      "steps": [
+        {
+          "stepDescription": "Enter the shipyard on Karamja.",
+          "worldpoint": {
+            "x": 2945,
+            "y": 3041,
+            "plane": 0
+          }
+        },
+        {
+          "stepDescription": "Get the Lumber order from the Foreman on the southern docks. You can either kill him or talk to him.",
+          "worldpoint": {
+            "x": 3000,
+            "y": 3044,
+            "plane": 0
+          }
+        }
+      ]
+    },
+    {
+      "panelName": "Tuzo",
+      "steps": [
+        {
+          "stepDescription": "Take the invasion plans to King Narnode in the Grand Tree.",
+          "worldpoint": {
+            "x": 2465,
+            "y": 3496,
+            "plane": 0
+          }
+        }
+      ]
+    },
+    {
+      "panelName": "Defeat the Black Demon",
+      "steps": [
+        {
+          "stepDescription": "Talk to King Narnode deeper in the cave.",
+          "worldpoint": {
+            "x": 2465,
+            "y": 9895,
+            "plane": 0
+          }
+        },
+        {
+          "stepDescription": "Give the Daconia stone to King Narnode under the Grand Tree.",
+          "worldpoint": {
+            "x": 2465,
+            "y": 9895,
+            "plane": 0
+          }
+        }
+      ]
+    }
+  ],
+  "activeStep": 0
+}

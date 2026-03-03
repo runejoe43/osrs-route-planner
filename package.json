@@ -15,10 +15,12 @@
     "@mantine/core": "^8.3.15",
     "@mantine/form": "^8.3.15",
     "@mantine/hooks": "^8.3.15",
+    "@tabler/icons-react": "^3.38.0",
     "leaflet": "^1.9.4",
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
-    "react-leaflet": "^5.0.0"
+    "react-leaflet": "^5.0.0",
+    "zustand": "^5.0.2"
   },
   "devDependencies": {
     "@eslint/js": "^9.39.1",
