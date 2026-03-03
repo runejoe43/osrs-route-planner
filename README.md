@@ -102,8 +102,8 @@ Encode the current route into the URL (compressed query param or hash) so users 
 
 ### Project Setup
 
-1. Scaffold the project with `npm create vite@latest` using the React + TypeScript template and install core dependencies (react-leaflet, leaflet, zustand, wtf_wikipedia, file-saver).
-2. Configure Vite to serve static data files from `/public/data/` and set up TypeScript path aliases.
+1. ~~Scaffold the project with `npm create vite@latest` using the React + TypeScript template and install core dependencies (react-leaflet, leaflet, zustand, wtf_wikipedia, file-saver).~~
+2. ~~Configure Vite to serve static data files from `/public/data/` and set up TypeScript path aliases.~~
 3. Define shared TypeScript types for `WorldPoint`, `RouteStep`, `StepType`, `EntityRef`, and the top-level `Route` object. Centralising these early prevents type drift between the store, the map layer, and the export serialiser.
 4. Configure the `User-Agent` header for all OSRS Wiki API calls (required by their usage guidelines). Create a thin `wikiApi.ts` wrapper around `fetch()` that injects this header so it is never forgotten on individual call sites.
 

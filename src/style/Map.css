@@ -2,13 +2,26 @@
   cursor: crosshair;
 }
 
+
+.worldmap-label:hover {
+  cursor: crosshair;
+}
+
 .worldmap-icon-marker {
   background: none !important;
   border: none !important;
+}
+
+.worldmap-icon-marker:hover {
+  cursor: crosshair;
 }
 
 .quest-pin-marker {
   background: none !important;
   border: none !important;
   /* box-shadow: 0 0 0 1px white; */
+}
+
+.quest-pin-marker:hover {
+  cursor: crosshair;
 }

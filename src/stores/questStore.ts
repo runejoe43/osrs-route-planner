@@ -1,6 +1,6 @@
 import { create } from "zustand";
 import { useShallow } from "zustand/react/shallow";
-import type { QuestData, QuestStepWithPoint, WorldPoint } from "../types/QuestData";
+import type { QuestData, QuestStepWithPoint } from "../types/QuestData";
 
 /** Flatten all steps from all panels into a single array. Used once when loading. */
 function flattenSteps(quest: QuestData): QuestStepWithPoint[] {
@@ -67,13 +67,13 @@ export function useQuestIds(): string[] {
 }
 
 /** Returns active step's WorldPoint for a quest. Use shallow when returning object. */
-export function useActiveCoordinates(questId: string): WorldPoint | undefined {
+export function useActiveStep(questId: string): QuestStepWithPoint | undefined {
   return useQuestStore(
     useShallow((s) => {
       const q = s.quests[questId];
       if (!q) return undefined;
       const step = q.flatSteps[q.activeStep ?? 0];
-      return step?.worldpoint;
+      return step;
     })
   );
 }
