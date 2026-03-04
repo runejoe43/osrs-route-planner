@@ -1,0 +1,153 @@
+{
+  "name": "Fairytale I",
+  "questPoints": 0,
+  "experienceRewards": [],
+  "lampRewards": null,
+  "skillRequirements": [],
+  "questRequirements": [],
+  "questPointRequirement": null,
+  "itemRequirements": [],
+  "steps": [
+    {
+      "panelName": "Investigating",
+      "steps": [
+        {
+          "stepDescription": "Talk to Martin in the Draynor Market.",
+          "worldpoint": {
+            "x": 3078,
+            "y": 3256,
+            "plane": 0
+          }
+        },
+        {
+          "stepDescription": "Talk to 5 farmers, then return to Martin in Draynor Village. The recommended 5 are:"
+        },
+        {
+          "stepDescription": "Return to Martin in the Draynor Market.",
+          "worldpoint": {
+            "x": 3078,
+            "y": 3256,
+            "plane": 0
+          }
+        }
+      ]
+    },
+    {
+      "panelName": "Unnatural events",
+      "steps": [
+        {
+          "stepDescription": "Travel to Zanaris.",
+          "worldpoint": {
+            "x": 3202,
+            "y": 3169,
+            "plane": 0
+          }
+        },
+        {
+          "stepDescription": "Talk to the Fairy Godfather in the Throne Room.",
+          "worldpoint": {
+            "x": 2447,
+            "y": 4430,
+            "plane": 0
+          }
+        },
+        {
+          "stepDescription": "Talk to Fairy Nuff in north west Zanaris.",
+          "worldpoint": {
+            "x": 2386,
+            "y": 4472,
+            "plane": 0
+          }
+        },
+        {
+          "stepDescription": "Talk to Zandar in the Dark Wizards' Tower west of Falador.",
+          "worldpoint": {
+            "x": 2907,
+            "y": 3335,
+            "plane": 2
+          }
+        }
+      ]
+    },
+    {
+      "panelName": "Finding a cure",
+      "steps": [
+        {
+          "stepDescription": "Dig for a skull in the north of Draynor Manor.",
+          "worldpoint": {
+            "x": 3106,
+            "y": 3383,
+            "plane": 0
+          }
+        },
+        {
+          "stepDescription": "Talk to Malignius Mortifer west of Port Sarim.",
+          "worldpoint": {
+            "x": 2991,
+            "y": 3270,
+            "plane": 0
+          }
+        }
+      ]
+    },
+    {
+      "panelName": "Enchanting secateurs",
+      "steps": [
+        {
+          "stepDescription": "Get the items Mortifer tells you to get, and enter the Grotto in the south of Mort Myre.",
+          "worldpoint": {
+            "x": 3440,
+            "y": 3337,
+            "plane": 0
+          }
+        },
+        {
+          "stepDescription": "Talk to the Nature Spirit.",
+          "worldpoint": {
+            "x": 3441,
+            "y": 9738,
+            "plane": 1
+          }
+        }
+      ]
+    },
+    {
+      "panelName": "Defeat the Tanglefoot",
+      "steps": [
+        {
+          "stepDescription": "Travel to Zanaris, ready to fight the Tanglefoot.",
+          "worldpoint": {
+            "x": 3202,
+            "y": 3169,
+            "plane": 0
+          }
+        },
+        {
+          "stepDescription": "Enter the tanglefoot lair in the south of Zanaris, near the cosmic altar.",
+          "worldpoint": {
+            "x": 2399,
+            "y": 4379,
+            "plane": 0
+          }
+        },
+        {
+          "stepDescription": "Kill the large Tanglefoot with the Magic Secateurs. You can flinch it on a corner.",
+          "worldpoint": {
+            "x": 2375,
+            "y": 4385,
+            "plane": 0
+          }
+        },
+        {
+          "stepDescription": "Talk to the Fairy Godfather to finish the quest.",
+          "worldpoint": {
+            "x": 2447,
+            "y": 4430,
+            "plane": 0
+          }
+        }
+      ]
+    }
+  ],
+  "activeStep": 0
+}

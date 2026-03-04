@@ -310,6 +310,9 @@ function parseStepConstructor(
   worldPointVars: Map<string, WorldPoint>
 ): ParsedStep {
   const args = splitTopLevelArgs(argsRaw);
+  const knownCustomStepDescriptions: Record<string, string> = {
+    PaintingWall: "Click the highlighted boxes to turn the squares to solve the puzzle.",
+  };
 
   if (["NpcStep", "ObjectStep"].includes(constructorName)) {
     // NpcStep/ObjectStep overloads can have description at arg[2] or arg[3]
@@ -355,6 +358,19 @@ function parseStepConstructor(
     };
   }
 
+  if (["DigStep", "TileStep"].includes(constructorName)) {
+    return {
+      worldpoint: args[1] ? resolveWorldPointArg(args[1], worldPointVars) : undefined,
+      stepDescription: args[2] ? extractStringArg(args[2]) : "",
+    };
+  }
+
+  if (constructorName === "WidgetStep") {
+    return {
+      stepDescription: args[1] ? extractStringArg(args[1]) : "",
+    };
+  }
+
   if (constructorName === "DetailedQuestStep") {
     // arg[1] is either a WorldPoint or the description string
     const worldpoint = args[1]
@@ -387,7 +403,14 @@ function parseStepConstructor(
     return { stepDescription: "UNKNOWN STEP" };
   }
 
-  return { stepDescription: "UNKNOWN STEP" };
+  const fallbackFromStrings =
+    args.map((arg) => extractStringArg(arg)).find((s) => s.length > 0) ?? "";
+  return {
+    stepDescription:
+      knownCustomStepDescriptions[constructorName] ||
+      fallbackFromStrings ||
+      "UNKNOWN STEP",
+  };
 }
 
 // ─── addStep resolver ─────────────────────────────────────────────────────────
@@ -584,8 +607,6 @@ function parseStepsFromMethod(
     const varName = constructorMatch[1];
     const constructorName = constructorMatch[2];
 
-    if (!constructorName.endsWith("Step") && !constructorName.endsWith("Steps")) continue;
-
     const openParen = constructorMatch.index + constructorMatch[0].length - 1;
     const closeParen = findMatchingClose(cleaned, openParen, "(", ")");
     if (closeParen === -1) continue;
@@ -625,6 +646,13 @@ function parseAllSteps(source: string): Map<string, ParsedStep> {
     worldPointVars,
     true
   );
+  const loadQuestStepsBody = parseStepsFromMethod(
+    source,
+    /(?:private|protected|public)?\s+void\s+loadQuestSteps\s*\(\s*\)/,
+    stepMap,
+    worldPointVars,
+    true
+  );
   const loadBody = parseStepsFromMethod(
     source,
     /(?:private|protected|public)?\s+[^{;]*\bloadSteps\s*\(\s*\)/,
@@ -632,7 +660,7 @@ function parseAllSteps(source: string): Map<string, ParsedStep> {
     worldPointVars,
     false
   );
-  const bodyForResolution = `${setupBody}\n${loadBody}`;
+  const bodyForResolution = `${setupBody}\n${loadQuestStepsBody}\n${loadBody}`;
 
   // Resolve WorldPoint for steps that lack one.
   // resolveWorldPoint walks addStep chains and falls back to the ConditionalStep's
@@ -656,6 +684,30 @@ function parsePanels(source: string): { panelTitle: string; stepVars: string[] }
   if (!body) return [];
 
   const cleaned = stripCommentsAndStrings(body);
+  const listVarMap = new Map<string, string[]>();
+  const listDeclPattern =
+    /(?:final\s+)?(?:List(?:\s*<[^>]+>)?|var)\s+([a-zA-Z_][a-zA-Z0-9_]*)\s*=\s*(?:List\.of|Arrays\.asList|Collections\.singletonList)\s*\(/g;
+  let listDeclMatch: RegExpExecArray | null;
+  while ((listDeclMatch = listDeclPattern.exec(cleaned)) !== null) {
+    const listVarName = listDeclMatch[1];
+    const listOpen = listDeclMatch.index + listDeclMatch[0].length - 1;
+    const listClose = findMatchingClose(cleaned, listOpen, "(", ")");
+    if (listClose === -1) continue;
+    const entriesRaw = body.slice(listOpen + 1, listClose);
+    const entries = splitTopLevelArgs(entriesRaw)
+      .map((token) => {
+        const tokenCleaned = stripCommentsAndStrings(token).trim();
+        if (!tokenCleaned) return undefined;
+        if (/^[a-zA-Z_][a-zA-Z0-9_]*$/.test(tokenCleaned)) return tokenCleaned;
+        if (tokenCleaned.startsWith("new ")) {
+          const idx = stripCommentsAndStrings(token).indexOf("new ");
+          return idx >= 0 ? token.slice(idx).trim() : token.trim();
+        }
+        return undefined;
+      })
+      .filter((s): s is string => s !== undefined);
+    listVarMap.set(listVarName, entries);
+  }
   const results: { panelTitle: string; stepVars: string[] }[] = [];
   const pattern = /new\s+PanelDetails\s*\(/g;
   let match: RegExpExecArray | null;
@@ -685,9 +737,24 @@ function parsePanels(source: string): { panelTitle: string; stepVars: string[] }
           .map((s) => s.trim())
           .filter((s) => s.length > 0);
       }
+    } else if (/^[a-zA-Z_][a-zA-Z0-9_]*$/.test(secondArg) && listVarMap.has(secondArg)) {
+      stepVars = listVarMap.get(secondArg) ?? [];
     } else if (secondArg) {
       stepVars = [secondArg];
     }
+
+    stepVars = stepVars
+      .map((token) => {
+        const tokenCleaned = stripCommentsAndStrings(token).trim();
+        if (!tokenCleaned) return undefined;
+        if (/^[a-zA-Z_][a-zA-Z0-9_]*$/.test(tokenCleaned)) return tokenCleaned;
+        if (tokenCleaned.startsWith("new ")) {
+          const idx = stripCommentsAndStrings(token).indexOf("new ");
+          return idx >= 0 ? token.slice(idx).trim() : token.trim();
+        }
+        return undefined;
+      })
+      .filter((s): s is string => s !== undefined);
 
     results.push({ panelTitle, stepVars });
   }
@@ -715,6 +782,20 @@ function buildPanels(source: string): ParsedPanel[] {
   return panelDefs.map(({ panelTitle, stepVars }) => ({
     panelTitle,
     steps: stepVars.map((varName) => {
+      const cleanedVar = stripCommentsAndStrings(varName).trim();
+      const inlineMatch = cleanedVar.match(/^new\s+([a-zA-Z_][a-zA-Z0-9_]*)\s*\(/);
+      if (inlineMatch) {
+        const constructorName = inlineMatch[1];
+        const openParen = varName.indexOf("(");
+        const closeParen = findMatchingClose(varName, openParen, "(", ")");
+        if (openParen !== -1 && closeParen !== -1) {
+          const argsRaw = varName.slice(openParen + 1, closeParen);
+          return {
+            varName,
+            ...parseStepConstructor(constructorName, argsRaw, new Map<string, WorldPoint>()),
+          };
+        }
+      }
       const step = stepMap.get(varName);
       if (!step) return { varName, stepDescription: "STEP NOT FOUND IN setupSteps" };
       return { varName, ...step };

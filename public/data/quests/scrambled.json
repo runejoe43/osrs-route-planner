@@ -1,0 +1,258 @@
+{
+  "name": "Scrambled",
+  "questPoints": 0,
+  "experienceRewards": [],
+  "lampRewards": null,
+  "skillRequirements": [],
+  "questRequirements": [],
+  "questPointRequirement": null,
+  "itemRequirements": [],
+  "steps": [
+    {
+      "panelName": "Humphrey Dumphrey sat on a wall",
+      "steps": [
+        {
+          "stepDescription": "Talk to Alan in Tal Teok Temple, north of Tal Teklan, to start the quest.",
+          "worldpoint": {
+            "x": 1247,
+            "y": 3167,
+            "plane": 0
+          }
+        }
+      ]
+    },
+    {
+      "panelName": "Wumty Scrumpty had a great fall",
+      "steps": [
+        {
+          "stepDescription": "Inspect the egg in front of you.",
+          "worldpoint": {
+            "x": 1247,
+            "y": 3170,
+            "plane": 0
+          }
+        },
+        {
+          "stepDescription": "Head south into Tal Teklan and talk to King in the pub.",
+          "worldpoint": {
+            "x": 1224,
+            "y": 3119,
+            "plane": 0
+          }
+        }
+      ]
+    },
+    {
+      "panelName": "All the king's horses and all the king's men...",
+      "steps": [
+        {
+          "stepDescription": "Get an empty bowl from the pub, will need it later. If it's not there, hop worlds or wait for it to spawn again.",
+          "worldpoint": {
+            "x": 1229,
+            "y": 3119,
+            "plane": 0
+          }
+        },
+        {
+          "stepDescription": "Talk to Acatzin inside the Tal Teklan pub.",
+          "worldpoint": {
+            "x": 1228,
+            "y": 3117,
+            "plane": 0
+          }
+        },
+        {
+          "stepDescription": "Talk to the Blacksmith west of the Tal Teklan pub.",
+          "worldpoint": {
+            "x": 1209,
+            "y": 3109,
+            "plane": 0
+          }
+        },
+        {
+          "stepDescription": "Fix the whetstone.",
+          "worldpoint": {
+            "x": 1211,
+            "y": 3108,
+            "plane": 0
+          }
+        },
+        {
+          "stepDescription": "Repair the axe on the whetstone.",
+          "worldpoint": {
+            "x": 1211,
+            "y": 3108,
+            "plane": 0
+          }
+        },
+        {
+          "stepDescription": "Get the Saw from the house to the south, we'll need it later. If it's not there, hop worlds or wait for it to spawn again.",
+          "worldpoint": {
+            "x": 1212,
+            "y": 3093,
+            "plane": 0
+          }
+        },
+        {
+          "stepDescription": "Return the repaired axe to Acatzin in the Tel Teklan pub.",
+          "worldpoint": {
+            "x": 1228,
+            "y": 3117,
+            "plane": 0
+          }
+        },
+        {
+          "stepDescription": "Pick the damiana bush at the east entrance of Tal Teklan for some damiana leaves, we'll need these later.",
+          "worldpoint": {
+            "x": 1250,
+            "y": 3110,
+            "plane": 0
+          }
+        },
+        {
+          "stepDescription": "Go south-west of Kauayotl and pick up two planks from besides the lake. If it's not there, hop worlds or wait for it to spawn again.",
+          "worldpoint": {
+            "x": 1238,
+            "y": 3076,
+            "plane": 0
+          }
+        },
+        {
+          "stepDescription": "Talk to Kauayotl at the east entrance of Tal Teklan.",
+          "worldpoint": {
+            "x": 1251,
+            "y": 3104,
+            "plane": 0
+          }
+        },
+        {
+          "stepDescription": "Repair Kauayotl's cart.",
+          "worldpoint": {
+            "x": 1250,
+            "y": 3107,
+            "plane": 0
+          }
+        },
+        {
+          "stepDescription": "Talk to Kauayotl again after repairing his cart.",
+          "worldpoint": {
+            "x": 1251,
+            "y": 3104,
+            "plane": 0
+          }
+        },
+        {
+          "stepDescription": "Talk to Nezketi in the Tal Teklan temple.",
+          "worldpoint": {
+            "x": 1224,
+            "y": 3105,
+            "plane": 0
+          }
+        },
+        {
+          "stepDescription": "Fill your empty bowl with water at the water pump near the eastern entrance of Tal Teklan.",
+          "worldpoint": {
+            "x": 1242,
+            "y": 3097,
+            "plane": 0
+          }
+        },
+        {
+          "stepDescription": "Mix damiana leaves with your bowl of water."
+        },
+        {
+          "stepDescription": "Use your bowl of damiana water on the stove in the east part of Tal Teklan to boil it."
+        },
+        {
+          "stepDescription": "Pour the damiana tea from your bowl into the empty cup"
+        },
+        {
+          "stepDescription": "Return to Nezketi in the Tal Teklan temple and give him the cup of damiana tea.",
+          "worldpoint": {
+            "x": 1224,
+            "y": 3105,
+            "plane": 0
+          }
+        },
+        {
+          "stepDescription": "Return to the temple north of Tal Teklan and speak with one of King's men.",
+          "worldpoint": {
+            "x": 1247,
+            "y": 3166,
+            "plane": 0
+          }
+        }
+      ]
+    },
+    {
+      "panelName": "Couldn't put Bumpty Numpty back together again...",
+      "steps": [
+        {
+          "stepDescription": "Fetch the Large egg from the chicken coop south of the large temple. Be ready to fight a level 17 chicken.",
+          "worldpoint": {
+            "x": 1238,
+            "y": 3137,
+            "plane": 0
+          }
+        },
+        {
+          "stepDescription": "Fetch the Dragon egg from the dragon cave south-east of the large temple, across the river. Be ready to fight a Red dragon.",
+          "worldpoint": {
+            "x": 1283,
+            "y": 3146,
+            "plane": 0
+          }
+        },
+        {
+          "stepDescription": "Fetch the Jaguar egg from the tent, east of the dragon cave. Be ready to fight a level 88 jaguar.",
+          "worldpoint": {
+            "x": 1332,
+            "y": 3122,
+            "plane": 0
+          }
+        },
+        {
+          "stepDescription": "Give the eggs to King's men at the Tal Teok Temple, north of Tal Teklan.",
+          "worldpoint": {
+            "x": 1247,
+            "y": 3166,
+            "plane": 0
+          }
+        },
+        {
+          "stepDescription": "Return to the large temple north of Tal Teklan and talk with one of King's men to evaluate the Humphrey Dumphrey alternatives.",
+          "worldpoint": {
+            "x": 1247,
+            "y": 3166,
+            "plane": 0
+          }
+        },
+        {
+          "stepDescription": "Talk to one of King's men to figure out how to solve the broken-egg conundrum.",
+          "worldpoint": {
+            "x": 1247,
+            "y": 3166,
+            "plane": 0
+          }
+        },
+        {
+          "stepDescription": "Put Lumpty Mumpty back together again.",
+          "worldpoint": {
+            "x": 1244,
+            "y": 3168,
+            "plane": 0
+          }
+        },
+        {
+          "stepDescription": "Talk to one of King's men to finish the quest.",
+          "worldpoint": {
+            "x": 1247,
+            "y": 3166,
+            "plane": 0
+          }
+        }
+      ]
+    }
+  ],
+  "activeStep": 0
+}

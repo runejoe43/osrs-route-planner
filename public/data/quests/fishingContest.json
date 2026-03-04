@@ -1,0 +1,74 @@
+{
+  "name": "Fishing Contest",
+  "questPoints": 0,
+  "experienceRewards": [],
+  "lampRewards": null,
+  "skillRequirements": [],
+  "questRequirements": [],
+  "questPointRequirement": null,
+  "itemRequirements": [],
+  "steps": [
+    {
+      "panelName": "Fishing Contest",
+      "steps": [
+        {
+          "stepDescription": "Talk to Vestri just north of Catherby.",
+          "worldpoint": {
+            "x": 2821,
+            "y": 3486,
+            "plane": 0
+          }
+        },
+        {
+          "stepDescription": "Enter Hemenster with your fishing pass.",
+          "worldpoint": {
+            "x": 2649,
+            "y": 3451,
+            "plane": 0
+          }
+        },
+        {
+          "stepDescription": "Speak to Bonzo to start the competition.",
+          "worldpoint": {
+            "x": 2641,
+            "y": 3437,
+            "plane": 0
+          }
+        },
+        {
+          "stepDescription": "Put garlic in the pipes.",
+          "worldpoint": {
+            "x": 2638,
+            "y": 3446,
+            "plane": 0
+          }
+        },
+        {
+          "stepDescription": "Catch the winning fish at the fishing spot near the pipes.",
+          "worldpoint": {
+            "x": 2637,
+            "y": 3444,
+            "plane": 0
+          }
+        },
+        {
+          "stepDescription": "Speak to Bonzo again after you have caught the winning fish.",
+          "worldpoint": {
+            "x": 2641,
+            "y": 3437,
+            "plane": 0
+          }
+        },
+        {
+          "stepDescription": "Bring Vestri just north of Catherby the trophy.",
+          "worldpoint": {
+            "x": 2821,
+            "y": 3486,
+            "plane": 0
+          }
+        }
+      ]
+    }
+  ],
+  "activeStep": 0
+}

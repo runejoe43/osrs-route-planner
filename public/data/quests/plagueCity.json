@@ -1,0 +1,244 @@
+{
+  "name": "Plague City",
+  "questPoints": 0,
+  "experienceRewards": [],
+  "lampRewards": null,
+  "skillRequirements": [],
+  "questRequirements": [],
+  "questPointRequirement": null,
+  "itemRequirements": [],
+  "steps": [
+    {
+      "panelName": "Start the quest",
+      "steps": [
+        {
+          "stepDescription": "Talk to Edmond in the north-west corner of East Ardougne.",
+          "worldpoint": {
+            "x": 2568,
+            "y": 3333,
+            "plane": 0
+          }
+        }
+      ]
+    },
+    {
+      "panelName": "Infiltrate West Ardougne",
+      "steps": [
+        {
+          "stepDescription": "Talk to Alrena and give her the dwellberries.",
+          "worldpoint": {
+            "x": 2573,
+            "y": 3333,
+            "plane": 0
+          }
+        },
+        {
+          "stepDescription": "Grab the Picture from Edmond's house.",
+          "worldpoint": {
+            "x": 2576,
+            "y": 3334,
+            "plane": 0
+          }
+        },
+        {
+          "stepDescription": "Talk to Edmond again.",
+          "worldpoint": {
+            "x": 2568,
+            "y": 3332,
+            "plane": 0
+          }
+        },
+        {
+          "stepDescription": "Use four buckets of water on the mud patch in Edmond's garden patch.",
+          "worldpoint": {
+            "x": 2566,
+            "y": 3332,
+            "plane": 0
+          }
+        },
+        {
+          "stepDescription": "Use a spade on the mud patch.",
+          "worldpoint": {
+            "x": 2566,
+            "y": 3332,
+            "plane": 0
+          }
+        },
+        {
+          "stepDescription": "Go down the hole.",
+          "worldpoint": {
+            "x": 2566,
+            "y": 3332,
+            "plane": 0
+          }
+        },
+        {
+          "stepDescription": "Attempt to pull the grill in the south of the sewer.",
+          "worldpoint": {
+            "x": 2514,
+            "y": 9739,
+            "plane": 0
+          }
+        },
+        {
+          "stepDescription": "Use a rope on the grill.",
+          "worldpoint": {
+            "x": 2514,
+            "y": 9739,
+            "plane": 0
+          }
+        },
+        {
+          "stepDescription": "Talk to Edmond and ask him to help you pull off the grill.",
+          "worldpoint": {
+            "x": 2517,
+            "y": 9753,
+            "plane": 0
+          }
+        },
+        {
+          "stepDescription": "Equip the gas mask and climb through the pipe.",
+          "worldpoint": {
+            "x": 2514,
+            "y": 9738,
+            "plane": 0
+          }
+        }
+      ]
+    },
+    {
+      "panelName": "Discover Elena's location",
+      "steps": [
+        {
+          "stepDescription": "Talk to Jethick east of where you emerge.",
+          "worldpoint": {
+            "x": 2540,
+            "y": 3305,
+            "plane": 0
+          }
+        },
+        {
+          "stepDescription": "Enter the tall house in north West Ardougne.",
+          "worldpoint": {
+            "x": 2531,
+            "y": 3328,
+            "plane": 0
+          }
+        },
+        {
+          "stepDescription": "Talk to Martha or Ted Rehnison",
+          "worldpoint": {
+            "x": 2531,
+            "y": 3331,
+            "plane": 0
+          }
+        },
+        {
+          "stepDescription": "Talk to Milli upstairs.",
+          "worldpoint": {
+            "x": 2528,
+            "y": 3333,
+            "plane": 0
+          }
+        }
+      ]
+    },
+    {
+      "panelName": "Freeing Elena",
+      "steps": [
+        {
+          "stepDescription": "Try to enter the house in the south-east corner of West Ardougne.",
+          "worldpoint": {
+            "x": 2540,
+            "y": 3273,
+            "plane": 0
+          }
+        },
+        {
+          "stepDescription": "Talk to the Clerk in the large building north of the manhole.",
+          "worldpoint": {
+            "x": 2528,
+            "y": 3317,
+            "plane": 0
+          }
+        },
+        {
+          "stepDescription": "Talk to Bravek in the room to the east.",
+          "worldpoint": {
+            "x": 2534,
+            "y": 3314,
+            "plane": 0
+          }
+        },
+        {
+          "stepDescription": "Use your chocolate dust on the bucket of milk."
+        },
+        {
+          "stepDescription": "Use the snape grass on the chocolatey milk"
+        },
+        {
+          "stepDescription": "Give the hangover cure to Bravek.",
+          "worldpoint": {
+            "x": 2534,
+            "y": 3314,
+            "plane": 0
+          }
+        },
+        {
+          "stepDescription": "Talk to Bravek to receive the warrant you need to enter the plague house.",
+          "worldpoint": {
+            "x": 2534,
+            "y": 3314,
+            "plane": 0
+          }
+        },
+        {
+          "stepDescription": "Try to enter the plague house again.",
+          "worldpoint": {
+            "x": 2540,
+            "y": 3273,
+            "plane": 0
+          }
+        },
+        {
+          "stepDescription": "Search the barrel in the room for a small key.",
+          "worldpoint": {
+            "x": 2534,
+            "y": 3268,
+            "plane": 0
+          }
+        },
+        {
+          "stepDescription": "Go downstairs in the plague house.",
+          "worldpoint": {
+            "x": 2537,
+            "y": 3269,
+            "plane": 0
+          }
+        },
+        {
+          "stepDescription": "Enter the jail and talk to Elena.",
+          "worldpoint": {
+            "x": 2541,
+            "y": 9671,
+            "plane": 0
+          }
+        }
+      ]
+    },
+    {
+      "panelName": "Finishing off",
+      "steps": [
+        {
+          "stepDescription": "Return to Edmond to finish the quest.",
+          "worldpoint": {
+            "x": 2568,
+            "y": 3333,
+            "plane": 0
+          }
+        }
+      ]
+    }
+  ],
+  "activeStep": 0
+}

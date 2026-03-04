@@ -1,0 +1,132 @@
+{
+  "name": "Fight Arena",
+  "questPoints": 0,
+  "experienceRewards": [],
+  "lampRewards": null,
+  "skillRequirements": [],
+  "questRequirements": [],
+  "questPointRequirement": null,
+  "itemRequirements": [],
+  "steps": [
+    {
+      "panelName": "Start quest",
+      "steps": [
+        {
+          "stepDescription": "Talk to Lady Servil, west-southwest of the Monastery south of Ardougne.",
+          "worldpoint": {
+            "x": 2565,
+            "y": 3199,
+            "plane": 0
+          }
+        },
+        {
+          "stepDescription": "Search the chest to the east for some Khazard armour.",
+          "worldpoint": {
+            "x": 2613,
+            "y": 3189,
+            "plane": 0
+          }
+        },
+        {
+          "stepDescription": "Equip Khazard armour, talk to the Khazard Guard in the southeast of the prison.",
+          "worldpoint": {
+            "x": 2615,
+            "y": 3143,
+            "plane": 0
+          }
+        },
+        {
+          "stepDescription": "Buy Khali brew from the nearby bar to the west for 5 coins.",
+          "worldpoint": {
+            "x": 2567,
+            "y": 3140,
+            "plane": 0
+          }
+        },
+        {
+          "stepDescription": "Take the brew back to the Khazard Guard.",
+          "worldpoint": {
+            "x": 2615,
+            "y": 3143,
+            "plane": 0
+          }
+        }
+      ]
+    },
+    {
+      "panelName": "Fight!",
+      "steps": [
+        {
+          "stepDescription": "Get another set of keys from the Khazard Guard",
+          "worldpoint": {
+            "x": 2615,
+            "y": 3143,
+            "plane": 0
+          }
+        },
+        {
+          "stepDescription": "Get ready to fight the monsters (all safespottable), starting with Khazard Ogre (level 63). Use the keys on Sammy's cell door to free him.",
+          "worldpoint": {
+            "x": 2617,
+            "y": 3167,
+            "plane": 0
+          }
+        },
+        {
+          "stepDescription": "Kill the Ogre. You can lure it behind a skeleton to safespot it.",
+          "worldpoint": {
+            "x": 2601,
+            "y": 3163,
+            "plane": 0
+          }
+        },
+        {
+          "stepDescription": "Talk to Hengrad.",
+          "worldpoint": {
+            "x": 2599,
+            "y": 3143,
+            "plane": 0
+          }
+        },
+        {
+          "stepDescription": "Kill the Scorpion. You can lure it behind a skeleton to safespot it.",
+          "worldpoint": {
+            "x": 2601,
+            "y": 3163,
+            "plane": 0
+          }
+        },
+        {
+          "stepDescription": "Kill Bouncer. You can lure it behind a skeleton to safespot it. Warning: After Bouncer is killed, you will be unable to re-enter the arena.",
+          "worldpoint": {
+            "x": 2601,
+            "y": 3163,
+            "plane": 0
+          }
+        }
+      ]
+    },
+    {
+      "panelName": "Finish quest",
+      "steps": [
+        {
+          "stepDescription": "Exit the arena (can ignore General Khazard). Warning: You will be unable to re-enter the arena.",
+          "worldpoint": {
+            "x": 2606,
+            "y": 3152,
+            "plane": 0
+          }
+        },
+        {
+          "stepDescription": "Go back to Lady Servil to end the quest.",
+          "worldpoint": {
+            "x": 2565,
+            "y": 3199,
+            "plane": 0
+          }
+        }
+      ]
+    }
+  ],
+  "activeStep": 0
+}

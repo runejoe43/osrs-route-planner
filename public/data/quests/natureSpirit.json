@@ -1,0 +1,197 @@
+{
+  "name": "Nature Spirit",
+  "questPoints": 0,
+  "experienceRewards": [],
+  "lampRewards": null,
+  "skillRequirements": [],
+  "questRequirements": [],
+  "questPointRequirement": null,
+  "itemRequirements": [],
+  "steps": [
+    {
+      "panelName": "Start the quest",
+      "steps": [
+        {
+          "stepDescription": "Talk to Drezel under the Paterdomus Temple.",
+          "worldpoint": {
+            "x": 3439,
+            "y": 9896,
+            "plane": 0
+          }
+        },
+        {
+          "stepDescription": "Enter the Mort Myre from the north gate.",
+          "worldpoint": {
+            "x": 3444,
+            "y": 3458,
+            "plane": 0
+          }
+        },
+        {
+          "stepDescription": "Attempt to enter the Grotto in the south of Mort Myre.",
+          "worldpoint": {
+            "x": 3440,
+            "y": 3337,
+            "plane": 0
+          }
+        },
+        {
+          "stepDescription": "Talk to Filliman Tarlock.",
+          "worldpoint": {
+            "x": 3440,
+            "y": 3336,
+            "plane": 0
+          }
+        },
+        {
+          "stepDescription": "Pick up the washing bowl.",
+          "worldpoint": {
+            "x": 3437,
+            "y": 3337,
+            "plane": 0
+          }
+        },
+        {
+          "stepDescription": "Pick up the mirror.",
+          "worldpoint": {
+            "x": 3437,
+            "y": 3337,
+            "plane": 0
+          }
+        },
+        {
+          "stepDescription": "Use the mirror on Filliman Tarlock.",
+          "worldpoint": {
+            "x": 3440,
+            "y": 3336,
+            "plane": 0
+          }
+        },
+        {
+          "stepDescription": "Right-click search the grotto tree.",
+          "worldpoint": {
+            "x": 3440,
+            "y": 3339,
+            "plane": 0
+          }
+        },
+        {
+          "stepDescription": "Use the journal on Filliman Tarlock.",
+          "worldpoint": {
+            "x": 3440,
+            "y": 3336,
+            "plane": 0
+          }
+        }
+      ]
+    },
+    {
+      "panelName": "Helping Filliman",
+      "steps": [
+        {
+          "stepDescription": "Return to Drezel under the Paterdomus Temple to get blessed.",
+          "worldpoint": {
+            "x": 3439,
+            "y": 9896,
+            "plane": 0
+          }
+        },
+        {
+          "stepDescription": "Cast the druidic spell next to a rotten log in Mort Myre to grow a mushroom. Pick it. If you already have, open the quest journal to re-sync your state."
+        },
+        {
+          "stepDescription": "Use the mushroom on the brown stone outside the grotto. If you already have, search it instead.",
+          "worldpoint": {
+            "x": 3439,
+            "y": 3336,
+            "plane": 0
+          }
+        },
+        {
+          "stepDescription": "Use the used spell on the gray stone outside the grotto. If you already have, search it instead.",
+          "worldpoint": {
+            "x": 3441,
+            "y": 3336,
+            "plane": 0
+          }
+        },
+        {
+          "stepDescription": "Stand on the orange stone outside the grotto.",
+          "worldpoint": {
+            "x": 3440,
+            "y": 3335,
+            "plane": 0
+          }
+        },
+        {
+          "stepDescription": "Tell Filliman Tarlock you're ready.",
+          "worldpoint": {
+            "x": 3440,
+            "y": 3336,
+            "plane": 0
+          }
+        },
+        {
+          "stepDescription": "Enter the Grotto in the south of Mort Myre.",
+          "worldpoint": {
+            "x": 3440,
+            "y": 3337,
+            "plane": 0
+          }
+        },
+        {
+          "stepDescription": "Search the grotto inside.",
+          "worldpoint": {
+            "x": 3442,
+            "y": 9741,
+            "plane": 0
+          }
+        },
+        {
+          "stepDescription": "Talk to Filliman in the grotto to bless your sickle.",
+          "worldpoint": {
+            "x": 3441,
+            "y": 9738,
+            "plane": 0
+          }
+        },
+        {
+          "stepDescription": "Talk to the Nature Spirit in the grotto to bless your sickle.",
+          "worldpoint": {
+            "x": 3441,
+            "y": 9738,
+            "plane": 0
+          }
+        }
+      ]
+    },
+    {
+      "panelName": "Killing Ghasts",
+      "steps": [
+        {
+          "stepDescription": "Right-click 'bloom' the blessed sickle next to rotten logs for mort myre fungi. Use these to fill the druid pouch."
+        },
+        {
+          "stepDescription": "Use the filled druid pouch on a ghast to make it attackable and kill it. You'll need to kill 3."
+        },
+        {
+          "stepDescription": "Enter the Grotto in the south of Mort Myre.",
+          "worldpoint": {
+            "x": 3440,
+            "y": 3337,
+            "plane": 0
+          }
+        },
+        {
+          "stepDescription": "Talk to the Nature Spirit in the grotto to finish the quest!",
+          "worldpoint": {
+            "x": 3441,
+            "y": 9738,
+            "plane": 0
+          }
+        }
+      ]
+    }
+  ],
+  "activeStep": 0
+}

@@ -1,0 +1,285 @@
+{
+  "name": "Mountain Daughter",
+  "questPoints": 0,
+  "experienceRewards": [],
+  "lampRewards": null,
+  "skillRequirements": [],
+  "questRequirements": [],
+  "questPointRequirement": null,
+  "itemRequirements": [],
+  "steps": [
+    {
+      "panelName": "Speak to Hamal",
+      "steps": [
+        {
+          "stepDescription": "Use your rope on the boulder outside the Mountain Camp east of Rellekka.",
+          "worldpoint": {
+            "x": 2766,
+            "y": 3667,
+            "plane": 0
+          }
+        },
+        {
+          "stepDescription": "Speak to Hamal the Chieftain in the Mountain Camp.",
+          "worldpoint": {
+            "x": 2810,
+            "y": 3672,
+            "plane": 0
+          }
+        }
+      ]
+    },
+    {
+      "panelName": "Go to the centre of the lake",
+      "steps": [
+        {
+          "stepDescription": "Head south of Hamal's tent and dig some mud from the mud pond.",
+          "worldpoint": {
+            "x": 2805,
+            "y": 3661,
+            "plane": 0
+          }
+        },
+        {
+          "stepDescription": "Pick up the pole north of Hamal's tent.",
+          "worldpoint": {
+            "x": 2813,
+            "y": 3685,
+            "plane": 0
+          }
+        },
+        {
+          "stepDescription": "Use mud on the Tall Tree on the lake north of the camp, and then climb it.",
+          "worldpoint": {
+            "x": 2772,
+            "y": 3681,
+            "plane": 0
+          }
+        },
+        {
+          "stepDescription": "Climb the Tall Tree on the lake north of the camp.",
+          "worldpoint": {
+            "x": 2772,
+            "y": 3681,
+            "plane": 0
+          }
+        },
+        {
+          "stepDescription": "Use your pole or a staff on the clump of rocks.",
+          "worldpoint": {
+            "x": 2773,
+            "y": 3688,
+            "plane": 0
+          }
+        },
+        {
+          "stepDescription": "Use a plank on the flat stone.",
+          "worldpoint": {
+            "x": 2775,
+            "y": 3691,
+            "plane": 0
+          }
+        },
+        {
+          "stepDescription": "Listen to the Shining Pool.",
+          "worldpoint": {
+            "x": 2781,
+            "y": 3689,
+            "plane": 0
+          }
+        }
+      ]
+    },
+    {
+      "panelName": "Find out how to help",
+      "steps": [
+        {
+          "stepDescription": "Speak to Hamal the Chieftain in the Mountain Camp.",
+          "worldpoint": {
+            "x": 2810,
+            "y": 3672,
+            "plane": 0
+          }
+        },
+        {
+          "stepDescription": "Speak to Jokul north of Hamal's tent.",
+          "worldpoint": {
+            "x": 2812,
+            "y": 3680,
+            "plane": 0
+          }
+        }
+      ]
+    },
+    {
+      "panelName": "Making peace with Rellekka",
+      "steps": [
+        {
+          "stepDescription": "Speak to Svidi who roams in the forest east of Rellekka.",
+          "worldpoint": {
+            "x": 2717,
+            "y": 3666,
+            "plane": 0
+          }
+        },
+        {
+          "stepDescription": "Speak to Brundt the Chieftain in the Rellekka's longhall.",
+          "worldpoint": {
+            "x": 2658,
+            "y": 3669,
+            "plane": 0
+          }
+        },
+        {
+          "stepDescription": "Use a pickaxe on the Ancient Rock in the Mountain Camp.",
+          "worldpoint": {
+            "x": 2799,
+            "y": 3660,
+            "plane": 0
+          }
+        },
+        {
+          "stepDescription": "Return to Brundt the Chieftain in the Rellekka's longhall.",
+          "worldpoint": {
+            "x": 2658,
+            "y": 3669,
+            "plane": 0
+          }
+        },
+        {
+          "stepDescription": "Return to Svidi who roams in the forest east of Rellekka.",
+          "worldpoint": {
+            "x": 2717,
+            "y": 3666,
+            "plane": 0
+          }
+        }
+      ]
+    },
+    {
+      "panelName": "Find a new food source",
+      "steps": [
+        {
+          "stepDescription": "Go to the top of White Wolf Mountain and pick the Thorny Bushes whilst wearing gloves.",
+          "worldpoint": {
+            "x": 2849,
+            "y": 3497,
+            "plane": 0
+          }
+        },
+        {
+          "stepDescription": "Eat the White Pearl."
+        }
+      ]
+    },
+    {
+      "panelName": "Prepare for a fight",
+      "steps": [
+        {
+          "stepDescription": "Prepare to fight The Kendal (level 70)"
+        }
+      ]
+    },
+    {
+      "panelName": "Tell Hamal about your success",
+      "steps": [
+        {
+          "stepDescription": "Return to Hamal the Chieftain in the Mountain Camp.",
+          "worldpoint": {
+            "x": 2810,
+            "y": 3672,
+            "plane": 0
+          }
+        }
+      ]
+    },
+    {
+      "panelName": "Tell Asleif about your success",
+      "steps": [
+        {
+          "stepDescription": "Return to the centre of the pool north of the Mountain Camp and listen to it.",
+          "worldpoint": {
+            "x": 2781,
+            "y": 3689,
+            "plane": 0
+          }
+        }
+      ]
+    },
+    {
+      "panelName": "Find Asleif's corpse",
+      "steps": [
+        {
+          "stepDescription": "Cut through the trees north east of the lake and enter the cave there. Bring combat gear.",
+          "worldpoint": {
+            "x": 2809,
+            "y": 3703,
+            "plane": 0
+          }
+        },
+        {
+          "stepDescription": "Speak to the Kendal, then kill him.",
+          "worldpoint": {
+            "x": 2788,
+            "y": 10081,
+            "plane": 0
+          }
+        },
+        {
+          "stepDescription": "Pick up the Corpse of Woman.",
+          "worldpoint": {
+            "x": 2784,
+            "y": 10078,
+            "plane": 0
+          }
+        }
+      ]
+    },
+    {
+      "panelName": "Bring Asleif's corpse to Hamal",
+      "steps": [
+        {
+          "stepDescription": "Bring the corpse to Hamal.",
+          "worldpoint": {
+            "x": 2810,
+            "y": 3672,
+            "plane": 0
+          }
+        }
+      ]
+    },
+    {
+      "panelName": "Bury Asleif",
+      "steps": [
+        {
+          "stepDescription": "Collect 5 Muddy Rocks from around the camp."
+        },
+        {
+          "stepDescription": "Speak to Ragnar.",
+          "worldpoint": {
+            "x": 2766,
+            "y": 3676,
+            "plane": 0
+          }
+        },
+        {
+          "stepDescription": "Return to the centre of the lake and bury the corpse.",
+          "worldpoint": {
+            "x": 2782,
+            "y": 3694,
+            "plane": 0
+          }
+        },
+        {
+          "stepDescription": "Use the Muddy rocks on the Burial Mound at the centre of the Mountain Camp's lake.",
+          "worldpoint": {
+            "x": 2783,
+            "y": 3694,
+            "plane": 0
+          }
+        }
+      ]
+    }
+  ],
+  "activeStep": 0
+}
