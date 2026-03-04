@@ -111,7 +111,7 @@ Encode the current route into the URL (compressed query param or hash) so users 
 
 1. ~~Implement the Leaflet map component with `CRS.Simple`, OSRS tile layers, and plane switching controls.~~
 2. ~~Implement the `WorldPoint` coordinate math — a utility function that converts Leaflet `latlng` pixel offsets to `{ x, y, plane }` integers.~~
-3. Add a coordinate display overlay that shows the current hovered `WorldPoint` in real time.
+3. ~~Add a coordinate display overlay that shows the current hovered `WorldPoint` in real time.~~
 4. Implement step pin rendering — for each `RouteStep` in the current route, place a numbered Leaflet `Marker` at the correct pixel position. Markers should update reactively when steps are added, reordered, or deleted, and should only be visible when their plane matches the current active plane.
 5. Wire up Leaflet click events to the step placement flow: a map click should compute the `WorldPoint`, write a draft step to the store, and open the step editor panel — keeping map interaction and UI state cleanly separated.
 

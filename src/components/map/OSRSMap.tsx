@@ -7,6 +7,7 @@ import WorldMapLabels from "./WorldMapLabels";
 import WorldMapIcons from "./WorldMapIcons";
 import QuestPins from "./QuestPins";
 import MapLayerToggles from "./MapLayerToggles";
+import CoordViewer from "./CoordViewer";
 
 export default function OSRSMap() {
   const bounds = new LatLngBounds([0, 0], [-1428, 405]);
@@ -41,6 +42,8 @@ export default function OSRSMap() {
         <WorldMapIcons />
         <QuestPins />
         <WorldMapLabels />
+
+        <CoordViewer />
 
         <MapLayerToggles />
       </MapContainer>
