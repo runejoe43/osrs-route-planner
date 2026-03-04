@@ -25,3 +25,11 @@
 .quest-pin-marker:hover {
   cursor: crosshair;
 }
+
+.map-layer-toggles {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  z-index: 1000;
+  background: rgba(22, 23, 24, 0.9);
+}

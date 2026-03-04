@@ -6,13 +6,14 @@ import L, { LatLngBounds } from "leaflet";
 import WorldMapLabels from "./WorldMapLabels";
 import WorldMapIcons from "./WorldMapIcons";
 import QuestPins from "./QuestPins";
+import MapLayerToggles from "./MapLayerToggles";
 
 export default function OSRSMap() {
   const bounds = new LatLngBounds([0, 0], [-1428, 405]);
   const center: [number, number] = [-1173, 273];
 
   return (
-    <Box h="100%" w="100%" style={{ minHeight: 400 }}>
+    <Box h="100%" w="100%" style={{ minHeight: 400, position: "relative" }}>
       <MapContainer
         crs={L.CRS.Simple}
         bounds={bounds}
@@ -40,6 +41,8 @@ export default function OSRSMap() {
         <WorldMapIcons />
         <QuestPins />
         <WorldMapLabels />
+
+        <MapLayerToggles />
       </MapContainer>
     </Box>
   );

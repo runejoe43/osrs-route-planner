@@ -72,7 +72,17 @@ export function useActiveStep(questId: string): QuestStepWithPoint | undefined {
     useShallow((s) => {
       const q = s.quests[questId];
       if (!q) return undefined;
-      const step = q.flatSteps[q.activeStep ?? 0];
+      const activeIndex = q.activeStep ?? 0;
+      const step = q.flatSteps[activeIndex];
+      if (!step) return undefined;
+      if (step.worldpoint) return step;
+      for (let i = activeIndex - 1; i >= 0; i -= 1) {
+        const previousStep = q.flatSteps[i];
+        if (previousStep?.worldpoint) {
+          return { ...step, worldpoint: previousStep.worldpoint };
+        }
+      }
+
       return step;
     })
   );

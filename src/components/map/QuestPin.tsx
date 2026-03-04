@@ -20,7 +20,7 @@ export default function QuestPin({ id }: { id: string }) {
   if (!step) return null
   
   return (
-    <Marker key={`marker-${id}`} position={worldPointToLeaflet(step.worldpoint)} icon={questPinIcon} zIndexOffset={1000}>
+    <Marker key={`marker-${id}`} position={worldPointToLeaflet(step.worldpoint!)} icon={questPinIcon} zIndexOffset={1000}>
       <Tooltip content={id} />
       <Popup>
         <Stack>

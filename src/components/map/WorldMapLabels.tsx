@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { Marker, useMap } from 'react-leaflet';
 import L from 'leaflet';
 import { loadWorldMapLabels, labelsToMarkers, type MapMarker } from '../../lib/worldMapData';
+import { useShowMapLabels } from '../../stores/mapVisibilityStore';
 
 function createLabelIcon(name: string, textScale: number, zoom: number): L.DivIcon {
   let fontSize: number;
@@ -40,7 +41,7 @@ function createLabelIcon(name: string, textScale: number, zoom: number): L.DivIc
   });
 }
 
-export default function WorldMapLabels() {
+function WorldMapLabelsLayer() {
   const [labels, setLabels] = useState<MapMarker[]>([]);
   const [loading, setLoading] = useState(true);
   const [zoom, setZoom] = useState(3);
@@ -105,4 +106,10 @@ export default function WorldMapLabels() {
       ))}
     </>
   );
+}
+
+export default function WorldMapLabels() {
+  const showMapLabels = useShowMapLabels();
+  if (!showMapLabels) return null;
+  return <WorldMapLabelsLayer />;
 }

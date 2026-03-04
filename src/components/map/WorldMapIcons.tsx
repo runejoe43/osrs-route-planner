@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { Marker, useMap } from 'react-leaflet';
 import L from 'leaflet';
 import { loadMapIcons, type MapIconEntry } from '../../lib/worldMapData';
+import { useShowMapIcons } from '../../stores/mapVisibilityStore';
 
 const DEFAULT_ICON_SIZE = 16;
 
@@ -28,7 +29,7 @@ function createIcon(iconPath: string, size: number): L.Icon {
   });
 }
 
-export default function WorldMapIcons() {
+function WorldMapIconsLayer() {
   const [icons, setIcons] = useState<MapIconEntry[]>([]);
   const [loading, setLoading] = useState(true);
   const [zoom, setZoom] = useState(3);
@@ -72,4 +73,10 @@ export default function WorldMapIcons() {
       ))}
     </>
   );
+}
+
+export default function WorldMapIcons() {
+  const showMapIcons = useShowMapIcons();
+  if (!showMapIcons) return null;
+  return <WorldMapIconsLayer />;
 }
