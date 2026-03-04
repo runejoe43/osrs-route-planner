@@ -1,455 +1,704 @@
+#!/usr/bin/env npx ts-node
+
 /**
- * Build-time script: fetches Quest Helper Java quest files from GitHub,
- * parses getPanels(), setupSteps(), getQuestPointReward(), getExperienceRewards(),
- * getItemRewards(), getGeneralRequirements(), getItemRequirements(), setupRequirements(),
- * and writes one JSON file per approved quest to public/data/quests/<slug>.json.
- * Run: npm run build:quests or npx tsx scripts/parse-quest-helper.ts
+ * parseQuestPanels.ts
+ *
+ * Fetches quest-helper Java files from the zoinkwiz/quest-helper GitHub repo,
+ * parses getPanels() and setupSteps(), and outputs structured panel/step data.
+ *
+ * Quest URLs are built from scripts/approved-quests.json using the pattern:
+ *   <questname>/<QuestName>.java  (lowercase / PascalCase.java)
+ *
+ * Usage:
+ *   npx tsx scripts/parseQuestPanels.ts
  */
 
-import * as fs from "fs";
 import * as path from "path";
-import type { QuestData, WorldPoint, ExperienceReward, LampReward, SkillRequirement, QuestPanel } from "../src/types/QuestData";
-import { Skill } from "../src/types/QuestData";
+import * as fs from "fs";
+import { fileURLToPath } from "url";
+import type {
+  QuestData,
+  QuestPanel,
+  QuestStepWithPoint,
+  WorldPoint,
+} from "../src/types/QuestData";
 
-const QUEST_HELPER_RAW_BASE =
-  "https://raw.githubusercontent.com/Zoinkwiz/quest-helper/master/src/main/java/com/questhelper/helpers/quests";
-const APPROVED_QUESTS_PATH = path.join(process.cwd(), "scripts", "approved-quests.json");
-const OUTPUT_DIR = path.join(process.cwd(), "public", "data", "quests");
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
-type ApprovedQuests = Record<string, boolean>;
+const GITHUB_RAW_BASE =
+  "https://raw.githubusercontent.com/Zoinkwiz/quest-helper/refs/heads/master/src/main/java/com/questhelper/helpers/quests";
 
-/** Convert "Waterfall Quest" → WaterfallQuest, "Dragon Slayer" → DragonSlayer. */
-function displayNameToClassName(name: string): string {
-  return name
+const APPROVED_QUESTS_PATH = path.join(__dirname, "approved-quests.json");
+const QUESTS_OUTPUT_DIR = path.join(__dirname, "..", "public", "data", "quests");
+
+/**
+ * Convert a quest display name (e.g. "Tree Gnome Village") to camelCase for filenames.
+ */
+function questNameToCamelCase(questName: string): string {
+  const words = questName
     .replace(/'/g, "")
     .split(/\s+/)
-    .map((word) => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
+    .filter(Boolean);
+  if (words.length === 0) return "quest";
+  const first = words[0].toLowerCase();
+  const rest = words
+    .slice(1)
+    .map((w) => w.charAt(0).toUpperCase() + w.slice(1).toLowerCase())
     .join("");
+  return first + rest;
 }
 
-/** Convert WaterfallQuest → waterfallquest for folder/slug. */
-function classNameToFolder(name: string): string {
-  return name.replace(/([A-Z])/g, (m) => m.toLowerCase());
+/**
+ * Convert a quest display name (e.g. "Tree Gnome Village") to the URL path pattern
+ * <questname>/<QuestName>.java (lowercase / PascalCase).
+ */
+function questNameToPath(questName: string): string {
+  const words = questName
+    .replace(/'/g, "")
+    .split(/\s+/)
+    .filter(Boolean);
+  const base = words.join("").toLowerCase();
+  const pascal = words
+    .map((w) => w.charAt(0).toUpperCase() + w.slice(1).toLowerCase())
+    .join("");
+  return `${base}/${pascal}`;
 }
 
-/** Convert WaterfallQuest → "Waterfall Quest", MonkeyMadnessII → "Monkey Madness II". */
-function classNameToDisplayName(className: string): string {
-  return className
-    .replace(/([a-z])([A-Z])/g, "$1 $2")
-    .replace(/([A-Z]+)([A-Z][a-z])/g, "$1 $2")
-    .trim();
+function loadApprovedQuests(): string[] {
+  const data = JSON.parse(
+    fs.readFileSync(APPROVED_QUESTS_PATH, "utf-8")
+  ) as Record<string, boolean>;
+  return Object.keys(data).filter((name) => data[name] === true);
 }
 
-/** Derive raw GitHub URL for a quest's Java file. */
-function questFileUrl(displayName: string): string {
-  const className = displayNameToClassName(displayName);
-  const folder = classNameToFolder(className);
-  return `${QUEST_HELPER_RAW_BASE}/${folder}/${className}.java`;
-}
+// ─── Types ────────────────────────────────────────────────────────────────────
 
-/** Extract method body (content between matching braces). */
-function extractMethodBody(source: string, methodName: string): string | null {
-  const regex = new RegExp(
-    `(?:@Override\\s+)?(?:public|protected)\\s+(?:\\w+(?:<[^>]+>)?\\s+)?${methodName}\\s*\\([^)]*\\)\\s*\\{`,
-    "s"
-  );
-  const match = source.match(regex);
-  if (!match) return null;
-  const start = match.index! + match[0].length;
-  let depth = 1;
-  let i = start;
-  while (i < source.length && depth > 0) {
-    const c = source[i];
-    if (c === "{") depth++;
-    else if (c === "}") depth--;
-    i++;
-  }
-  return source.slice(start, i - 1);
-}
 
-/** Parse getQuestPointReward() → number. */
-function parseQuestPoints(java: string): number {
-  const body = extractMethodBody(java, "getQuestPointReward");
-  if (!body) return 0;
-  const m = body.match(/new\s+QuestPointReward\s*\(\s*(\d+)\s*\)/);
-  return m ? parseInt(m[1], 10) : 0;
-}
 
-/** Parse getExperienceRewards() → ExperienceReward[]. */
-function parseExperienceRewards(java: string): ExperienceReward[] {
-  const body = extractMethodBody(java, "getExperienceRewards");
-  if (!body) return [];
-  const rewards: ExperienceReward[] = [];
-  const regex = /new\s+ExperienceReward\s*\(\s*Skill\.(\w+)\s*,\s*(\d+)\s*\)/g;
-  let m: RegExpExecArray | null;
-  while ((m = regex.exec(body)) !== null) {
-    rewards.push({ skill: m[1] as Skill, xp: parseInt(m[2], 10) });
-  }
-  return rewards;
-}
 
-/** Parse getItemRewards() for lamp rewards; return null if none. */
-function parseLampRewards(java: string): LampReward | null {
-  const body = extractMethodBody(java, "getItemRewards");
-  if (!body) return null;
-  const lampMatch = body.match(
-    /(?:new\s+(?:LampReward|XpLampReward)|ItemReward\s*\(\s*"[^"]*[Ll]amp[^"]*"\s*)[^)]*\)/g
-  );
-  if (!lampMatch || lampMatch.length === 0) return null;
-  const first = lampMatch[0];
-  const skillsMatch = first.match(/skills?\s*[=:]\s*"([^"]+)"/) ?? first.match(/"([^"]*[Aa]ny[^"]*)"/);
-  const valueMatch = first.match(/value\s*[=:]\s*(\d+)/) ?? first.match(/(\d{3,})/);
-  const qtyMatch = first.match(/quantity\s*[=:]\s*(\d+)/) ?? first.match(/,(\d+)\s*\)/);
-  return {
-    skills: skillsMatch ? skillsMatch[1] : "Any",
-    value: valueMatch ? parseInt(valueMatch[1], 10) : 0,
-    quantity: qtyMatch ? parseInt(qtyMatch[1], 10) : 1,
-  };
-}
+// ─── Fetch ────────────────────────────────────────────────────────────────────
 
-/** Parse getGeneralRequirements(). */
-function parseGeneralRequirements(java: string): {
-  skillRequirements: SkillRequirement[];
-  questRequirements: string[];
-  questPointRequirement: number | null;
-} {
-  const body = extractMethodBody(java, "getGeneralRequirements");
-  const skillRequirements: SkillRequirement[] = [];
-  const questRequirements: string[] = [];
-  let questPointRequirement: number | null = null;
-
-  if (!body) return { skillRequirements, questRequirements, questPointRequirement };
-
-  const skillRegex = /new\s+SkillRequirement\s*\(\s*Skill\.(\w+)\s*,\s*(\d+)/g;
-  let m: RegExpExecArray | null;
-  while ((m = skillRegex.exec(body)) !== null) {
-    skillRequirements.push({
-      skill: m[1] as Skill,
-      level: parseInt(m[2], 10),
-    });
-  }
-
-  const questRegex = /QuestRequirement\s*\(\s*QuestHelperQuest\.(\w+)/g;
-  while ((m = questRegex.exec(body)) !== null) {
-    const name = m[1].replace(/_/g, " ").replace(/\b\w/g, (c) => c.toUpperCase());
-    if (!questRequirements.includes(name)) questRequirements.push(name);
-  }
-
-  const qpMatch = body.match(/new\s+QuestPointRequirement\s*\(\s*(\d+)\s*\)/);
-  if (qpMatch) questPointRequirement = parseInt(qpMatch[1], 10);
-
-  return { skillRequirements, questRequirements, questPointRequirement };
-}
-
-/** Parse getItemRequirements() to get list of variable names. */
-function parseItemRequirementVarNames(java: string): string[] {
-  const body = extractMethodBody(java, "getItemRequirements");
-  if (!body) return [];
-  const names: string[] = [];
-  const listMatch = body.match(/List\.of\s*\(\s*([^)]+)\)/) ?? body.match(/Arrays\.asList\s*\(\s*([^)]+)\)/);
-  if (listMatch) {
-    const inner = listMatch[1];
-    const vars = inner.split(",").map((s) => s.trim());
-    for (const v of vars) {
-      const name = v.split(/\s+/).pop() ?? v;
-      if (name && /^[a-zA-Z_][a-zA-Z0-9_]*$/.test(name)) names.push(name);
-    }
-    return names;
-  }
-  const addRegex = /(?:reqs\.add|\.add)\s*\(\s*([a-zA-Z_][a-zA-Z0-9_]*)\s*\)/g;
-  let am: RegExpExecArray | null;
-  while ((am = addRegex.exec(body)) !== null) {
-    names.push(am[1]);
-  }
-  return names;
-}
-
-/** Parse setupRequirements() to build varName → display string. */
-function parseSetupRequirements(java: string): Map<string, string> {
-  const body = extractMethodBody(java, "setupRequirements");
-  const displayByVar = new Map<string, string>();
-  const alias = new Map<string, string>();
-
-  if (!body) return displayByVar;
-
-  const reqRegex = /([a-zA-Z_][a-zA-Z0-9_]*)\s*=\s*new\s+ItemRequirement\s*\(\s*"([^"]*)"/g;
-  let m: RegExpExecArray | null;
-  while ((m = reqRegex.exec(body)) !== null) {
-    displayByVar.set(m[1], m[2]);
-  }
-
-  const aliasRegex = /([a-zA-Z_][a-zA-Z0-9_]*)\s*=\s*([a-zA-Z_][a-zA-Z0-9_]*)\s*\.(?:highlighted|alsoCheckBank)\s*\(\s*\)/g;
-  while ((m = aliasRegex.exec(body)) !== null) {
-    alias.set(m[1], m[2]);
-  }
-
-  function resolve(name: string): string | undefined {
-    const direct = displayByVar.get(name);
-    if (direct) return direct;
-    const target = alias.get(name);
-    if (target) return resolve(target);
-    return undefined;
-  }
-
-  const result = new Map<string, string>();
-  for (const [k, v] of displayByVar) result.set(k, v);
-  for (const [k] of alias) {
-    const resolved = resolve(k);
-    if (resolved) result.set(k, resolved);
-  }
-  return result;
-}
-
-function resolveItemRequirements(
-  varNames: string[],
-  setupReqs: Map<string, string>
-): string[] {
-  const out: string[] = [];
-  const seen = new Set<string>();
-  for (const v of varNames) {
-    const display = setupReqs.get(v);
-    if (display && !seen.has(display)) {
-      seen.add(display);
-      out.push(display);
-    }
-  }
-  return out;
-}
-
-/** Parse getPanels() → { panelName, stepVarNames }[]. */
-function parsePanels(java: string): { panelName: string; stepVarNames: string[] }[] {
-  const body = extractMethodBody(java, "getPanels");
-  const panels: { panelName: string; stepVarNames: string[] }[] = [];
-  if (!body) return panels;
-
-  const panelRegex = /(?:new\s+)?PanelDetails\s*\(\s*"([^"]+)"\s*,\s*(?:List\.of\s*\(([^)]+)\)|Arrays\.asList\s*\(([^)]+)\)|Collections\.singletonList\s*\(([^)]+)\))/g;
-  let m: RegExpExecArray | null;
-  while ((m = panelRegex.exec(body)) !== null) {
-    const title = m[1];
-    const stepsSource = m[2] ?? m[3] ?? m[4] ?? "";
-    const stepVars = stepsSource
-      .split(",")
-      .map((s) => s.trim().split(/\s+/).pop() ?? s.trim())
-      .filter((s) => /^[a-zA-Z_][a-zA-Z0-9_]*$/.test(s));
-    panels.push({ panelName: title, stepVarNames: stepVars });
-  }
-
-  return panels;
-}
-
-/** Parse WorldPoint variable declarations in setupSteps: WorldPoint varName = new WorldPoint(x, y, z); */
-function parseWorldPointVariables(body: string): Map<string, WorldPoint> {
-  const wpMap = new Map<string, WorldPoint>();
-  const wpRegex = /WorldPoint\s+([a-zA-Z_][a-zA-Z0-9_]*)\s*=\s*new\s+WorldPoint\s*\(\s*(\d+)\s*,\s*(\d+)\s*,\s*(\d+)\s*\)/g;
-  let m: RegExpExecArray | null;
-  while ((m = wpRegex.exec(body)) !== null) {
-    wpMap.set(m[1], {
-      x: parseInt(m[2], 10),
-      y: parseInt(m[3], 10),
-      plane: parseInt(m[4], 10),
-    });
-  }
-  return wpMap;
-}
-
-/** Parse setupSteps() → stepVarName → { stepDescription, worldpoint }. */
-function parseSetupSteps(java: string): Map<string, { stepDescription: string; worldpoint: WorldPoint }> {
-  const body = extractMethodBody(java, "setupSteps");
-  const map = new Map<string, { stepDescription: string; worldpoint: WorldPoint }>();
-  if (!body) return map;
-
-  const wpVariables = parseWorldPointVariables(body);
-
-  // Merge Java string concatenation: "first" + "second" by parsing from opening " position
-  const readConcatenatedString = (openQuoteIndex: number): string => {
-    const parts: string[] = [];
-    let i = openQuoteIndex;
-    while (i < body.length) {
-      i++; // skip opening "
-      let s = "";
-      while (i < body.length) {
-        const c = body[i];
-        if (c === "\\") {
-          i += 2;
-          continue;
-        }
-        if (c === '"') {
-          i++;
-          break;
-        }
-        s += c;
-        i++;
-      }
-      parts.push(s);
-      while (i < body.length && /[\s]/.test(body[i])) i++;
-      if (body[i] !== "+") break;
-      i++;
-      while (i < body.length && /[\s]/.test(body[i])) i++;
-      if (body[i] !== '"') break;
-    }
-    return parts.join("");
-  };
-
-  const resolveWorldPoint = (
-    explicit: { x: number; y: number; plane: number } | null,
-    varName: string | null
-  ): WorldPoint | null => {
-    if (explicit) return explicit;
-    if (varName) return wpVariables.get(varName) ?? null;
-    return null;
-  };
-
-  // Steps with explicit new WorldPoint(x, y, z)
-  const stepAssignRegex = /([a-zA-Z_][a-zA-Z0-9_]*)\s*=\s*new\s+(?:NpcStep|ObjectStep)\s*\(\s*this\s*,\s*[^,]+,\s*new\s+WorldPoint\s*\(\s*(\d+)\s*,\s*(\d+)\s*,\s*(\d+)\s*\)\s*,\s*"/g;
-  let m: RegExpExecArray | null;
-  while ((m = stepAssignRegex.exec(body)) !== null) {
-    const strStart = m.index + m[0].length - 1;
-    const desc = readConcatenatedString(strStart);
-    const wp = resolveWorldPoint({ x: parseInt(m[2], 10), y: parseInt(m[3], 10), plane: parseInt(m[4], 10) }, null);
-    if (wp) {
-      map.set(m[1], { stepDescription: desc, worldpoint: wp });
-    }
-  }
-
-  // Steps with WorldPoint variable reference: stepVar = new NpcStep/ObjectStep(this, id, varName, "
-  const stepWithVarRegex = /([a-zA-Z_][a-zA-Z0-9_]*)\s*=\s*new\s+(?:NpcStep|ObjectStep)\s*\(\s*this\s*,\s*[^,]+,\s*([a-zA-Z_][a-zA-Z0-9_]*)\s*,\s*"/g;
-  while ((m = stepWithVarRegex.exec(body)) !== null) {
-    if (map.has(m[1])) continue; // already parsed with explicit WorldPoint
-    const wp = resolveWorldPoint(null, m[2]);
-    if (!wp) continue; // variable not a known WorldPoint (could be Zone, etc.)
-    const strStart = m.index + m[0].length - 1;
-    const desc = readConcatenatedString(strStart);
-    map.set(m[1], { stepDescription: desc, worldpoint: wp });
-  }
-
-  // ObjectStep with explicit WorldPoint (fallback for any missed)
-  const objectStepRegex = /([a-zA-Z_][a-zA-Z0-9_]*)\s*=\s*new\s+ObjectStep\s*\(\s*this\s*,\s*[^,]+,\s*new\s+WorldPoint\s*\(\s*(\d+)\s*,\s*(\d+)\s*,\s*(\d+)\s*\)\s*,\s*"/g;
-  while ((m = objectStepRegex.exec(body)) !== null) {
-    if (!map.has(m[1])) {
-      const strStart = m.index + m[0].length - 1;
-      const desc = readConcatenatedString(strStart);
-      const wp = resolveWorldPoint({ x: parseInt(m[2], 10), y: parseInt(m[3], 10), plane: parseInt(m[4], 10) }, null);
-      if (wp) {
-        map.set(m[1], { stepDescription: desc, worldpoint: wp });
-      }
-    }
-  }
-
-  // ObjectStep with WorldPoint variable reference
-  const objectStepWithVarRegex = /([a-zA-Z_][a-zA-Z0-9_]*)\s*=\s*new\s+ObjectStep\s*\(\s*this\s*,\s*[^,]+,\s*([a-zA-Z_][a-zA-Z0-9_]*)\s*,\s*"/g;
-  while ((m = objectStepWithVarRegex.exec(body)) !== null) {
-    if (map.has(m[1])) continue;
-    const wp = resolveWorldPoint(null, m[2]);
-    if (!wp) continue;
-    const strStart = m.index + m[0].length - 1;
-    const desc = readConcatenatedString(strStart);
-    map.set(m[1], { stepDescription: desc, worldpoint: wp });
-  }
-
-  return map;
-}
-
-function buildSteps(
-  panels: { panelName: string; stepVarNames: string[] }[],
-  stepData: Map<string, { stepDescription: string; worldpoint: WorldPoint }>
-): QuestPanel[] {
-  const result: QuestPanel[] = [];
-  for (const panel of panels) {
-    const steps: QuestPanel["steps"] = [];
-    for (const varName of panel.stepVarNames) {
-      const data = stepData.get(varName);
-      if (data) steps.push({ stepDescription: data.stepDescription, worldpoint: data.worldpoint });
-    }
-    result.push({ panelName: panel.panelName, steps });
-  }
-  return result;
-}
-
-function extractClassName(java: string): string {
-  const m = java.match(/public\s+class\s+(\w+)\s+extends/);
-  return m ? m[1] : "";
-}
-
-async function fetchQuestFile(url: string): Promise<string> {
-  const res = await fetch(url, {
-    headers: { "User-Agent": "osrs-route-builder/1.0 (quest step extraction)" },
-  });
+async function fetchQuestFile(questPath: string): Promise<string> {
+  const url = `${GITHUB_RAW_BASE}/${questPath}.java`;
+  console.log(`Fetching: ${url}`);
+  const res = await fetch(url);
   if (!res.ok) throw new Error(`HTTP ${res.status}: ${url}`);
   return res.text();
 }
 
-function writeQuestFile(slug: string, data: QuestData): void {
-  fs.mkdirSync(OUTPUT_DIR, { recursive: true });
-  const filePath = path.join(OUTPUT_DIR, `${slug}.json`);
-  fs.writeFileSync(filePath, JSON.stringify(data, null, 2), "utf-8");
-  console.log(`Wrote ${filePath}`);
-}
+// ─── Core utilities ───────────────────────────────────────────────────────────
 
-async function main(): Promise<void> {
-  let approved: ApprovedQuests = {};
-  try {
-    const raw = fs.readFileSync(APPROVED_QUESTS_PATH, "utf-8");
-    approved = JSON.parse(raw) as ApprovedQuests;
-  } catch (err) {
-    console.error("Failed to read approved-quests.json:", err);
-    process.exit(1);
-  }
+/**
+ * Replace string literal contents and comments with spaces,
+ * preserving character indices so cleaned and original stay aligned.
+ */
+function stripCommentsAndStrings(code: string): string {
+  let result = "";
+  let i = 0;
+  let inLineComment = false;
+  let inBlockComment = false;
+  let inString = false;
 
-  const toProcess = Object.entries(approved)
-    .filter(([, v]) => v === true)
-    .map(([name]) => name);
+  while (i < code.length) {
+    const ch = code[i];
+    const next = code[i + 1];
 
-  if (toProcess.length === 0) {
-    console.log("No approved quests with value true.");
-    return;
-  }
-
-  for (const displayName of toProcess) {
-    const url = questFileUrl(displayName);
-    let java: string;
-    try {
-      java = await fetchQuestFile(url);
-    } catch (err) {
-      console.warn(`Skipping "${displayName}": fetch failed –`, (err as Error).message);
+    if (inLineComment) {
+      if (ch === "\n") {
+        result += "\n";
+        inLineComment = false;
+      } else {
+        result += " ";
+      }
+      i++;
       continue;
     }
 
-    const className = extractClassName(java);
-    const name = className ? classNameToDisplayName(className) : displayName;
-    const slug = className ? classNameToFolder(className) : classNameToFolder(displayNameToClassName(displayName));
+    if (inBlockComment) {
+      if (ch === "*" && next === "/") {
+        result += "  ";
+        i += 2;
+        inBlockComment = false;
+      } else {
+        result += ch === "\n" ? "\n" : " ";
+        i++;
+      }
+      continue;
+    }
 
-    const questPoints = parseQuestPoints(java);
-    const experienceRewards = parseExperienceRewards(java);
-    const lampRewards = parseLampRewards(java);
-    const { skillRequirements, questRequirements, questPointRequirement } = parseGeneralRequirements(java);
-    const itemVarNames = parseItemRequirementVarNames(java);
-    const setupReqs = parseSetupRequirements(java);
-    const itemRequirements = resolveItemRequirements(itemVarNames, setupReqs);
-    const panels = parsePanels(java);
-    const stepData = parseSetupSteps(java);
-    const steps = buildSteps(panels, stepData);
+    if (inString) {
+      if (ch === "\\" && i + 1 < code.length) {
+        result += "  ";
+        i += 2;
+      } else if (ch === '"') {
+        result += '"';
+        i++;
+        inString = false;
+      } else {
+        result += ch === "\n" ? "\n" : " ";
+        i++;
+      }
+      continue;
+    }
 
-    const data: QuestData = {
-      name,
-      questPoints,
-      experienceRewards,
-      lampRewards,
-      skillRequirements,
-      questRequirements,
-      questPointRequirement,
-      itemRequirements,
-      steps,
-      activeStep: 0,
+    if (ch === "/" && next === "/") {
+      result += "  ";
+      i += 2;
+      inLineComment = true;
+      continue;
+    }
+
+    if (ch === "/" && next === "*") {
+      result += "  ";
+      i += 2;
+      inBlockComment = true;
+      continue;
+    }
+
+    if (ch === '"') {
+      result += '"';
+      i++;
+      inString = true;
+      continue;
+    }
+
+    result += ch;
+    i++;
+  }
+  return result;
+}
+
+/**
+ * Find the index of the matching closing delimiter starting from openIdx.
+ */
+function findMatchingClose(
+  code: string,
+  openIdx: number,
+  openChar: string,
+  closeChar: string
+): number {
+  let depth = 0;
+  for (let i = openIdx; i < code.length; i++) {
+    if (code[i] === openChar) depth++;
+    else if (code[i] === closeChar) {
+      depth--;
+      if (depth === 0) return i;
+    }
+  }
+  return -1;
+}
+
+/**
+ * Split `original` on top-level commas, using a stripped copy to find
+ * split points. This correctly handles "str1" + "str2", nextArg because
+ * string contents (including embedded commas) are masked in the cleaned copy.
+ */
+function splitTopLevelArgs(original: string): string[] {
+  const cleaned = stripCommentsAndStrings(original);
+  const args: string[] = [];
+  let depth = 0;
+  let start = 0;
+  for (let i = 0; i < cleaned.length; i++) {
+    const ch = cleaned[i];
+    if (ch === "(" || ch === "[" || ch === "<") depth++;
+    else if (ch === ")" || ch === "]" || ch === ">") depth--;
+    else if (ch === "," && depth === 0) {
+      args.push(original.slice(start, i).trim());
+      start = i + 1;
+    }
+  }
+  if (original.slice(start).trim()) args.push(original.slice(start).trim());
+  return args;
+}
+
+/**
+ * Extract and join all string literal parts from an expression like:
+ *   "part one " + "part two" + "part three"
+ */
+function extractStringArg(s: string): string {
+  const parts: string[] = [];
+  let i = 0;
+  while (i < s.length) {
+    if (s[i] === '"') {
+      i++;
+      let part = "";
+      while (i < s.length && s[i] !== '"') {
+        if (s[i] === "\\" && i + 1 < s.length) {
+          part += s[i + 1];
+          i += 2;
+        } else {
+          part += s[i];
+          i++;
+        }
+      }
+      parts.push(part);
+      i++; // closing quote
+    } else {
+      i++;
+    }
+  }
+  return parts.join("");
+}
+
+/**
+ * Extract a WorldPoint from a raw argument string containing new WorldPoint(x, y, plane).
+ */
+function extractWorldPoint(raw: string): WorldPoint | undefined {
+  const cleaned = stripCommentsAndStrings(raw);
+  const idx = cleaned.search(/new\s+WorldPoint\s*\(/);
+  if (idx === -1) return undefined;
+  const openParen = idx + cleaned.slice(idx).indexOf("(");
+  const closeParen = findMatchingClose(cleaned, openParen, "(", ")");
+  const inside = raw.slice(openParen + 1, closeParen);
+  const parts = splitTopLevelArgs(inside).map((s) => parseInt(s.trim(), 10));
+  if (parts.length >= 3 && parts.every((n) => !isNaN(n))) {
+    return { x: parts[0], y: parts[1], plane: parts[2] };
+  }
+  return undefined;
+}
+
+/**
+ * Resolve a WorldPoint argument from either:
+ * - inline constructor syntax: new WorldPoint(x, y, plane)
+ * - a plain identifier previously declared in setupSteps()
+ */
+function resolveWorldPointArg(
+  raw: string,
+  worldPointVars: Map<string, WorldPoint>
+): WorldPoint | undefined {
+  const inline = extractWorldPoint(raw);
+  if (inline) return inline;
+  const token = raw.trim();
+  if (/^[a-zA-Z_][a-zA-Z0-9_]*$/.test(token)) {
+    return worldPointVars.get(token);
+  }
+  return undefined;
+}
+
+/**
+ * Extract the body of a method matched by methodPattern using brace-depth tracking.
+ */
+function extractMethodBody(source: string, methodPattern: RegExp): string | null {
+  const methodStart = source.search(methodPattern);
+  if (methodStart === -1) return null;
+  let braceDepth = 0, inMethod = false, bodyStart = -1, bodyEnd = -1;
+  for (let i = methodStart; i < source.length; i++) {
+    if (source[i] === "{") {
+      braceDepth++;
+      if (!inMethod) { inMethod = true; bodyStart = i + 1; }
+    } else if (source[i] === "}") {
+      braceDepth--;
+      if (inMethod && braceDepth === 0) { bodyEnd = i; break; }
+    }
+  }
+  return source.slice(bodyStart, bodyEnd);
+}
+
+// ─── Step constructor dispatch ────────────────────────────────────────────────
+//
+// Constructor argument mappings (1-indexed in spec, 0-indexed here):
+//
+//   NpcStep / ObjectStep      worldPoint=arg[2]? description=arg[2]/arg[3]
+//   ConditionalStep           description=arg[2] worldPoint=none
+//   ItemStep                  description=arg[1] worldPoint=none
+//   DetailedQuestStep         arg[1] is WorldPoint OR description string
+//   PuzzleWrapperStep         description=last string arg, worldPoint=none
+
+function parseStepConstructor(
+  constructorName: string,
+  argsRaw: string,
+  worldPointVars: Map<string, WorldPoint>
+): ParsedStep {
+  const args = splitTopLevelArgs(argsRaw);
+
+  if (["NpcStep", "ObjectStep"].includes(constructorName)) {
+    // NpcStep/ObjectStep overloads can have description at arg[2] or arg[3]
+    // depending on whether a WorldPoint argument is present.
+    const worldpoint = args
+      .slice(2)
+      .map((arg) => resolveWorldPointArg(arg, worldPointVars))
+      .find((wp): wp is WorldPoint => wp !== undefined);
+    const stepDescription =
+      args
+        .slice(2)
+        .map((arg) => extractStringArg(arg))
+        .find((s) => s.length > 0) ?? "";
+
+    return {
+      worldpoint,
+      stepDescription,
     };
+  }
 
-    try {
-      writeQuestFile(slug, data);
-    } catch (err) {
-      console.warn(`Skipping "${displayName}": write failed –`, (err as Error).message);
+  if (constructorName === "ConditionalStep") {
+    return {
+      stepDescription: args[2] ? extractStringArg(args[2]) : "",
+    };
+  }
+
+  if (constructorName === "ItemStep") {
+    return {
+      stepDescription: args[1] ? extractStringArg(args[1]) : "",
+    };
+  }
+
+  if (constructorName === "DetailedQuestStep") {
+    // arg[1] is either a WorldPoint or the description string
+    const worldpoint = args[1]
+      ? resolveWorldPointArg(args[1], worldPointVars)
+      : undefined;
+    if (worldpoint) {
+      return {
+        worldpoint,
+        stepDescription: args[2] ? extractStringArg(args[2]) : "",
+      };
+    }
+    return {
+      stepDescription: args[1] ? extractStringArg(args[1]) : "",
+    };
+  }
+
+  if (constructorName === "PuzzleWrapperStep") {
+    // arg[1] is the wrapped step constructor (e.g. new ObjectStep(...), new DetailedQuestStep(...))
+    // Delegate to the existing logic by extracting its constructor name and args recursively
+    const wrappedArg = (args[1] ?? "").trim();
+    const cleanedWrapped = stripCommentsAndStrings(wrappedArg);
+    const innerMatch = cleanedWrapped.match(/^new\s+([a-zA-Z_][a-zA-Z0-9_]*)\s*\(/);
+    if (innerMatch) {
+      const innerConstructor = innerMatch[1];
+      const openParen = wrappedArg.indexOf("(");
+      const closeParen = findMatchingClose(wrappedArg, openParen, "(", ")");
+      const innerArgsRaw = wrappedArg.slice(openParen + 1, closeParen);
+      return parseStepConstructor(innerConstructor, innerArgsRaw, worldPointVars);
+    }
+    return { stepDescription: "UNKNOWN STEP" };
+  }
+
+  return { stepDescription: "UNKNOWN STEP" };
+}
+
+// ─── addStep resolver ─────────────────────────────────────────────────────────
+
+/**
+ * Finds all varName.addStep(...) calls in a method body and returns the
+ * plain-identifier step variable names from arg[1] of each call, in order.
+ * Calls where arg[1] is a complex expression (e.g. new Conditions(...)) are skipped.
+ */
+function findAddStepVarNames(methodBody: string, varName: string): string[] {
+  const cleaned = stripCommentsAndStrings(methodBody);
+  const pattern = new RegExp(`\\b${varName}\\s*\\.\\s*addStep\\s*\\(`, "g");
+  const results: string[] = [];
+  let match: RegExpExecArray | null;
+
+  while ((match = pattern.exec(cleaned)) !== null) {
+    const openParen = match.index + match[0].length - 1;
+    const closeParen = findMatchingClose(cleaned, openParen, "(", ")");
+    if (closeParen === -1) continue;
+    const argsRaw = methodBody.slice(openParen + 1, closeParen);
+    const stepArg = (splitTopLevelArgs(argsRaw)[1] ?? "").trim();
+    // Only accept plain identifiers — skip new Conditions(...), and(...), etc.
+    if (/^[a-zA-Z_][a-zA-Z0-9_]*$/.test(stepArg)) results.push(stepArg);
+  }
+
+  return results;
+}
+
+/**
+ * Returns the plain-identifier arg[1] of a ConditionalStep constructor —
+ * the default step it delegates to when no condition matches.
+ */
+function getConditionalStepDefaultVar(body: string, varName: string): string | undefined {
+  const cleaned = stripCommentsAndStrings(body);
+  const pattern = new RegExp(
+    `(?:var\\s+)?${varName}\\s*=\\s*new\\s+ConditionalStep\\s*\\(`,
+    "g"
+  );
+  const match = pattern.exec(cleaned);
+  if (!match) return undefined;
+  const openParen = match.index + match[0].length - 1;
+  const closeParen = findMatchingClose(cleaned, openParen, "(", ")");
+  if (closeParen === -1) return undefined;
+  const args = splitTopLevelArgs(body.slice(openParen + 1, closeParen));
+  // arg[0] = this, arg[1] = default step variable
+  const defaultVar = (args[1] ?? "").trim();
+  return /^[a-zA-Z_][a-zA-Z0-9_]*$/.test(defaultVar) ? defaultVar : undefined;
+}
+
+/**
+ * Recursively resolves a WorldPoint for a step variable:
+ * 1. Returns immediately if the step already has a WorldPoint.
+ * 2. Tries the last plain-identifier addStep arg (most-specific condition = final destination).
+ * 3. Falls back to the ConditionalStep's own arg[1] (the default delegate step).
+ * A visited set prevents infinite loops from circular references.
+ */
+function resolveWorldPoint(
+  varName: string,
+  stepMap: Map<string, ParsedStep>,
+  body: string,
+  visited: Set<string>
+): WorldPoint | undefined {
+  if (visited.has(varName)) return undefined;
+  visited.add(varName);
+
+  const step = stepMap.get(varName);
+  if (!step) return undefined;
+  if (step.worldpoint) return step.worldpoint;
+
+  // Try addStep vars first — last one is the most-specific condition
+  const addStepVars = findAddStepVarNames(body, varName);
+  if (addStepVars.length > 0) {
+    const wp = resolveWorldPoint(addStepVars[addStepVars.length - 1], stepMap, body, visited);
+    if (wp) return wp;
+  }
+
+  // Fallback: try the ConditionalStep's own default delegate (arg[1])
+  const defaultVar = getConditionalStepDefaultVar(body, varName);
+  if (defaultVar) {
+    return resolveWorldPoint(defaultVar, stepMap, body, visited);
+  }
+
+  return undefined;
+}
+
+// ─── setupSteps parser ────────────────────────────────────────────────────────
+
+function parseWorldPointDeclarations(body: string): Map<string, WorldPoint> {
+  const cleaned = stripCommentsAndStrings(body);
+  const worldPointVars = new Map<string, WorldPoint>();
+  const pattern =
+    /(?:final\s+)?(?:WorldPoint|var)\s+([a-zA-Z_][a-zA-Z0-9_]*)\s*=\s*new\s+WorldPoint\s*\(/g;
+  let match: RegExpExecArray | null;
+
+  while ((match = pattern.exec(cleaned)) !== null) {
+    const varName = match[1];
+    const openParen = match.index + match[0].length - 1;
+    const closeParen = findMatchingClose(cleaned, openParen, "(", ")");
+    if (closeParen === -1) continue;
+    const rhs = body.slice(match.index, closeParen + 1);
+    const worldpoint = extractWorldPoint(rhs);
+    if (worldpoint) worldPointVars.set(varName, worldpoint);
+  }
+
+  return worldPointVars;
+}
+
+function parseStepsFromMethod(
+  source: string,
+  methodPattern: RegExp,
+  stepMap: Map<string, ParsedStep>,
+  worldPointVars: Map<string, WorldPoint>
+): string {
+  const body = extractMethodBody(source, methodPattern);
+  if (!body) return "";
+
+  for (const [key, value] of parseWorldPointDeclarations(body)) {
+    worldPointVars.set(key, value);
+  }
+
+  const cleaned = stripCommentsAndStrings(body);
+
+  // Parse `foo = new SomeStep(...)` declarations.
+  const constructorPattern =
+    /(?:var\s+)?([a-zA-Z_][a-zA-Z0-9_]*)\s*=\s*new\s+([a-zA-Z_][a-zA-Z0-9_]*)\s*\(/g;
+  let constructorMatch: RegExpExecArray | null;
+  while ((constructorMatch = constructorPattern.exec(cleaned)) !== null) {
+    const varName = constructorMatch[1];
+    const constructorName = constructorMatch[2];
+
+    if (!constructorName.endsWith("Step") && !constructorName.endsWith("Steps")) continue;
+
+    const openParen = constructorMatch.index + constructorMatch[0].length - 1;
+    const closeParen = findMatchingClose(cleaned, openParen, "(", ")");
+    if (closeParen === -1) continue;
+
+    const argsRaw = body.slice(openParen + 1, closeParen);
+    stepMap.set(varName, parseStepConstructor(constructorName, argsRaw, worldPointVars));
+  }
+
+  // Parse copy assignments such as: goTalkToCharlie3 = goTalkToCharlie.copy();
+  const copyPattern =
+    /([a-zA-Z_][a-zA-Z0-9_]*)\s*=\s*([a-zA-Z_][a-zA-Z0-9_]*)\s*\.\s*copy\s*\(\s*\)/g;
+  let copyMatch: RegExpExecArray | null;
+  while ((copyMatch = copyPattern.exec(cleaned)) !== null) {
+    const toVar = copyMatch[1];
+    const fromVar = copyMatch[2];
+    const sourceStep = stepMap.get(fromVar);
+    if (sourceStep) {
+      stepMap.set(toVar, { ...sourceStep });
     }
   }
 
-  console.log("Done.");
+  return body;
 }
 
-main();
+function parseAllSteps(source: string): Map<string, ParsedStep> {
+  const stepMap = new Map<string, ParsedStep>();
+  const worldPointVars = new Map<string, WorldPoint>();
+
+  const setupBody = parseStepsFromMethod(
+    source,
+    /(?:private|protected|public)?\s+void\s+setupSteps\s*\(\s*\)/,
+    stepMap,
+    worldPointVars
+  );
+  const loadBody = parseStepsFromMethod(
+    source,
+    /(?:private|protected|public)?\s+[^{;]*\bloadSteps\s*\(\s*\)/,
+    stepMap,
+    worldPointVars
+  );
+  const bodyForResolution = `${setupBody}\n${loadBody}`;
+
+  // Resolve WorldPoint for steps that lack one.
+  // resolveWorldPoint walks addStep chains and falls back to the ConditionalStep's
+  // default delegate (arg[1]) recursively, with cycle protection.
+  for (const [varName, step] of stepMap) {
+    if (step.worldpoint !== undefined) continue;
+    const wp = resolveWorldPoint(varName, stepMap, bodyForResolution, new Set());
+    if (wp) step.worldpoint = wp;
+  }
+
+  return stepMap;
+}
+
+// ─── getPanels parser ─────────────────────────────────────────────────────────
+
+function parsePanels(source: string): { panelTitle: string; stepVars: string[] }[] {
+  const body = extractMethodBody(
+    source,
+    /(?:private|protected|public)?\s+[^{;]*\bgetPanels\s*\(\s*\)/
+  );
+  if (!body) return [];
+
+  const cleaned = stripCommentsAndStrings(body);
+  const results: { panelTitle: string; stepVars: string[] }[] = [];
+  const pattern = /new\s+PanelDetails\s*\(/g;
+  let match: RegExpExecArray | null;
+
+  while ((match = pattern.exec(cleaned)) !== null) {
+    const openParen = match.index + match[0].length - 1;
+    const closeParen = findMatchingClose(cleaned, openParen, "(", ")");
+    if (closeParen === -1) continue;
+
+    const argsRaw = body.slice(openParen + 1, closeParen);
+    const rawArgs = splitTopLevelArgs(argsRaw);
+
+    const panelTitle = extractStringArg(rawArgs[0] ?? "");
+
+    // arg[1] is the steps list; arg[2]+ are item/skill requirements (ignored)
+    const secondArg = (rawArgs[1] ?? "").trim();
+    const listMatch = secondArg.match(
+      /^(?:List\.of|Arrays\.asList|Collections\.singletonList)\s*\(/
+    );
+
+    let stepVars: string[] = [];
+    if (listMatch) {
+      const listOpenIdx = secondArg.indexOf("(");
+      const listCloseIdx = findMatchingClose(secondArg, listOpenIdx, "(", ")");
+      if (listCloseIdx !== -1) {
+        stepVars = splitTopLevelArgs(secondArg.slice(listOpenIdx + 1, listCloseIdx))
+          .map((s) => s.trim())
+          .filter((s) => s.length > 0);
+      }
+    } else if (secondArg) {
+      stepVars = [secondArg];
+    }
+
+    results.push({ panelTitle, stepVars });
+  }
+
+  return results;
+}
+
+// ─── Full pipeline ────────────────────────────────────────────────────────────
+
+/** Internal panel during parsing; maps to QuestPanel for output. */
+/** Internal step during parsing; uses same field names as QuestStepWithPoint. */
+interface ParsedStep {
+  stepDescription: string;
+  worldpoint?: WorldPoint;
+}
+interface ParsedPanel {
+  panelTitle: string;
+  steps: (ParsedStep & { varName: string })[];
+}
+
+function buildPanels(source: string): ParsedPanel[] {
+  const stepMap = parseAllSteps(source);
+  const panelDefs = parsePanels(source);
+
+  return panelDefs.map(({ panelTitle, stepVars }) => ({
+    panelTitle,
+    steps: stepVars.map((varName) => {
+      const step = stepMap.get(varName);
+      if (!step) return { varName, stepDescription: "STEP NOT FOUND IN setupSteps" };
+      return { varName, ...step };
+    }),
+  }));
+}
+
+/**
+ * Convert parsed panels to QuestData. Steps are populated from parsed data;
+ * other fields are optional with empty defaults.
+ */
+function toQuestData(questName: string, panels: ParsedPanel[]): QuestData {
+  const steps: QuestPanel[] = panels.map((panel) => ({
+    panelName: panel.panelTitle,
+    steps: panel.steps.map((s): QuestStepWithPoint => ({
+      stepDescription: s.stepDescription,
+      worldpoint: s.worldpoint,
+    })),
+  }));
+
+  return {
+    name: questName,
+    questPoints: 0,
+    experienceRewards: [],
+    lampRewards: null,
+    skillRequirements: [],
+    questRequirements: [],
+    questPointRequirement: null,
+    itemRequirements: [],
+    steps,
+    activeStep: 0,
+  };
+}
+
+// ─── Main ─────────────────────────────────────────────────────────────────────
+
+async function main() {
+  const approvedQuests = loadApprovedQuests();
+
+  if (approvedQuests.length === 0) {
+    console.error("No approved quests found in approved-quests.json");
+    process.exit(1);
+  }
+
+  fs.mkdirSync(QUESTS_OUTPUT_DIR, { recursive: true });
+
+  for (const questName of approvedQuests) {
+    const questPath = questNameToPath(questName);
+    try {
+      const source = await fetchQuestFile(questPath);
+      const panels = buildPanels(source);
+
+      if (panels.length === 0) {
+        console.log("No panels found.");
+        continue;
+      }
+
+      const questData = toQuestData(questName, panels);
+      const filename = `${questNameToCamelCase(questName)}.json`;
+      const outputPath = path.join(QUESTS_OUTPUT_DIR, filename);
+      fs.writeFileSync(outputPath, JSON.stringify(questData, null, 2), "utf-8");
+      console.log(`Wrote: ${outputPath}`);
+    } catch (err) {
+      console.error(`Failed to process ${questName}:`, err);
+    }
+  }
+}
+
+main().catch((err) => {
+  console.error(err);
+  process.exit(1);
+});

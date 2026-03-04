@@ -1,31 +1,12 @@
 {
   "name": "Dragon Slayer",
-  "questPoints": 2,
-  "experienceRewards": [
-    {
-      "skill": "STRENGTH",
-      "xp": 18650
-    },
-    {
-      "skill": "DEFENCE",
-      "xp": 18650
-    }
-  ],
+  "questPoints": 0,
+  "experienceRewards": [],
   "lampRewards": null,
   "skillRequirements": [],
   "questRequirements": [],
-  "questPointRequirement": 32,
-  "itemRequirements": [
-    "Unfired bowl",
-    "Wizard's mind bomb",
-    "Lobster pot",
-    "Silk",
-    "Hammer",
-    "Planks",
-    "Steel nails",
-    "Coins",
-    "Combat equipment"
-  ],
+  "questPointRequirement": null,
+  "itemRequirements": [],
   "steps": [
     {
       "panelName": "Starting off",
@@ -340,6 +321,9 @@
     {
       "panelName": "Get a captain ready",
       "steps": [
+        {
+          "stepDescription": "Use the three map parts together to repair the map."
+        },
         {
           "stepDescription": "Bring Ned your map and ask him to be your captain.",
           "worldpoint": {

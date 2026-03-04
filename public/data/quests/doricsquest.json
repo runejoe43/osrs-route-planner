@@ -1,21 +1,12 @@
 {
-  "name": "Dorics Quest",
-  "questPoints": 1,
-  "experienceRewards": [
-    {
-      "skill": "MINING",
-      "xp": 1300
-    }
-  ],
+  "name": "Doric's Quest",
+  "questPoints": 0,
+  "experienceRewards": [],
   "lampRewards": null,
   "skillRequirements": [],
   "questRequirements": [],
   "questPointRequirement": null,
-  "itemRequirements": [
-    "Clay (UNNOTED)",
-    "Copper ore (UNNOTED)",
-    "Iron ore (UNNOTED)"
-  ],
+  "itemRequirements": [],
   "steps": [
     {
       "panelName": "Help Doric",

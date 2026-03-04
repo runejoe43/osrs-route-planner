@@ -1,26 +1,12 @@
 {
   "name": "Waterfall Quest",
-  "questPoints": 1,
-  "experienceRewards": [
-    {
-      "skill": "STRENGTH",
-      "xp": 13750
-    },
-    {
-      "skill": "ATTACK",
-      "xp": 13750
-    }
-  ],
+  "questPoints": 0,
+  "experienceRewards": [],
   "lampRewards": null,
   "skillRequirements": [],
   "questRequirements": [],
   "questPointRequirement": null,
-  "itemRequirements": [
-    "Rope",
-    "Air runes",
-    "Earth runes",
-    "Water runes"
-  ],
+  "itemRequirements": [],
   "steps": [
     {
       "panelName": "Starting off",
@@ -93,6 +79,9 @@
             "y": 3427,
             "plane": 1
           }
+        },
+        {
+          "stepDescription": "Read the book."
         }
       ]
     },
@@ -166,6 +155,9 @@
       "panelName": "Put Glarial to rest",
       "steps": [
         {
+          "stepDescription": "Leave Glarial's Tomb and get 6 air, water, and earth runes, a rope, glarial's amulet, glarial's urn, and some food."
+        },
+        {
           "stepDescription": "Board the log raft west of Almera.",
           "worldpoint": {
             "x": 2509,
@@ -190,6 +182,9 @@
           }
         },
         {
+          "stepDescription": "Equip Glarial's amulet."
+        },
+        {
           "stepDescription": "Enter the falls with Glarial's amulet equipped.",
           "worldpoint": {
             "x": 2511,
@@ -212,6 +207,9 @@
             "y": 9901,
             "plane": 0
           }
+        },
+        {
+          "stepDescription": "Use 1 earth, water and air rune on each of the 6 pillars in the room. Afterwards, use Glarial's amulet on the statue of Glarial."
         },
         {
           "stepDescription": "DO NOT LEFT-CLICK THE CHALICE! Use Glarial's urn on the Chalice to finish the quest.",

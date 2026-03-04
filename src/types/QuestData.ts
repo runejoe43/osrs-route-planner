@@ -58,7 +58,7 @@ export interface SkillRequirement {
 
 export interface QuestStepWithPoint {
   stepDescription: string;
-  worldpoint: WorldPoint;
+  worldpoint?: WorldPoint;
 }
 
 export interface QuestPanel {

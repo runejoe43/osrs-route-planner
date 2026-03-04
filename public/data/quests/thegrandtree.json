@@ -1,27 +1,9 @@
 {
   "name": "The Grand Tree",
-  "questPoints": 5,
-  "experienceRewards": [
-    {
-      "skill": "ATTACK",
-      "xp": 18400
-    },
-    {
-      "skill": "AGILITY",
-      "xp": 7900
-    },
-    {
-      "skill": "MAGIC",
-      "xp": 2150
-    }
-  ],
+  "questPoints": 0,
+  "experienceRewards": [],
   "lampRewards": null,
-  "skillRequirements": [
-    {
-      "skill": "AGILITY",
-      "level": 25
-    }
-  ],
+  "skillRequirements": [],
   "questRequirements": [],
   "questPointRequirement": null,
   "itemRequirements": [],
@@ -49,6 +31,9 @@
             "y": 3087,
             "plane": 0
           }
+        },
+        {
+          "stepDescription": "Talk to Hazelmere."
         }
       ]
     },
@@ -72,10 +57,37 @@
           }
         },
         {
+          "stepDescription": "Talk to Glough."
+        },
+        {
           "stepDescription": "Talk to King Narnode again in the Grand Tree.",
           "worldpoint": {
             "x": 2466,
             "y": 3495,
+            "plane": 0
+          }
+        },
+        {
+          "stepDescription": "Talk to Charlie on the top floor of the Grand Tree.",
+          "worldpoint": {
+            "x": 2464,
+            "y": 3495,
+            "plane": 3
+          }
+        },
+        {
+          "stepDescription": "Return to Glough's house and search the cupboard for Glough's Journal.",
+          "worldpoint": {
+            "x": 2476,
+            "y": 3463,
+            "plane": 0
+          }
+        },
+        {
+          "stepDescription": "Confront Glough about his journal.",
+          "worldpoint": {
+            "x": 2476,
+            "y": 3463,
             "plane": 0
           }
         },
@@ -86,6 +98,9 @@
             "y": 3495,
             "plane": 3
           }
+        },
+        {
+          "stepDescription": "Talk to King Narnode outside Charlie's cell."
         },
         {
           "stepDescription": "Travel with the glider to escape.",
@@ -122,12 +137,29 @@
       "panelName": "Tuzo",
       "steps": [
         {
+          "stepDescription": "Talk to Charlie on the top floor of the Grand Tree."
+        },
+        {
+          "stepDescription": "Talk to Anita in her house west of the Grand Tree.",
+          "worldpoint": {
+            "x": 2466,
+            "y": 3495,
+            "plane": 1
+          }
+        },
+        {
+          "stepDescription": "Search the chest in Glough's house."
+        },
+        {
           "stepDescription": "Take the invasion plans to King Narnode in the Grand Tree.",
           "worldpoint": {
             "x": 2465,
             "y": 3496,
             "plane": 0
           }
+        },
+        {
+          "stepDescription": "Place the twigs to spell 'TUZO' in the watchtower in Glough's house. Return to King Narnode if you lost any."
         }
       ]
     },
@@ -135,12 +167,21 @@
       "panelName": "Defeat the Black Demon",
       "steps": [
         {
+          "stepDescription": "Go down the trap door. Be prepared for the fight against a Black Demon (level 172)."
+        },
+        {
+          "stepDescription": "Kill the black Demon. You can safespot from where Glough stands."
+        },
+        {
           "stepDescription": "Talk to King Narnode deeper in the cave.",
           "worldpoint": {
             "x": 2465,
             "y": 9895,
             "plane": 0
           }
+        },
+        {
+          "stepDescription": "Search the roots under the Grand Tree until you find the Daconia stone. If you lose the rock, it will be in the same root again."
         },
         {
           "stepDescription": "Give the Daconia stone to King Narnode under the Grand Tree.",
