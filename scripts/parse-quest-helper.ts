@@ -337,8 +337,21 @@ function parseStepConstructor(
   }
 
   if (constructorName === "ItemStep") {
+    // ItemStep overloads can be:
+    //   ItemStep(this, "description", ...)
+    //   ItemStep(this, new WorldPoint(...), "description", ...)
+    const worldpoint = args
+      .slice(1)
+      .map((arg) => resolveWorldPointArg(arg, worldPointVars))
+      .find((wp): wp is WorldPoint => wp !== undefined);
+    const stepDescription =
+      args
+        .slice(1)
+        .map((arg) => extractStringArg(arg))
+        .find((s) => s.length > 0) ?? "";
     return {
-      stepDescription: args[1] ? extractStringArg(args[1]) : "",
+      worldpoint,
+      stepDescription,
     };
   }
 
@@ -460,6 +473,71 @@ function resolveWorldPoint(
   return undefined;
 }
 
+function extractTextFromListCall(raw: string): string | undefined {
+  const cleaned = stripCommentsAndStrings(raw);
+  const listMatch = cleaned.match(/^(?:Arrays\.asList|List\.of)\s*\(/);
+  if (!listMatch) return undefined;
+  const openParen = raw.indexOf("(");
+  const closeParen = findMatchingClose(cleaned, openParen, "(", ")");
+  if (closeParen === -1) return undefined;
+  const listArgs = splitTopLevelArgs(raw.slice(openParen + 1, closeParen))
+    .map((arg) => extractStringArg(arg).trim())
+    .filter((s) => s.length > 0);
+  if (listArgs.length === 0) return undefined;
+  return listArgs.join(" ");
+}
+
+function parseStringListDeclarations(body: string): Map<string, string> {
+  const cleaned = stripCommentsAndStrings(body);
+  const textLists = new Map<string, string>();
+  const pattern =
+    /(?:final\s+)?(?:List(?:\s*<[^>]+>)?|var)\s+([a-zA-Z_][a-zA-Z0-9_]*)\s*=\s*(?:Arrays\.asList|List\.of)\s*\(/g;
+  let match: RegExpExecArray | null;
+
+  while ((match = pattern.exec(cleaned)) !== null) {
+    const varName = match[1];
+    const openParen = match.index + match[0].length - 1;
+    const closeParen = findMatchingClose(cleaned, openParen, "(", ")");
+    if (closeParen === -1) continue;
+    const listArgs = splitTopLevelArgs(body.slice(openParen + 1, closeParen))
+      .map((arg) => extractStringArg(arg).trim())
+      .filter((s) => s.length > 0);
+    const text = listArgs.length > 0 ? listArgs.join(" ") : undefined;
+    if (text) textLists.set(varName, text);
+  }
+
+  return textLists;
+}
+
+function applySetTextOverrides(
+  body: string,
+  stepMap: Map<string, ParsedStep>,
+  textLists: Map<string, string>
+): void {
+  const cleaned = stripCommentsAndStrings(body);
+  const pattern = /([a-zA-Z_][a-zA-Z0-9_]*)\s*\.\s*setText\s*\(/g;
+  let match: RegExpExecArray | null;
+
+  while ((match = pattern.exec(cleaned)) !== null) {
+    const varName = match[1];
+    const openParen = match.index + match[0].length - 1;
+    const closeParen = findMatchingClose(cleaned, openParen, "(", ")");
+    if (closeParen === -1) continue;
+    const argRaw = body.slice(openParen + 1, closeParen).trim();
+
+    // Prefer structured list parsing to preserve separators between entries.
+    let text = extractTextFromListCall(argRaw) ?? "";
+    if (!text) text = extractStringArg(argRaw);
+    if (!text && /^[a-zA-Z_][a-zA-Z0-9_]*$/.test(argRaw)) {
+      text = textLists.get(argRaw) ?? "";
+    }
+    if (!text) continue;
+
+    const step = stepMap.get(varName);
+    if (step) step.stepDescription = text;
+  }
+}
+
 // ─── setupSteps parser ────────────────────────────────────────────────────────
 
 function parseWorldPointDeclarations(body: string): Map<string, WorldPoint> {
@@ -486,7 +564,8 @@ function parseStepsFromMethod(
   source: string,
   methodPattern: RegExp,
   stepMap: Map<string, ParsedStep>,
-  worldPointVars: Map<string, WorldPoint>
+  worldPointVars: Map<string, WorldPoint>,
+  allowOverwrite: boolean
 ): string {
   const body = extractMethodBody(source, methodPattern);
   if (!body) return "";
@@ -512,6 +591,7 @@ function parseStepsFromMethod(
     if (closeParen === -1) continue;
 
     const argsRaw = body.slice(openParen + 1, closeParen);
+    if (!allowOverwrite && stepMap.has(varName)) continue;
     stepMap.set(varName, parseStepConstructor(constructorName, argsRaw, worldPointVars));
   }
 
@@ -522,11 +602,14 @@ function parseStepsFromMethod(
   while ((copyMatch = copyPattern.exec(cleaned)) !== null) {
     const toVar = copyMatch[1];
     const fromVar = copyMatch[2];
+    if (!allowOverwrite && stepMap.has(toVar)) continue;
     const sourceStep = stepMap.get(fromVar);
     if (sourceStep) {
       stepMap.set(toVar, { ...sourceStep });
     }
   }
+
+  applySetTextOverrides(body, stepMap, parseStringListDeclarations(body));
 
   return body;
 }
@@ -539,13 +622,15 @@ function parseAllSteps(source: string): Map<string, ParsedStep> {
     source,
     /(?:private|protected|public)?\s+void\s+setupSteps\s*\(\s*\)/,
     stepMap,
-    worldPointVars
+    worldPointVars,
+    true
   );
   const loadBody = parseStepsFromMethod(
     source,
     /(?:private|protected|public)?\s+[^{;]*\bloadSteps\s*\(\s*\)/,
     stepMap,
-    worldPointVars
+    worldPointVars,
+    false
   );
   const bodyForResolution = `${setupBody}\n${loadBody}`;
 

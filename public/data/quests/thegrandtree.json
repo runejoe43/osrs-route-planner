@@ -137,7 +137,7 @@
       "panelName": "Tuzo",
       "steps": [
         {
-          "stepDescription": "Talk to Charlie on the top floor of the Grand Tree."
+          "stepDescription": "Return to Charlie. If entering the Stronghold through the south entrance you'll need to talk to Femi there. If you didn't help them previously you'll need to pay them 1k."
         },
         {
           "stepDescription": "Talk to Anita in her house west of the Grand Tree.",

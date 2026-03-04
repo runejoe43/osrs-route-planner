@@ -1,0 +1,119 @@
+{
+  "name": "Devious Minds",
+  "questPoints": 0,
+  "experienceRewards": [],
+  "lampRewards": null,
+  "skillRequirements": [],
+  "questRequirements": [],
+  "questPointRequirement": null,
+  "itemRequirements": [],
+  "steps": [
+    {
+      "panelName": "Starting off",
+      "steps": [
+        {
+          "stepDescription": "Start by talking to the Monk outside the Paterdomus temple, east of Varrock.",
+          "worldpoint": {
+            "x": 3406,
+            "y": 3494,
+            "plane": 0
+          }
+        }
+      ]
+    },
+    {
+      "panelName": "Making the Bow-sword",
+      "steps": [
+        {
+          "stepDescription": "Use the Mithril 2H sword on Doric's Whetstone. (Doric is located north of Falador).",
+          "worldpoint": {
+            "x": 2953,
+            "y": 3452,
+            "plane": 0
+          }
+        },
+        {
+          "stepDescription": "Use the bow-string on the Slender blade to make the Bow-sword."
+        }
+      ]
+    },
+    {
+      "panelName": "A Gift for Entrana",
+      "steps": [
+        {
+          "stepDescription": "Return to the monk near the Paterdomus temple with the bow-sword.",
+          "worldpoint": {
+            "x": 3406,
+            "y": 3494,
+            "plane": 0
+          }
+        },
+        {
+          "stepDescription": "Use the Orb on the Large/Colossal Pouch. You will also be going to Entrana via the Abyss, so you must bank all combat gear."
+        },
+        {
+          "stepDescription": "Teleport with the Mage of Zamorak IN THE WILDERNESS (other players can attack you here) to the Abyss. You will be attacked by monsters upon entering, and your prayer drained to 0!",
+          "worldpoint": {
+            "x": 3106,
+            "y": 3556,
+            "plane": 0
+          }
+        },
+        {
+          "stepDescription": "Enter the central area through a gap/passage/eyes. Enter the Law Rift.",
+          "worldpoint": {
+            "x": 3049,
+            "y": 4839,
+            "plane": 0
+          }
+        },
+        {
+          "stepDescription": "Enter the portal to leave the Law Altar.",
+          "worldpoint": {
+            "x": 2464,
+            "y": 4817,
+            "plane": 0
+          }
+        },
+        {
+          "stepDescription": "Use the illuminated pouch on the Altar in the Entrana Church.",
+          "worldpoint": {
+            "x": 2853,
+            "y": 3349,
+            "plane": 0
+          }
+        }
+      ]
+    },
+    {
+      "panelName": "Surprise!",
+      "steps": [
+        {
+          "stepDescription": "Go back to the monk near Paterdomus temple and search the dead monk's body.",
+          "worldpoint": {
+            "x": 3406,
+            "y": 3494,
+            "plane": 0
+          }
+        },
+        {
+          "stepDescription": "Talk to the High Priest in the Entrana Church (Rat Pits Port Sarim Minigame teleport is the closest teleport).",
+          "worldpoint": {
+            "x": 2851,
+            "y": 3349,
+            "plane": 0
+          }
+        },
+        {
+          "stepDescription": "Talk to Sir Tiffy Cashien in Falador park to complete the quest.",
+          "worldpoint": {
+            "x": 2997,
+            "y": 3373,
+            "plane": 0
+          }
+        }
+      ]
+    }
+  ],
+  "activeStep": 0
+}
