@@ -12,7 +12,7 @@
       "panelName": "Start the quest",
       "steps": [
         {
-          "stepDescription": "Talk to Edmond in the north-west corner of East Ardougne.",
+          "description": "Talk to Edmond in the north-west corner of East Ardougne.",
           "worldpoint": {
             "x": 2568,
             "y": 3333,
@@ -25,7 +25,7 @@
       "panelName": "Infiltrate West Ardougne",
       "steps": [
         {
-          "stepDescription": "Talk to Alrena and give her the dwellberries.",
+          "description": "Talk to Alrena and give her the dwellberries.",
           "worldpoint": {
             "x": 2573,
             "y": 3333,
@@ -33,7 +33,7 @@
           }
         },
         {
-          "stepDescription": "Grab the Picture from Edmond's house.",
+          "description": "Grab the Picture from Edmond's house.",
           "worldpoint": {
             "x": 2576,
             "y": 3334,
@@ -41,7 +41,7 @@
           }
         },
         {
-          "stepDescription": "Talk to Edmond again.",
+          "description": "Talk to Edmond again.",
           "worldpoint": {
             "x": 2568,
             "y": 3332,
@@ -49,7 +49,7 @@
           }
         },
         {
-          "stepDescription": "Use four buckets of water on the mud patch in Edmond's garden patch.",
+          "description": "Use four buckets of water on the mud patch in Edmond's garden patch.",
           "worldpoint": {
             "x": 2566,
             "y": 3332,
@@ -57,7 +57,7 @@
           }
         },
         {
-          "stepDescription": "Use a spade on the mud patch.",
+          "description": "Use a spade on the mud patch.",
           "worldpoint": {
             "x": 2566,
             "y": 3332,
@@ -65,7 +65,7 @@
           }
         },
         {
-          "stepDescription": "Go down the hole.",
+          "description": "Go down the hole.",
           "worldpoint": {
             "x": 2566,
             "y": 3332,
@@ -73,7 +73,7 @@
           }
         },
         {
-          "stepDescription": "Attempt to pull the grill in the south of the sewer.",
+          "description": "Attempt to pull the grill in the south of the sewer.",
           "worldpoint": {
             "x": 2514,
             "y": 9739,
@@ -81,7 +81,7 @@
           }
         },
         {
-          "stepDescription": "Use a rope on the grill.",
+          "description": "Use a rope on the grill.",
           "worldpoint": {
             "x": 2514,
             "y": 9739,
@@ -89,7 +89,7 @@
           }
         },
         {
-          "stepDescription": "Talk to Edmond and ask him to help you pull off the grill.",
+          "description": "Talk to Edmond and ask him to help you pull off the grill.",
           "worldpoint": {
             "x": 2517,
             "y": 9753,
@@ -97,7 +97,7 @@
           }
         },
         {
-          "stepDescription": "Equip the gas mask and climb through the pipe.",
+          "description": "Equip the gas mask and climb through the pipe.",
           "worldpoint": {
             "x": 2514,
             "y": 9738,
@@ -110,7 +110,7 @@
       "panelName": "Discover Elena's location",
       "steps": [
         {
-          "stepDescription": "Talk to Jethick east of where you emerge.",
+          "description": "Talk to Jethick east of where you emerge.",
           "worldpoint": {
             "x": 2540,
             "y": 3305,
@@ -118,7 +118,7 @@
           }
         },
         {
-          "stepDescription": "Enter the tall house in north West Ardougne.",
+          "description": "Enter the tall house in north West Ardougne.",
           "worldpoint": {
             "x": 2531,
             "y": 3328,
@@ -126,7 +126,7 @@
           }
         },
         {
-          "stepDescription": "Talk to Martha or Ted Rehnison",
+          "description": "Talk to Martha or Ted Rehnison",
           "worldpoint": {
             "x": 2531,
             "y": 3331,
@@ -134,7 +134,7 @@
           }
         },
         {
-          "stepDescription": "Talk to Milli upstairs.",
+          "description": "Talk to Milli upstairs.",
           "worldpoint": {
             "x": 2528,
             "y": 3333,
@@ -147,7 +147,7 @@
       "panelName": "Freeing Elena",
       "steps": [
         {
-          "stepDescription": "Try to enter the house in the south-east corner of West Ardougne.",
+          "description": "Try to enter the house in the south-east corner of West Ardougne.",
           "worldpoint": {
             "x": 2540,
             "y": 3273,
@@ -155,7 +155,7 @@
           }
         },
         {
-          "stepDescription": "Talk to the Clerk in the large building north of the manhole.",
+          "description": "Talk to the Clerk in the large building north of the manhole.",
           "worldpoint": {
             "x": 2528,
             "y": 3317,
@@ -163,7 +163,7 @@
           }
         },
         {
-          "stepDescription": "Talk to Bravek in the room to the east.",
+          "description": "Talk to Bravek in the room to the east.",
           "worldpoint": {
             "x": 2534,
             "y": 3314,
@@ -171,13 +171,13 @@
           }
         },
         {
-          "stepDescription": "Use your chocolate dust on the bucket of milk."
+          "description": "Use your chocolate dust on the bucket of milk."
         },
         {
-          "stepDescription": "Use the snape grass on the chocolatey milk"
+          "description": "Use the snape grass on the chocolatey milk"
         },
         {
-          "stepDescription": "Give the hangover cure to Bravek.",
+          "description": "Give the hangover cure to Bravek.",
           "worldpoint": {
             "x": 2534,
             "y": 3314,
@@ -185,7 +185,7 @@
           }
         },
         {
-          "stepDescription": "Talk to Bravek to receive the warrant you need to enter the plague house.",
+          "description": "Talk to Bravek to receive the warrant you need to enter the plague house.",
           "worldpoint": {
             "x": 2534,
             "y": 3314,
@@ -193,7 +193,7 @@
           }
         },
         {
-          "stepDescription": "Try to enter the plague house again.",
+          "description": "Try to enter the plague house again.",
           "worldpoint": {
             "x": 2540,
             "y": 3273,
@@ -201,7 +201,7 @@
           }
         },
         {
-          "stepDescription": "Search the barrel in the room for a small key.",
+          "description": "Search the barrel in the room for a small key.",
           "worldpoint": {
             "x": 2534,
             "y": 3268,
@@ -209,7 +209,7 @@
           }
         },
         {
-          "stepDescription": "Go downstairs in the plague house.",
+          "description": "Go downstairs in the plague house.",
           "worldpoint": {
             "x": 2537,
             "y": 3269,
@@ -217,7 +217,7 @@
           }
         },
         {
-          "stepDescription": "Enter the jail and talk to Elena.",
+          "description": "Enter the jail and talk to Elena.",
           "worldpoint": {
             "x": 2541,
             "y": 9671,
@@ -230,7 +230,7 @@
       "panelName": "Finishing off",
       "steps": [
         {
-          "stepDescription": "Return to Edmond to finish the quest.",
+          "description": "Return to Edmond to finish the quest.",
           "worldpoint": {
             "x": 2568,
             "y": 3333,

@@ -3,6 +3,7 @@ import L from "leaflet";
 import { renderToStaticMarkup } from "react-dom/server";
 import { IconMapPinFilled } from "@tabler/icons-react";
 import { useActiveStep, useQuestActions } from "../../stores/questStore";
+import { useRouteActions } from "../../stores/routeStore";
 import { worldPointToLeaflet } from "../../util/Coordinates";
 import { Button, Stack, Text } from "@mantine/core";
 
@@ -16,6 +17,7 @@ const questPinIcon = L.divIcon({
 export default function QuestPin({ id }: { id: string }) {
   const step = useActiveStep(id);
   const { advanceStep } = useQuestActions();
+  const { appendRoute } = useRouteActions();
 
   if (!step) return null
   
@@ -24,8 +26,8 @@ export default function QuestPin({ id }: { id: string }) {
       <Tooltip content={id} />
       <Popup>
         <Stack>
-          <Text>{step.stepDescription}</Text>
-          <Button onClick={() => advanceStep(id)}>Advance Step</Button>
+          <Text>{step.description}</Text>
+          <Button onClick={() => { appendRoute(step); advanceStep(id); }}>Advance Step</Button>
         </Stack>
       </Popup>
     </Marker>    

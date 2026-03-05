@@ -12,7 +12,7 @@
       "panelName": "Starting off",
       "steps": [
         {
-          "stepDescription": "Talk to Dimintheis in south east Varrock.",
+          "description": "Talk to Dimintheis in south east Varrock.",
           "worldpoint": {
             "x": 3280,
             "y": 3402,
@@ -25,7 +25,7 @@
       "panelName": "Caleb's piece",
       "steps": [
         {
-          "stepDescription": "Talk to Caleb in Catherby.",
+          "description": "Talk to Caleb in Catherby.",
           "worldpoint": {
             "x": 2819,
             "y": 3452,
@@ -33,7 +33,7 @@
           }
         },
         {
-          "stepDescription": "Talk to Caleb again with the required fish.",
+          "description": "Talk to Caleb again with the required fish.",
           "worldpoint": {
             "x": 2819,
             "y": 3452,
@@ -41,7 +41,7 @@
           }
         },
         {
-          "stepDescription": "Talk to Caleb in Catherby once more.",
+          "description": "Talk to Caleb in Catherby once more.",
           "worldpoint": {
             "x": 2819,
             "y": 3452,
@@ -54,7 +54,7 @@
       "panelName": "Avan's piece",
       "steps": [
         {
-          "stepDescription": "Talk to the Gem Trader in Al Kharid.",
+          "description": "Talk to the Gem Trader in Al Kharid.",
           "worldpoint": {
             "x": 3286,
             "y": 3211,
@@ -62,7 +62,7 @@
           }
         },
         {
-          "stepDescription": "Talk to the man south of the Al Kharid mine.",
+          "description": "Talk to the man south of the Al Kharid mine.",
           "worldpoint": {
             "x": 3295,
             "y": 3275,
@@ -70,7 +70,7 @@
           }
         },
         {
-          "stepDescription": "Talk to Boot in the south western Dwarven Mines.",
+          "description": "Talk to Boot in the south western Dwarven Mines.",
           "worldpoint": {
             "x": 2984,
             "y": 9810,
@@ -78,7 +78,7 @@
           }
         },
         {
-          "stepDescription": "Enter the old ruin entrance west of Witchaven.",
+          "description": "Enter the old ruin entrance west of Witchaven.",
           "worldpoint": {
             "x": 2696,
             "y": 3283,
@@ -86,7 +86,7 @@
           }
         },
         {
-          "stepDescription": "Follow the path around, and pull the lever on the wall in the north east corner.",
+          "description": "Follow the path around, and pull the lever on the wall in the north east corner.",
           "worldpoint": {
             "x": 2722,
             "y": 9710,
@@ -94,7 +94,7 @@
           }
         },
         {
-          "stepDescription": "Pull the lever in the south room up.",
+          "description": "Pull the lever in the south room up.",
           "worldpoint": {
             "x": 2724,
             "y": 9669,
@@ -102,7 +102,7 @@
           }
         },
         {
-          "stepDescription": "Pull the north wall lever again.",
+          "description": "Pull the north wall lever again.",
           "worldpoint": {
             "x": 2722,
             "y": 9710,
@@ -110,7 +110,7 @@
           }
         },
         {
-          "stepDescription": "Pull the lever in the north room up.",
+          "description": "Pull the lever in the north room up.",
           "worldpoint": {
             "x": 2722,
             "y": 9718,
@@ -118,7 +118,7 @@
           }
         },
         {
-          "stepDescription": "Pull the north wall lever again.",
+          "description": "Pull the north wall lever again.",
           "worldpoint": {
             "x": 2722,
             "y": 9710,
@@ -126,7 +126,7 @@
           }
         },
         {
-          "stepDescription": "Pull the lever in the south room down.",
+          "description": "Pull the lever in the south room down.",
           "worldpoint": {
             "x": 2724,
             "y": 9669,
@@ -134,7 +134,7 @@
           }
         },
         {
-          "stepDescription": "Mine 2 perfect gold in the east room.",
+          "description": "Mine 2 perfect gold in the east room.",
           "worldpoint": {
             "x": 2732,
             "y": 9680,
@@ -142,7 +142,7 @@
           }
         },
         {
-          "stepDescription": "Smelt the perfect gold ore into bars.",
+          "description": "Smelt the perfect gold ore into bars.",
           "worldpoint": {
             "x": 3273,
             "y": 3186,
@@ -150,13 +150,13 @@
           }
         },
         {
-          "stepDescription": "Make a perfect ruby necklace at a furnace. Make sure to only craft one."
+          "description": "Make a perfect ruby necklace at a furnace. Make sure to only craft one."
         },
         {
-          "stepDescription": "Make a perfect ruby ring at a furnace. Make sure to only craft one."
+          "description": "Make a perfect ruby ring at a furnace. Make sure to only craft one."
         },
         {
-          "stepDescription": "Return to the man south of the Al Kharid mine.",
+          "description": "Return to the man south of the Al Kharid mine.",
           "worldpoint": {
             "x": 3295,
             "y": 3275,
@@ -169,7 +169,7 @@
       "panelName": "Johnathon's piece",
       "steps": [
         {
-          "stepDescription": "Go upstairs in the Jolly Boar Inn north east of Varrock and talk to Johnathon.",
+          "description": "Go upstairs in the Jolly Boar Inn north east of Varrock and talk to Johnathon.",
           "worldpoint": {
             "x": 3286,
             "y": 3494,
@@ -177,7 +177,7 @@
           }
         },
         {
-          "stepDescription": "Give Johnathon some antipoison.",
+          "description": "Give Johnathon some antipoison.",
           "worldpoint": {
             "x": 3277,
             "y": 3504,
@@ -185,7 +185,7 @@
           }
         },
         {
-          "stepDescription": "Kill Chronozon in the south west corner of the Edgeville Wilderness Dungeon. You need to hit him at least once with all 4 elemental blast spell.",
+          "description": "Kill Chronozon in the south west corner of the Edgeville Wilderness Dungeon. You need to hit him at least once with all 4 elemental blast spell.",
           "worldpoint": {
             "x": 3087,
             "y": 9936,
@@ -198,10 +198,10 @@
       "panelName": "Return the crest",
       "steps": [
         {
-          "stepDescription": "Combine the 3 crest parts together."
+          "description": "Combine the 3 crest parts together."
         },
         {
-          "stepDescription": "Return the family crest to Dimintheis in south east Varrock.",
+          "description": "Return the family crest to Dimintheis in south east Varrock.",
           "worldpoint": {
             "x": 3280,
             "y": 3402,

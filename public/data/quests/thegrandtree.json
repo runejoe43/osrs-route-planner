@@ -12,7 +12,7 @@
       "panelName": "Getting started",
       "steps": [
         {
-          "stepDescription": "Talk to King Narnode Shareen in the Grand Tree(Make sure to have two empty inventory slots to start the quest).",
+          "description": "Talk to King Narnode Shareen in the Grand Tree(Make sure to have two empty inventory slots to start the quest).",
           "worldpoint": {
             "x": 2466,
             "y": 3495,
@@ -25,7 +25,7 @@
       "panelName": "Hazelmere",
       "steps": [
         {
-          "stepDescription": "Go up to Hazelmere, on the island east of Yanille. Fairy ring CLS or minigame teleport near Yanille.",
+          "description": "Go up to Hazelmere, on the island east of Yanille. Fairy ring CLS or minigame teleport near Yanille.",
           "worldpoint": {
             "x": 2677,
             "y": 3087,
@@ -33,7 +33,7 @@
           }
         },
         {
-          "stepDescription": "Talk to Hazelmere."
+          "description": "Talk to Hazelmere."
         }
       ]
     },
@@ -41,7 +41,7 @@
       "panelName": "Investigation",
       "steps": [
         {
-          "stepDescription": "Return to King Narnode in the Grand Tree.",
+          "description": "Return to King Narnode in the Grand Tree.",
           "worldpoint": {
             "x": 2466,
             "y": 3495,
@@ -49,7 +49,7 @@
           }
         },
         {
-          "stepDescription": "Go up to Glough in the Tree Gnome Stronghold.",
+          "description": "Go up to Glough in the Tree Gnome Stronghold.",
           "worldpoint": {
             "x": 2476,
             "y": 3463,
@@ -57,10 +57,10 @@
           }
         },
         {
-          "stepDescription": "Talk to Glough."
+          "description": "Talk to Glough."
         },
         {
-          "stepDescription": "Talk to King Narnode again in the Grand Tree.",
+          "description": "Talk to King Narnode again in the Grand Tree.",
           "worldpoint": {
             "x": 2466,
             "y": 3495,
@@ -68,7 +68,7 @@
           }
         },
         {
-          "stepDescription": "Talk to Charlie on the top floor of the Grand Tree.",
+          "description": "Talk to Charlie on the top floor of the Grand Tree.",
           "worldpoint": {
             "x": 2464,
             "y": 3495,
@@ -76,7 +76,7 @@
           }
         },
         {
-          "stepDescription": "Return to Glough's house and search the cupboard for Glough's Journal.",
+          "description": "Return to Glough's house and search the cupboard for Glough's Journal.",
           "worldpoint": {
             "x": 2476,
             "y": 3463,
@@ -84,7 +84,7 @@
           }
         },
         {
-          "stepDescription": "Confront Glough about his journal.",
+          "description": "Confront Glough about his journal.",
           "worldpoint": {
             "x": 2476,
             "y": 3463,
@@ -92,7 +92,7 @@
           }
         },
         {
-          "stepDescription": "Talk to Charlie.",
+          "description": "Talk to Charlie.",
           "worldpoint": {
             "x": 2464,
             "y": 3495,
@@ -100,10 +100,10 @@
           }
         },
         {
-          "stepDescription": "Talk to King Narnode outside Charlie's cell."
+          "description": "Talk to King Narnode outside Charlie's cell."
         },
         {
-          "stepDescription": "Travel with the glider to escape.",
+          "description": "Travel with the glider to escape.",
           "worldpoint": {
             "x": 2466,
             "y": 3495,
@@ -116,7 +116,7 @@
       "panelName": "Karamja",
       "steps": [
         {
-          "stepDescription": "Enter the shipyard on Karamja.",
+          "description": "Enter the shipyard on Karamja.",
           "worldpoint": {
             "x": 2945,
             "y": 3041,
@@ -124,7 +124,7 @@
           }
         },
         {
-          "stepDescription": "Get the Lumber order from the Foreman on the southern docks. You can either kill him or talk to him.",
+          "description": "Get the Lumber order from the Foreman on the southern docks. You can either kill him or talk to him.",
           "worldpoint": {
             "x": 3000,
             "y": 3044,
@@ -137,10 +137,10 @@
       "panelName": "Tuzo",
       "steps": [
         {
-          "stepDescription": "Return to Charlie. If entering the Stronghold through the south entrance you'll need to talk to Femi there. If you didn't help them previously you'll need to pay them 1k."
+          "description": "Return to Charlie. If entering the Stronghold through the south entrance you'll need to talk to Femi there. If you didn't help them previously you'll need to pay them 1k."
         },
         {
-          "stepDescription": "Talk to Anita in her house west of the Grand Tree.",
+          "description": "Talk to Anita in her house west of the Grand Tree.",
           "worldpoint": {
             "x": 2466,
             "y": 3495,
@@ -148,10 +148,10 @@
           }
         },
         {
-          "stepDescription": "Search the chest in Glough's house."
+          "description": "Search the chest in Glough's house."
         },
         {
-          "stepDescription": "Take the invasion plans to King Narnode in the Grand Tree.",
+          "description": "Take the invasion plans to King Narnode in the Grand Tree.",
           "worldpoint": {
             "x": 2465,
             "y": 3496,
@@ -159,7 +159,7 @@
           }
         },
         {
-          "stepDescription": "Place the twigs to spell 'TUZO' in the watchtower in Glough's house. Return to King Narnode if you lost any."
+          "description": "Place the twigs to spell 'TUZO' in the watchtower in Glough's house. Return to King Narnode if you lost any."
         }
       ]
     },
@@ -167,13 +167,13 @@
       "panelName": "Defeat the Black Demon",
       "steps": [
         {
-          "stepDescription": "Go down the trap door. Be prepared for the fight against a Black Demon (level 172)."
+          "description": "Go down the trap door. Be prepared for the fight against a Black Demon (level 172)."
         },
         {
-          "stepDescription": "Kill the black Demon. You can safespot from where Glough stands."
+          "description": "Kill the black Demon. You can safespot from where Glough stands."
         },
         {
-          "stepDescription": "Talk to King Narnode deeper in the cave.",
+          "description": "Talk to King Narnode deeper in the cave.",
           "worldpoint": {
             "x": 2465,
             "y": 9895,
@@ -181,10 +181,10 @@
           }
         },
         {
-          "stepDescription": "Search the roots under the Grand Tree until you find the Daconia stone. If you lose the rock, it will be in the same root again."
+          "description": "Search the roots under the Grand Tree until you find the Daconia stone. If you lose the rock, it will be in the same root again."
         },
         {
-          "stepDescription": "Give the Daconia stone to King Narnode under the Grand Tree.",
+          "description": "Give the Daconia stone to King Narnode under the Grand Tree.",
           "worldpoint": {
             "x": 2465,
             "y": 9895,

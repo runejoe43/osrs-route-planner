@@ -12,7 +12,7 @@
       "panelName": "Starting off",
       "steps": [
         {
-          "stepDescription": "Talk to Olaf Hradson north east of Rellekka.",
+          "description": "Talk to Olaf Hradson north east of Rellekka.",
           "worldpoint": {
             "x": 2722,
             "y": 3727,
@@ -20,7 +20,7 @@
           }
         },
         {
-          "stepDescription": "Chop a log from the Windswept Tree east of Olaf.",
+          "description": "Chop a log from the Windswept Tree east of Olaf.",
           "worldpoint": {
             "x": 2749,
             "y": 3735,
@@ -28,7 +28,7 @@
           }
         },
         {
-          "stepDescription": "Bring the logs to Olaf Hradson north east of Rellekka.",
+          "description": "Bring the logs to Olaf Hradson north east of Rellekka.",
           "worldpoint": {
             "x": 2722,
             "y": 3727,
@@ -36,7 +36,7 @@
           }
         },
         {
-          "stepDescription": "Talk to Ingrid Hradson near the well in southeast Rellekka.",
+          "description": "Talk to Ingrid Hradson near the well in southeast Rellekka.",
           "worldpoint": {
             "x": 2670,
             "y": 3670,
@@ -44,7 +44,7 @@
           }
         },
         {
-          "stepDescription": "Talk to Volf Olafson north of the longhall in Rellekka.",
+          "description": "Talk to Volf Olafson north of the longhall in Rellekka.",
           "worldpoint": {
             "x": 2662,
             "y": 3700,
@@ -52,7 +52,7 @@
           }
         },
         {
-          "stepDescription": "Return to Olaf Hradson north east of Rellekka.",
+          "description": "Return to Olaf Hradson north east of Rellekka.",
           "worldpoint": {
             "x": 2722,
             "y": 3727,
@@ -60,7 +60,7 @@
           }
         },
         {
-          "stepDescription": "Use the damp planks on Olaf's embers.",
+          "description": "Use the damp planks on Olaf's embers.",
           "worldpoint": {
             "x": 2724,
             "y": 3728,
@@ -68,7 +68,7 @@
           }
         },
         {
-          "stepDescription": "Talk to Olaf again, and give him some food.",
+          "description": "Talk to Olaf again, and give him some food.",
           "worldpoint": {
             "x": 2722,
             "y": 3727,
@@ -81,7 +81,7 @@
       "panelName": "Finding treasure",
       "steps": [
         {
-          "stepDescription": "Dig next to the Windswept Tree.",
+          "description": "Dig next to the Windswept Tree.",
           "worldpoint": {
             "x": 2748,
             "y": 3732,
@@ -89,7 +89,7 @@
           }
         },
         {
-          "stepDescription": "Go deeper into the caverns and kill a Skeleton Fremennik for a key.",
+          "description": "Go deeper into the caverns and kill a Skeleton Fremennik for a key.",
           "worldpoint": {
             "x": 2727,
             "y": 10141,
@@ -97,7 +97,7 @@
           }
         },
         {
-          "stepDescription": "Search the picture wall in the north room.",
+          "description": "Search the picture wall in the north room.",
           "worldpoint": {
             "x": 2707,
             "y": 10147,
@@ -105,13 +105,13 @@
           }
         },
         {
-          "stepDescription": "Click the highlighted boxes to turn the squares to solve the puzzle."
+          "description": "Click the highlighted boxes to turn the squares to solve the puzzle."
         },
         {
-          "stepDescription": "Pick up 2 rotten barrels and 6 ropes from around the room."
+          "description": "Pick up 2 rotten barrels and 6 ropes from around the room."
         },
         {
-          "stepDescription": "WALK onto the walkway to the east, and use a barrel on it to repair it.",
+          "description": "WALK onto the walkway to the east, and use a barrel on it to repair it.",
           "worldpoint": {
             "x": 2722,
             "y": 10168,
@@ -119,7 +119,7 @@
           }
         },
         {
-          "stepDescription": "WALK on the walkway and repair the next hole in it.",
+          "description": "WALK on the walkway and repair the next hole in it.",
           "worldpoint": {
             "x": 2724,
             "y": 10168,
@@ -127,7 +127,7 @@
           }
         },
         {
-          "stepDescription": "Open the gate on the walkway, clicking the key hole which matches your key.",
+          "description": "Open the gate on the walkway, clicking the key hole which matches your key.",
           "worldpoint": {
             "x": 2725,
             "y": 10168,
@@ -135,7 +135,7 @@
           }
         },
         {
-          "stepDescription": "WALK off the remaining walkway, and search the chest in the wreck. Be prepared to fight Ulfric.",
+          "description": "WALK off the remaining walkway, and search the chest in the wreck. Be prepared to fight Ulfric.",
           "worldpoint": {
             "x": 2740,
             "y": 10164,
@@ -143,7 +143,7 @@
           }
         },
         {
-          "stepDescription": "Kill Ulfric.",
+          "description": "Kill Ulfric.",
           "worldpoint": {
             "x": 2740,
             "y": 10164,
@@ -151,7 +151,7 @@
           }
         },
         {
-          "stepDescription": "Search the chest again to finish the quest.",
+          "description": "Search the chest again to finish the quest.",
           "worldpoint": {
             "x": 2740,
             "y": 10164,

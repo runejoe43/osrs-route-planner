@@ -1,4 +1,6 @@
-import { Box, Group, Paper, Text } from "@mantine/core";
+import { useState } from "react";
+import { ActionIcon, Box, Collapse, Group, Paper, Text } from "@mantine/core";
+import { IconChevronDown, IconChevronUp } from "@tabler/icons-react";
 // import { IconGripVertical } from "@tabler/icons-react";
 import useDraggable from "../../hooks/useDraggable";
 
@@ -16,11 +18,13 @@ export default function DraggableBox({
   width = 320,
 }: DraggableBoxProps) {
   const { position, onMouseDown } = useDraggable(initialPosition);
+  const [collapsed, setCollapsed] = useState(false);
 
   return (
     <Paper
       shadow="md"
       withBorder
+      className="draggable-box"
       style={{
         position: "fixed",
         top: position.y,
@@ -28,7 +32,6 @@ export default function DraggableBox({
         width,
         zIndex: 999,
         userSelect: "none",
-        backgroundColor: "red",
       }}
     >
       {/* Drag handle */}
@@ -37,12 +40,14 @@ export default function DraggableBox({
         px="sm"
         py={6}
         gap="xs"
+        justify="space-between"
         style={{
           cursor: "grab",
-          borderBottom: "1px solid var(--mantine-color-default-border)",
+          borderBottom: collapsed ? "none" : "1px solid var(--mantine-color-default-border)",
           background: "var(--mantine-color-default-hover)",
-          borderRadius:
-            "var(--mantine-radius-default) var(--mantine-radius-default) 0 0",
+          borderRadius: collapsed
+            ? "var(--mantine-radius-default)"
+            : "var(--mantine-radius-default) var(--mantine-radius-default) 0 0",
         }}
       >
         {/* <IconGripVertical size={14} color="var(--mantine-color-dimmed)" /> */}
@@ -51,10 +56,21 @@ export default function DraggableBox({
             {title}
           </Text>
         )}
+        <ActionIcon
+          variant="subtle"
+          size="xs"
+          onMouseDown={(e) => e.stopPropagation()}
+          onClick={() => setCollapsed((c) => !c)}
+          aria-label={collapsed ? "Expand" : "Collapse"}
+        >
+          {collapsed ? <IconChevronDown size={14} /> : <IconChevronUp size={14} />}
+        </ActionIcon>
       </Group>
 
       {/* Content */}
-      <Box p="sm">{children}</Box>
+      <Collapse in={!collapsed}>
+        <Box p="sm">{children}</Box>
+      </Collapse>
     </Paper>
   );
 }

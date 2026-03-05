@@ -12,7 +12,7 @@
       "panelName": "Starting off",
       "steps": [
         {
-          "stepDescription": "Talk to King Arthur in Camelot Castle to start the quest.",
+          "description": "Talk to King Arthur in Camelot Castle to start the quest.",
           "worldpoint": {
             "x": 2763,
             "y": 3513,
@@ -20,7 +20,7 @@
           }
         },
         {
-          "stepDescription": "Go upstairs and talk to Merlin.",
+          "description": "Go upstairs and talk to Merlin.",
           "worldpoint": {
             "x": 2763,
             "y": 3513,
@@ -33,7 +33,7 @@
       "panelName": "Getting the Napkin",
       "steps": [
         {
-          "stepDescription": "Head to Port Sarim and talk to a monk of Entrana for passage to Entrana. Bank all combat gear.",
+          "description": "Head to Port Sarim and talk to a monk of Entrana for passage to Entrana. Bank all combat gear.",
           "worldpoint": {
             "x": 3048,
             "y": 3235,
@@ -41,7 +41,7 @@
           }
         },
         {
-          "stepDescription": "Talk to the High Priest on Entrana.",
+          "description": "Talk to the High Priest on Entrana.",
           "worldpoint": {
             "x": 2851,
             "y": 3348,
@@ -49,7 +49,7 @@
           }
         },
         {
-          "stepDescription": "Talk to Galahad in his house west of McGrubor's Woods.",
+          "description": "Talk to Galahad in his house west of McGrubor's Woods.",
           "worldpoint": {
             "x": 2612,
             "y": 3475,
@@ -62,7 +62,7 @@
       "panelName": "Getting the Magic Whistles",
       "steps": [
         {
-          "stepDescription": "Travel to Draynor Manor.",
+          "description": "Travel to Draynor Manor.",
           "worldpoint": {
             "x": 3108,
             "y": 3350,
@@ -70,10 +70,10 @@
           }
         },
         {
-          "stepDescription": "Enter Draynor Manor."
+          "description": "Enter Draynor Manor."
         },
         {
-          "stepDescription": "Go up the stairs in Draynor Manor.",
+          "description": "Go up the stairs in Draynor Manor.",
           "worldpoint": {
             "x": 3109,
             "y": 3364,
@@ -81,7 +81,7 @@
           }
         },
         {
-          "stepDescription": "Go up the second set of stairs in Draynor Manor.",
+          "description": "Go up the second set of stairs in Draynor Manor.",
           "worldpoint": {
             "x": 3105,
             "y": 3363,
@@ -89,10 +89,10 @@
           }
         },
         {
-          "stepDescription": "Open the door to the Magic Whistles."
+          "description": "Open the door to the Magic Whistles."
         },
         {
-          "stepDescription": "Pickup 2 Magic Whistles.",
+          "description": "Pickup 2 Magic Whistles.",
           "worldpoint": {
             "x": 3107,
             "y": 3359,
@@ -105,7 +105,7 @@
       "panelName": "Fisher King Realm Pt.1",
       "steps": [
         {
-          "stepDescription": "Go to the tower on Karamja near gold mine west of Brimhaven.",
+          "description": "Go to the tower on Karamja near gold mine west of Brimhaven.",
           "worldpoint": {
             "x": 2742,
             "y": 3236,
@@ -113,13 +113,13 @@
           }
         },
         {
-          "stepDescription": "Blow the whistle once you are underneath of the tower."
+          "description": "Blow the whistle once you are underneath of the tower."
         },
         {
-          "stepDescription": "Kill the Black Knight Titan with Excalibur. Melee is recommended as it has high Ranged and Magic defence. (You only need to deal the killing blow with excalibur!)"
+          "description": "Kill the Black Knight Titan with Excalibur. Melee is recommended as it has high Ranged and Magic defence. (You only need to deal the killing blow with excalibur!)"
         },
         {
-          "stepDescription": "Talk to the fisherman by the river. After talking to him walk West to the castle.",
+          "description": "Talk to the fisherman by the river. After talking to him walk West to the castle.",
           "worldpoint": {
             "x": 2798,
             "y": 4706,
@@ -127,7 +127,7 @@
           }
         },
         {
-          "stepDescription": "Pickup the grail bell outside of the castle. If it's not there, return to the fisherman and finish the conversation.",
+          "description": "Pickup the grail bell outside of the castle. If it's not there, return to the fisherman and finish the conversation.",
           "worldpoint": {
             "x": 2762,
             "y": 4694,
@@ -135,7 +135,7 @@
           }
         },
         {
-          "stepDescription": "Ring the grail bell while standing directly north of the broken castle wall (Where you picked up the bell)",
+          "description": "Ring the grail bell while standing directly north of the broken castle wall (Where you picked up the bell)",
           "worldpoint": {
             "x": 2762,
             "y": 4694,
@@ -143,7 +143,7 @@
           }
         },
         {
-          "stepDescription": "Go up the stairs inside of the castle.",
+          "description": "Go up the stairs inside of the castle.",
           "worldpoint": {
             "x": 2762,
             "y": 4681,
@@ -151,7 +151,7 @@
           }
         },
         {
-          "stepDescription": "Talk to The Fisher King."
+          "description": "Talk to The Fisher King."
         }
       ]
     },
@@ -159,7 +159,7 @@
       "panelName": "Finding Percival",
       "steps": [
         {
-          "stepDescription": "Return to Camelot and talk to King Arthur.",
+          "description": "Return to Camelot and talk to King Arthur.",
           "worldpoint": {
             "x": 2763,
             "y": 3513,
@@ -167,7 +167,7 @@
           }
         },
         {
-          "stepDescription": "Travel to the Goblin Village, north of Falador. Right click and open the sacks.",
+          "description": "Travel to the Goblin Village, north of Falador. Right click and open the sacks.",
           "worldpoint": {
             "x": 2962,
             "y": 3506,
@@ -180,7 +180,7 @@
       "panelName": "Fisher King Realm Pt.2",
       "steps": [
         {
-          "stepDescription": "Go to the tower on Karamja near gold mine west of Brimhaven.",
+          "description": "Go to the tower on Karamja near gold mine west of Brimhaven.",
           "worldpoint": {
             "x": 2742,
             "y": 3236,
@@ -188,13 +188,13 @@
           }
         },
         {
-          "stepDescription": "Blow the whistle once you are underneath of the tower."
+          "description": "Blow the whistle once you are underneath of the tower."
         },
         {
-          "stepDescription": "Open the door to the castle and enter."
+          "description": "Open the door to the castle and enter."
         },
         {
-          "stepDescription": "Go up the stairs to the east.",
+          "description": "Go up the stairs to the east.",
           "worldpoint": {
             "x": 2649,
             "y": 4684,
@@ -202,10 +202,10 @@
           }
         },
         {
-          "stepDescription": "Climb the ladder on the second floor."
+          "description": "Climb the ladder on the second floor."
         },
         {
-          "stepDescription": "Pickup the Holy grail.",
+          "description": "Pickup the Holy grail.",
           "worldpoint": {
             "x": 2649,
             "y": 4684,
@@ -218,7 +218,7 @@
       "panelName": "Finishing up",
       "steps": [
         {
-          "stepDescription": "Return to Camelot and talk to King Arthur",
+          "description": "Return to Camelot and talk to King Arthur",
           "worldpoint": {
             "x": 2763,
             "y": 3513,

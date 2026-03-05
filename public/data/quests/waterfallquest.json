@@ -12,7 +12,7 @@
       "panelName": "Starting off",
       "steps": [
         {
-          "stepDescription": "Talk to Almera on top of Baxtorian Falls, south of Barbarian Outpost.",
+          "description": "Talk to Almera on top of Baxtorian Falls, south of Barbarian Outpost.",
           "worldpoint": {
             "x": 2521,
             "y": 3495,
@@ -25,7 +25,7 @@
       "panelName": "Investigate",
       "steps": [
         {
-          "stepDescription": "Board the log raft west of Almera.",
+          "description": "Board the log raft west of Almera.",
           "worldpoint": {
             "x": 2509,
             "y": 3494,
@@ -33,7 +33,7 @@
           }
         },
         {
-          "stepDescription": "Talk to Hudon.",
+          "description": "Talk to Hudon.",
           "worldpoint": {
             "x": 2511,
             "y": 3484,
@@ -41,7 +41,7 @@
           }
         },
         {
-          "stepDescription": "Use a rope on the rock to the south.",
+          "description": "Use a rope on the rock to the south.",
           "worldpoint": {
             "x": 2512,
             "y": 3468,
@@ -49,7 +49,7 @@
           }
         },
         {
-          "stepDescription": "Use a rope on the dead tree.",
+          "description": "Use a rope on the dead tree.",
           "worldpoint": {
             "x": 2512,
             "y": 3465,
@@ -57,7 +57,7 @@
           }
         },
         {
-          "stepDescription": "Get in the barrel.",
+          "description": "Get in the barrel.",
           "worldpoint": {
             "x": 2512,
             "y": 3463,
@@ -65,7 +65,7 @@
           }
         },
         {
-          "stepDescription": "Go up the stairs in the house south of Almera's house.",
+          "description": "Go up the stairs in the house south of Almera's house.",
           "worldpoint": {
             "x": 2518,
             "y": 3430,
@@ -73,7 +73,7 @@
           }
         },
         {
-          "stepDescription": "Search the south east bookcase.",
+          "description": "Search the south east bookcase.",
           "worldpoint": {
             "x": 2520,
             "y": 3427,
@@ -81,7 +81,7 @@
           }
         },
         {
-          "stepDescription": "Read the book."
+          "description": "Read the book."
         }
       ]
     },
@@ -89,7 +89,7 @@
       "panelName": "Get Glarial's Pebble",
       "steps": [
         {
-          "stepDescription": "Go to the centre of the Tree Gnome Village and go down the ladder at the entrance.",
+          "description": "Go to the centre of the Tree Gnome Village and go down the ladder at the entrance.",
           "worldpoint": {
             "x": 2533,
             "y": 3155,
@@ -97,7 +97,7 @@
           }
         },
         {
-          "stepDescription": "Search the off-coloured crate in the east room.",
+          "description": "Search the off-coloured crate in the east room.",
           "worldpoint": {
             "x": 2548,
             "y": 9565,
@@ -105,7 +105,7 @@
           }
         },
         {
-          "stepDescription": "Go through the gate in the west room.",
+          "description": "Go through the gate in the west room.",
           "worldpoint": {
             "x": 2515,
             "y": 9575,
@@ -113,7 +113,7 @@
           }
         },
         {
-          "stepDescription": "Talk to Golrie.",
+          "description": "Talk to Golrie.",
           "worldpoint": {
             "x": 2514,
             "y": 9580,
@@ -126,7 +126,7 @@
       "panelName": "Loot Glarial's tomb",
       "steps": [
         {
-          "stepDescription": "Bank everything besides the pebble and some food. Then use Glarial's pebble on Glarial's Tombstone east of Baxtorian Falls.",
+          "description": "Bank everything besides the pebble and some food. Then use Glarial's pebble on Glarial's Tombstone east of Baxtorian Falls.",
           "worldpoint": {
             "x": 2559,
             "y": 3445,
@@ -134,7 +134,7 @@
           }
         },
         {
-          "stepDescription": "Search the chest in the western room for Glarial's amulet.",
+          "description": "Search the chest in the western room for Glarial's amulet.",
           "worldpoint": {
             "x": 2530,
             "y": 9844,
@@ -142,7 +142,7 @@
           }
         },
         {
-          "stepDescription": "Search Glarial's Tomb in the south room for Glarial's urn.",
+          "description": "Search Glarial's Tomb in the south room for Glarial's urn.",
           "worldpoint": {
             "x": 2542,
             "y": 9812,
@@ -155,10 +155,10 @@
       "panelName": "Put Glarial to rest",
       "steps": [
         {
-          "stepDescription": "Leave Glarial's Tomb and get 6 air, water, and earth runes, a rope, glarial's amulet, glarial's urn, and some food."
+          "description": "Leave Glarial's Tomb and get 6 air, water, and earth runes, a rope, glarial's amulet, glarial's urn, and some food."
         },
         {
-          "stepDescription": "Board the log raft west of Almera.",
+          "description": "Board the log raft west of Almera.",
           "worldpoint": {
             "x": 2509,
             "y": 3494,
@@ -166,7 +166,7 @@
           }
         },
         {
-          "stepDescription": "Use a rope on the rock to the south.",
+          "description": "Use a rope on the rock to the south.",
           "worldpoint": {
             "x": 2512,
             "y": 3468,
@@ -174,7 +174,7 @@
           }
         },
         {
-          "stepDescription": "Use a rope on the dead tree.",
+          "description": "Use a rope on the dead tree.",
           "worldpoint": {
             "x": 2512,
             "y": 3465,
@@ -182,10 +182,10 @@
           }
         },
         {
-          "stepDescription": "Equip Glarial's amulet."
+          "description": "Equip Glarial's amulet."
         },
         {
-          "stepDescription": "Enter the falls with Glarial's amulet equipped.",
+          "description": "Enter the falls with Glarial's amulet equipped.",
           "worldpoint": {
             "x": 2511,
             "y": 3464,
@@ -193,7 +193,7 @@
           }
         },
         {
-          "stepDescription": "Search the crate in the east room for a key.",
+          "description": "Search the crate in the east room for a key.",
           "worldpoint": {
             "x": 2589,
             "y": 9888,
@@ -201,7 +201,7 @@
           }
         },
         {
-          "stepDescription": "Enter the west room with the key.",
+          "description": "Enter the west room with the key.",
           "worldpoint": {
             "x": 2566,
             "y": 9901,
@@ -209,10 +209,10 @@
           }
         },
         {
-          "stepDescription": "Use 1 earth, water and air rune on each of the 6 pillars in the room. Afterwards, use Glarial's amulet on the statue of Glarial."
+          "description": "Use 1 earth, water and air rune on each of the 6 pillars in the room. Afterwards, use Glarial's amulet on the statue of Glarial."
         },
         {
-          "stepDescription": "DO NOT LEFT-CLICK THE CHALICE! Use Glarial's urn on the Chalice to finish the quest.",
+          "description": "DO NOT LEFT-CLICK THE CHALICE! Use Glarial's urn on the Chalice to finish the quest.",
           "worldpoint": {
             "x": 2604,
             "y": 9911,

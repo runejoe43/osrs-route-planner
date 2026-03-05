@@ -4,6 +4,8 @@
  * WorldPoint mirrors src/util/Coordinates.tsx for schema alignment.
  */
 
+import type { RawStep } from "./Steps";
+
 export interface WorldPoint {
   x: number;
   y: number;
@@ -56,14 +58,9 @@ export interface SkillRequirement {
   level: number;
 }
 
-export interface QuestStepWithPoint {
-  stepDescription: string;
-  worldpoint?: WorldPoint;
-}
-
 export interface QuestPanel {
   panelName: string;
-  steps: QuestStepWithPoint[];
+  steps: RawStep[];
 }
 
 export interface QuestData {

@@ -12,7 +12,7 @@
       "panelName": "Fishing Contest",
       "steps": [
         {
-          "stepDescription": "Talk to Vestri just north of Catherby.",
+          "description": "Talk to Vestri just north of Catherby.",
           "worldpoint": {
             "x": 2821,
             "y": 3486,
@@ -20,7 +20,7 @@
           }
         },
         {
-          "stepDescription": "Enter Hemenster with your fishing pass.",
+          "description": "Enter Hemenster with your fishing pass.",
           "worldpoint": {
             "x": 2649,
             "y": 3451,
@@ -28,7 +28,7 @@
           }
         },
         {
-          "stepDescription": "Speak to Bonzo to start the competition.",
+          "description": "Speak to Bonzo to start the competition.",
           "worldpoint": {
             "x": 2641,
             "y": 3437,
@@ -36,7 +36,7 @@
           }
         },
         {
-          "stepDescription": "Put garlic in the pipes.",
+          "description": "Put garlic in the pipes.",
           "worldpoint": {
             "x": 2638,
             "y": 3446,
@@ -44,7 +44,7 @@
           }
         },
         {
-          "stepDescription": "Catch the winning fish at the fishing spot near the pipes.",
+          "description": "Catch the winning fish at the fishing spot near the pipes.",
           "worldpoint": {
             "x": 2637,
             "y": 3444,
@@ -52,7 +52,7 @@
           }
         },
         {
-          "stepDescription": "Speak to Bonzo again after you have caught the winning fish.",
+          "description": "Speak to Bonzo again after you have caught the winning fish.",
           "worldpoint": {
             "x": 2641,
             "y": 3437,
@@ -60,7 +60,7 @@
           }
         },
         {
-          "stepDescription": "Bring Vestri just north of Catherby the trophy.",
+          "description": "Bring Vestri just north of Catherby the trophy.",
           "worldpoint": {
             "x": 2821,
             "y": 3486,

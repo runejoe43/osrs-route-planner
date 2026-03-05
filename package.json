@@ -20,6 +20,7 @@
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
     "react-leaflet": "^5.0.0",
+    "uuid": "^13.0.0",
     "zustand": "^5.0.2"
   },
   "devDependencies": {
@@ -28,6 +29,7 @@
     "@types/node": "^24.10.1",
     "@types/react": "^19.2.7",
     "@types/react-dom": "^19.2.3",
+    "@types/uuid": "^10.0.0",
     "@vitejs/plugin-react": "^5.1.1",
     "cheerio": "^1.2.0",
     "eslint": "^9.39.1",

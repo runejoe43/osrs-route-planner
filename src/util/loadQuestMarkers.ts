@@ -21,7 +21,7 @@ function extractWorldPoints(quest: QuestData) {
     for (const step of panel.steps) {
       if (step.worldpoint) {
         const wp = step.worldpoint as WorldPoint;
-        points.push({worldPoint: wp, description: step.stepDescription});
+        points.push({worldPoint: wp, description: step.description});
       }
     }
   }

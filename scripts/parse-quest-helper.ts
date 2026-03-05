@@ -19,9 +19,9 @@ import { fileURLToPath } from "url";
 import type {
   QuestData,
   QuestPanel,
-  QuestStepWithPoint,
   WorldPoint,
 } from "../src/types/QuestData";
+import type { RawStep } from "../src/types/Steps";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
@@ -310,7 +310,7 @@ function parseStepConstructor(
   worldPointVars: Map<string, WorldPoint>
 ): ParsedStep {
   const args = splitTopLevelArgs(argsRaw);
-  const knownCustomStepDescriptions: Record<string, string> = {
+  const knownCustomdescriptions: Record<string, string> = {
     PaintingWall: "Click the highlighted boxes to turn the squares to solve the puzzle.",
   };
 
@@ -321,7 +321,7 @@ function parseStepConstructor(
       .slice(2)
       .map((arg) => resolveWorldPointArg(arg, worldPointVars))
       .find((wp): wp is WorldPoint => wp !== undefined);
-    const stepDescription =
+    const description =
       args
         .slice(2)
         .map((arg) => extractStringArg(arg))
@@ -329,13 +329,13 @@ function parseStepConstructor(
 
     return {
       worldpoint,
-      stepDescription,
+      description,
     };
   }
 
   if (constructorName === "ConditionalStep") {
     return {
-      stepDescription: args[2] ? extractStringArg(args[2]) : "",
+      description: args[2] ? extractStringArg(args[2]) : "",
     };
   }
 
@@ -347,27 +347,27 @@ function parseStepConstructor(
       .slice(1)
       .map((arg) => resolveWorldPointArg(arg, worldPointVars))
       .find((wp): wp is WorldPoint => wp !== undefined);
-    const stepDescription =
+    const description =
       args
         .slice(1)
         .map((arg) => extractStringArg(arg))
         .find((s) => s.length > 0) ?? "";
     return {
       worldpoint,
-      stepDescription,
+      description,
     };
   }
 
   if (["DigStep", "TileStep"].includes(constructorName)) {
     return {
       worldpoint: args[1] ? resolveWorldPointArg(args[1], worldPointVars) : undefined,
-      stepDescription: args[2] ? extractStringArg(args[2]) : "",
+      description: args[2] ? extractStringArg(args[2]) : "",
     };
   }
 
   if (constructorName === "WidgetStep") {
     return {
-      stepDescription: args[1] ? extractStringArg(args[1]) : "",
+      description: args[1] ? extractStringArg(args[1]) : "",
     };
   }
 
@@ -379,11 +379,11 @@ function parseStepConstructor(
     if (worldpoint) {
       return {
         worldpoint,
-        stepDescription: args[2] ? extractStringArg(args[2]) : "",
+        description: args[2] ? extractStringArg(args[2]) : "",
       };
     }
     return {
-      stepDescription: args[1] ? extractStringArg(args[1]) : "",
+      description: args[1] ? extractStringArg(args[1]) : "",
     };
   }
 
@@ -400,14 +400,14 @@ function parseStepConstructor(
       const innerArgsRaw = wrappedArg.slice(openParen + 1, closeParen);
       return parseStepConstructor(innerConstructor, innerArgsRaw, worldPointVars);
     }
-    return { stepDescription: "UNKNOWN STEP" };
+    return { description: "UNKNOWN STEP" };
   }
 
   const fallbackFromStrings =
     args.map((arg) => extractStringArg(arg)).find((s) => s.length > 0) ?? "";
   return {
-    stepDescription:
-      knownCustomStepDescriptions[constructorName] ||
+    description:
+      knownCustomdescriptions[constructorName] ||
       fallbackFromStrings ||
       "UNKNOWN STEP",
   };
@@ -557,7 +557,7 @@ function applySetTextOverrides(
     if (!text) continue;
 
     const step = stepMap.get(varName);
-    if (step) step.stepDescription = text;
+    if (step) step.description = text;
   }
 }
 
@@ -765,9 +765,9 @@ function parsePanels(source: string): { panelTitle: string; stepVars: string[] }
 // ─── Full pipeline ────────────────────────────────────────────────────────────
 
 /** Internal panel during parsing; maps to QuestPanel for output. */
-/** Internal step during parsing; uses same field names as QuestStepWithPoint. */
+/** Internal step during parsing; uses same field names as QuestStep. */
 interface ParsedStep {
-  stepDescription: string;
+  description: string;
   worldpoint?: WorldPoint;
 }
 interface ParsedPanel {
@@ -797,7 +797,7 @@ function buildPanels(source: string): ParsedPanel[] {
         }
       }
       const step = stepMap.get(varName);
-      if (!step) return { varName, stepDescription: "STEP NOT FOUND IN setupSteps" };
+      if (!step) return { varName, description: "STEP NOT FOUND IN setupSteps" };
       return { varName, ...step };
     }),
   }));
@@ -810,9 +810,9 @@ function buildPanels(source: string): ParsedPanel[] {
 function toQuestData(questName: string, panels: ParsedPanel[]): QuestData {
   const steps: QuestPanel[] = panels.map((panel) => ({
     panelName: panel.panelTitle,
-    steps: panel.steps.map((s): QuestStepWithPoint => ({
-      stepDescription: s.stepDescription,
-      worldpoint: s.worldpoint,
+    steps: panel.steps.map((s): RawStep => ({
+      description: s.description,
+      ...(s.worldpoint !== undefined ? { worldpoint: s.worldpoint } : {}),
     })),
   }));
 

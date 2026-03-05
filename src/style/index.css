@@ -63,6 +63,14 @@ button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
 }
 
+.route-step {
+  border-radius: var(--mantine-radius-sm);
+  transition: background-color 0.15s ease;
+}
+.route-step:hover {
+  background-color: var(--mantine-color-default-hover);
+}
+
 @media (prefers-color-scheme: light) {
   :root {
     color: #213547;

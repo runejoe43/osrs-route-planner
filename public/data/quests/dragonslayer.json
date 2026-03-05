@@ -12,7 +12,7 @@
       "panelName": "Starting off",
       "steps": [
         {
-          "stepDescription": "Talk to the Guildmaster in the Champions' Guild, south of Varrock.",
+          "description": "Talk to the Guildmaster in the Champions' Guild, south of Varrock.",
           "worldpoint": {
             "x": 3190,
             "y": 3360,
@@ -20,7 +20,7 @@
           }
         },
         {
-          "stepDescription": "Talk to Oziach in his house in north western Edgeville.",
+          "description": "Talk to Oziach in his house in north western Edgeville.",
           "worldpoint": {
             "x": 3068,
             "y": 3517,
@@ -28,7 +28,7 @@
           }
         },
         {
-          "stepDescription": "Return to the Guildmaster and ask him all the available questions.",
+          "description": "Return to the Guildmaster and ask him all the available questions.",
           "worldpoint": {
             "x": 3190,
             "y": 3360,
@@ -41,7 +41,7 @@
       "panelName": "Thalzar's map piece",
       "steps": [
         {
-          "stepDescription": "Talk to the Oracle on top of Ice Mountain.",
+          "description": "Talk to the Oracle on top of Ice Mountain.",
           "worldpoint": {
             "x": 3014,
             "y": 3501,
@@ -49,7 +49,7 @@
           }
         },
         {
-          "stepDescription": "Go down the ladder in the dwarven camp to the south into the Dwarven Mines.",
+          "description": "Go down the ladder in the dwarven camp to the south into the Dwarven Mines.",
           "worldpoint": {
             "x": 3019,
             "y": 3450,
@@ -57,7 +57,7 @@
           }
         },
         {
-          "stepDescription": "Go to the north east of the Dwarven Mines and use the silk on the magic door.",
+          "description": "Go to the north east of the Dwarven Mines and use the silk on the magic door.",
           "worldpoint": {
             "x": 3050,
             "y": 9840,
@@ -65,7 +65,7 @@
           }
         },
         {
-          "stepDescription": "Go to the north east of the Dwarven Mines and use the lobster pot on the magic door.",
+          "description": "Go to the north east of the Dwarven Mines and use the lobster pot on the magic door.",
           "worldpoint": {
             "x": 3050,
             "y": 9840,
@@ -73,7 +73,7 @@
           }
         },
         {
-          "stepDescription": "Go to the north east of the Dwarven Mines and use the unfired bowl on the magic door.",
+          "description": "Go to the north east of the Dwarven Mines and use the unfired bowl on the magic door.",
           "worldpoint": {
             "x": 3050,
             "y": 9840,
@@ -81,7 +81,7 @@
           }
         },
         {
-          "stepDescription": "Go to the north east of the Dwarven Mines and use the wizard's mind bomb on the magic door (BE CAREFUL NOT TO DRINK IT).",
+          "description": "Go to the north east of the Dwarven Mines and use the wizard's mind bomb on the magic door (BE CAREFUL NOT TO DRINK IT).",
           "worldpoint": {
             "x": 3050,
             "y": 9840,
@@ -89,7 +89,7 @@
           }
         },
         {
-          "stepDescription": "Search the chest for Thalzar's map piece.",
+          "description": "Search the chest for Thalzar's map piece.",
           "worldpoint": {
             "x": 3057,
             "y": 9841,
@@ -102,7 +102,7 @@
       "panelName": "Lozar's map piece",
       "steps": [
         {
-          "stepDescription": "Go to Port Sarim Jail. You can either pay Wormbrain there 10,000 coins for Lozar's map piece, or kill him with ranged/mage and telegrab it with level 33 magic.",
+          "description": "Go to Port Sarim Jail. You can either pay Wormbrain there 10,000 coins for Lozar's map piece, or kill him with ranged/mage and telegrab it with level 33 magic.",
           "worldpoint": {
             "x": 3015,
             "y": 3195,
@@ -115,7 +115,7 @@
       "panelName": "Melzar's map piece",
       "steps": [
         {
-          "stepDescription": "Enter Melzar's Maze north of Rimmington. Be prepared to fight multiple monsters up to a level 82 lesser demon.",
+          "description": "Enter Melzar's Maze north of Rimmington. Be prepared to fight multiple monsters up to a level 82 lesser demon.",
           "worldpoint": {
             "x": 2941,
             "y": 3248,
@@ -123,7 +123,7 @@
           }
         },
         {
-          "stepDescription": "Kill the marked zombie rat for a key.",
+          "description": "Kill the marked zombie rat for a key.",
           "worldpoint": {
             "x": 2933,
             "y": 3250,
@@ -131,7 +131,7 @@
           }
         },
         {
-          "stepDescription": "Go through the north west red door",
+          "description": "Go through the north west red door",
           "worldpoint": {
             "x": 2926,
             "y": 3253,
@@ -139,7 +139,7 @@
           }
         },
         {
-          "stepDescription": "Climb up the ladder.",
+          "description": "Climb up the ladder.",
           "worldpoint": {
             "x": 2928,
             "y": 3256,
@@ -147,7 +147,7 @@
           }
         },
         {
-          "stepDescription": "Kill the marked ghost for a key.",
+          "description": "Kill the marked ghost for a key.",
           "worldpoint": {
             "x": 2927,
             "y": 3253,
@@ -155,7 +155,7 @@
           }
         },
         {
-          "stepDescription": "Go through second yellow door from the north.",
+          "description": "Go through second yellow door from the north.",
           "worldpoint": {
             "x": 2931,
             "y": 3253,
@@ -163,7 +163,7 @@
           }
         },
         {
-          "stepDescription": "Climb up the ladder.",
+          "description": "Climb up the ladder.",
           "worldpoint": {
             "x": 2934,
             "y": 3254,
@@ -171,7 +171,7 @@
           }
         },
         {
-          "stepDescription": "Kill the marked skeleton for a key",
+          "description": "Kill the marked skeleton for a key",
           "worldpoint": {
             "x": 2927,
             "y": 3253,
@@ -179,7 +179,7 @@
           }
         },
         {
-          "stepDescription": "Go through south west yellow door.",
+          "description": "Go through south west yellow door.",
           "worldpoint": {
             "x": 2924,
             "y": 3249,
@@ -187,7 +187,7 @@
           }
         },
         {
-          "stepDescription": "Climb down the ladder.",
+          "description": "Climb down the ladder.",
           "worldpoint": {
             "x": 2940,
             "y": 3240,
@@ -195,7 +195,7 @@
           }
         },
         {
-          "stepDescription": "Climb down again.",
+          "description": "Climb down again.",
           "worldpoint": {
             "x": 2937,
             "y": 3240,
@@ -203,7 +203,7 @@
           }
         },
         {
-          "stepDescription": "Climb down the ladder into the basement.",
+          "description": "Climb down the ladder into the basement.",
           "worldpoint": {
             "x": 2932,
             "y": 3240,
@@ -211,7 +211,7 @@
           }
         },
         {
-          "stepDescription": "Kill the marked zombie for a key",
+          "description": "Kill the marked zombie for a key",
           "worldpoint": {
             "x": 2932,
             "y": 9643,
@@ -219,7 +219,7 @@
           }
         },
         {
-          "stepDescription": "Go through the blue door in the north west corner.",
+          "description": "Go through the blue door in the north west corner.",
           "worldpoint": {
             "x": 2931,
             "y": 9644,
@@ -227,7 +227,7 @@
           }
         },
         {
-          "stepDescription": "Kill Melzar the Mad for a magenta key.",
+          "description": "Kill Melzar the Mad for a magenta key.",
           "worldpoint": {
             "x": 2929,
             "y": 9649,
@@ -235,7 +235,7 @@
           }
         },
         {
-          "stepDescription": "Go through the magenta door.",
+          "description": "Go through the magenta door.",
           "worldpoint": {
             "x": 2929,
             "y": 9652,
@@ -243,7 +243,7 @@
           }
         },
         {
-          "stepDescription": "Kill the lesser demon. You can safe spot it from the spot east of the magenta door.",
+          "description": "Kill the lesser demon. You can safe spot it from the spot east of the magenta door.",
           "worldpoint": {
             "x": 2936,
             "y": 9652,
@@ -251,7 +251,7 @@
           }
         },
         {
-          "stepDescription": "Go through the green door.",
+          "description": "Go through the green door.",
           "worldpoint": {
             "x": 2936,
             "y": 9655,
@@ -259,7 +259,7 @@
           }
         },
         {
-          "stepDescription": "Open the chest and get Melzar's map part.",
+          "description": "Open the chest and get Melzar's map part.",
           "worldpoint": {
             "x": 2935,
             "y": 9657,
@@ -272,7 +272,7 @@
       "panelName": "Get an anti-dragon shield",
       "steps": [
         {
-          "stepDescription": "Talk to Duke Horacio on the first floor of Lumbridge castle for the anti-dragon shield if you don't have one.",
+          "description": "Talk to Duke Horacio on the first floor of Lumbridge castle for the anti-dragon shield if you don't have one.",
           "worldpoint": {
             "x": 3210,
             "y": 3220,
@@ -285,7 +285,7 @@
       "panelName": "Get a boat",
       "steps": [
         {
-          "stepDescription": "Talk to Klarense on the south Port Sarim docks and buy his boat.",
+          "description": "Talk to Klarense on the south Port Sarim docks and buy his boat.",
           "worldpoint": {
             "x": 3044,
             "y": 3203,
@@ -293,7 +293,7 @@
           }
         },
         {
-          "stepDescription": "Board your new ship.",
+          "description": "Board your new ship.",
           "worldpoint": {
             "x": 3047,
             "y": 3205,
@@ -301,7 +301,7 @@
           }
         },
         {
-          "stepDescription": "Go down into the ship's hull.",
+          "description": "Go down into the ship's hull.",
           "worldpoint": {
             "x": 3049,
             "y": 3208,
@@ -309,7 +309,7 @@
           }
         },
         {
-          "stepDescription": "Repair the hole in the hull 3 times.",
+          "description": "Repair the hole in the hull 3 times.",
           "worldpoint": {
             "x": 3047,
             "y": 9639,
@@ -322,10 +322,10 @@
       "panelName": "Get a captain ready",
       "steps": [
         {
-          "stepDescription": "Use the three map parts together to repair the map."
+          "description": "Use the three map parts together to repair the map."
         },
         {
-          "stepDescription": "Bring Ned your map and ask him to be your captain.",
+          "description": "Bring Ned your map and ask him to be your captain.",
           "worldpoint": {
             "x": 3098,
             "y": 3257,
@@ -338,7 +338,7 @@
       "panelName": "Slaying Elvarg",
       "steps": [
         {
-          "stepDescription": "Prepare to fight Elvarg (level 83). When you're ready, go board your boat in Port Sarim and talk to Ned.",
+          "description": "Prepare to fight Elvarg (level 83). When you're ready, go board your boat in Port Sarim and talk to Ned.",
           "worldpoint": {
             "x": 3047,
             "y": 3205,
@@ -346,7 +346,7 @@
           }
         },
         {
-          "stepDescription": "Go to the center of the island and go down the hole.",
+          "description": "Go to the center of the island and go down the hole.",
           "worldpoint": {
             "x": 2834,
             "y": 3256,
@@ -354,7 +354,7 @@
           }
         },
         {
-          "stepDescription": "Go all the way south and through the wall to unlock the shortcut to return here if needed.",
+          "description": "Go all the way south and through the wall to unlock the shortcut to return here if needed.",
           "worldpoint": {
             "x": 2836,
             "y": 9600,
@@ -362,7 +362,7 @@
           }
         },
         {
-          "stepDescription": "Return back through the shortcut.",
+          "description": "Return back through the shortcut.",
           "worldpoint": {
             "x": 2836,
             "y": 9600,
@@ -370,7 +370,7 @@
           }
         },
         {
-          "stepDescription": "Enter Elvarg's area and kill her.",
+          "description": "Enter Elvarg's area and kill her.",
           "worldpoint": {
             "x": 2846,
             "y": 9635,
@@ -378,7 +378,7 @@
           }
         },
         {
-          "stepDescription": "Kill Elvarg.",
+          "description": "Kill Elvarg.",
           "worldpoint": {
             "x": 2855,
             "y": 9637,
@@ -391,7 +391,7 @@
       "panelName": "Finish the quest",
       "steps": [
         {
-          "stepDescription": "Talk to Oziach in his house in north western Edgeville to finish the quest.",
+          "description": "Talk to Oziach in his house in north western Edgeville to finish the quest.",
           "worldpoint": {
             "x": 3068,
             "y": 3517,

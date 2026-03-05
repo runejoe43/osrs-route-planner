@@ -1,13 +1,15 @@
 import { create } from "zustand";
 import { useShallow } from "zustand/react/shallow";
-import type { QuestData, QuestStepWithPoint } from "../types/QuestData";
+import type { QuestData } from "../types/QuestData";
+import type { QuestStep } from "../types/Steps";
+import { createQuestStepFromRaw } from "../factories/StepFactory";
 
-/** Flatten all steps from all panels into a single array. Used once when loading. */
-function flattenSteps(quest: QuestData): QuestStepWithPoint[] {
-  const result: QuestStepWithPoint[] = [];
+/** Flatten and hydrate raw steps into QuestSteps at load time. */
+function flattenSteps(quest: QuestData): QuestStep[] {
+  const result: QuestStep[] = [];
   for (const panel of quest.steps) {
-    for (const step of panel.steps) {
-      result.push(step);
+    for (const raw of panel.steps) {
+      result.push(createQuestStepFromRaw(raw));
     }
   }
   return result;
@@ -15,7 +17,7 @@ function flattenSteps(quest: QuestData): QuestStepWithPoint[] {
 
 /** Quest as stored in the store: includes pre-flattened steps for O(1) access. */
 export interface StoredQuest extends QuestData {
-  flatSteps: QuestStepWithPoint[];
+  flatSteps: QuestStep[];
 }
 
 interface QuestState {
@@ -23,6 +25,7 @@ interface QuestState {
   actions: {
     addQuest: (quest: QuestData) => void;
     advanceStep: (questId: string) => void;
+    reset: () => void;
   }
 }
 
@@ -56,6 +59,15 @@ export const useQuestStore = create<QuestState>((set) => ({
           },
         };
       }),
+    reset: () =>
+      set((state) => ({
+        quests: Object.fromEntries(
+          Object.entries(state.quests).map(([id, quest]) => [
+            id,
+            { ...quest, activeStep: 0 },
+          ])
+        ),
+      })),
   }
 }));
 
@@ -67,7 +79,7 @@ export function useQuestIds(): string[] {
 }
 
 /** Returns active step's WorldPoint for a quest. Use shallow when returning object. */
-export function useActiveStep(questId: string): QuestStepWithPoint | undefined {
+export function useActiveStep(questId: string): QuestStep | undefined {
   return useQuestStore(
     useShallow((s) => {
       const q = s.quests[questId];

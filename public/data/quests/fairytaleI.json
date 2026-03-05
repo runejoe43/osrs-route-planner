@@ -12,7 +12,7 @@
       "panelName": "Investigating",
       "steps": [
         {
-          "stepDescription": "Talk to Martin in the Draynor Market.",
+          "description": "Talk to Martin in the Draynor Market.",
           "worldpoint": {
             "x": 3078,
             "y": 3256,
@@ -20,10 +20,10 @@
           }
         },
         {
-          "stepDescription": "Talk to 5 farmers, then return to Martin in Draynor Village. The recommended 5 are:"
+          "description": "Talk to 5 farmers, then return to Martin in Draynor Village. The recommended 5 are:"
         },
         {
-          "stepDescription": "Return to Martin in the Draynor Market.",
+          "description": "Return to Martin in the Draynor Market.",
           "worldpoint": {
             "x": 3078,
             "y": 3256,
@@ -36,7 +36,7 @@
       "panelName": "Unnatural events",
       "steps": [
         {
-          "stepDescription": "Travel to Zanaris.",
+          "description": "Travel to Zanaris.",
           "worldpoint": {
             "x": 3202,
             "y": 3169,
@@ -44,7 +44,7 @@
           }
         },
         {
-          "stepDescription": "Talk to the Fairy Godfather in the Throne Room.",
+          "description": "Talk to the Fairy Godfather in the Throne Room.",
           "worldpoint": {
             "x": 2447,
             "y": 4430,
@@ -52,7 +52,7 @@
           }
         },
         {
-          "stepDescription": "Talk to Fairy Nuff in north west Zanaris.",
+          "description": "Talk to Fairy Nuff in north west Zanaris.",
           "worldpoint": {
             "x": 2386,
             "y": 4472,
@@ -60,7 +60,7 @@
           }
         },
         {
-          "stepDescription": "Talk to Zandar in the Dark Wizards' Tower west of Falador.",
+          "description": "Talk to Zandar in the Dark Wizards' Tower west of Falador.",
           "worldpoint": {
             "x": 2907,
             "y": 3335,
@@ -73,7 +73,7 @@
       "panelName": "Finding a cure",
       "steps": [
         {
-          "stepDescription": "Dig for a skull in the north of Draynor Manor.",
+          "description": "Dig for a skull in the north of Draynor Manor.",
           "worldpoint": {
             "x": 3106,
             "y": 3383,
@@ -81,7 +81,7 @@
           }
         },
         {
-          "stepDescription": "Talk to Malignius Mortifer west of Port Sarim.",
+          "description": "Talk to Malignius Mortifer west of Port Sarim.",
           "worldpoint": {
             "x": 2991,
             "y": 3270,
@@ -94,7 +94,7 @@
       "panelName": "Enchanting secateurs",
       "steps": [
         {
-          "stepDescription": "Get the items Mortifer tells you to get, and enter the Grotto in the south of Mort Myre.",
+          "description": "Get the items Mortifer tells you to get, and enter the Grotto in the south of Mort Myre.",
           "worldpoint": {
             "x": 3440,
             "y": 3337,
@@ -102,7 +102,7 @@
           }
         },
         {
-          "stepDescription": "Talk to the Nature Spirit.",
+          "description": "Talk to the Nature Spirit.",
           "worldpoint": {
             "x": 3441,
             "y": 9738,
@@ -115,7 +115,7 @@
       "panelName": "Defeat the Tanglefoot",
       "steps": [
         {
-          "stepDescription": "Travel to Zanaris, ready to fight the Tanglefoot.",
+          "description": "Travel to Zanaris, ready to fight the Tanglefoot.",
           "worldpoint": {
             "x": 3202,
             "y": 3169,
@@ -123,7 +123,7 @@
           }
         },
         {
-          "stepDescription": "Enter the tanglefoot lair in the south of Zanaris, near the cosmic altar.",
+          "description": "Enter the tanglefoot lair in the south of Zanaris, near the cosmic altar.",
           "worldpoint": {
             "x": 2399,
             "y": 4379,
@@ -131,7 +131,7 @@
           }
         },
         {
-          "stepDescription": "Kill the large Tanglefoot with the Magic Secateurs. You can flinch it on a corner.",
+          "description": "Kill the large Tanglefoot with the Magic Secateurs. You can flinch it on a corner.",
           "worldpoint": {
             "x": 2375,
             "y": 4385,
@@ -139,7 +139,7 @@
           }
         },
         {
-          "stepDescription": "Talk to the Fairy Godfather to finish the quest.",
+          "description": "Talk to the Fairy Godfather to finish the quest.",
           "worldpoint": {
             "x": 2447,
             "y": 4430,

@@ -12,7 +12,7 @@
       "panelName": "Help Doric",
       "steps": [
         {
-          "stepDescription": "Bring Doric north of Falador all the required items. You can mine them all in the Dwarven Mines, or buy them from the Grand Exchange.",
+          "description": "Bring Doric north of Falador all the required items. You can mine them all in the Dwarven Mines, or buy them from the Grand Exchange.",
           "worldpoint": {
             "x": 2951,
             "y": 3451,

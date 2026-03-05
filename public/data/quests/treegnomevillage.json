@@ -12,7 +12,7 @@
       "panelName": "Getting started",
       "steps": [
         {
-          "stepDescription": "Speak to King Bolren in the centre of the Tree Gnome Maze.",
+          "description": "Speak to King Bolren in the centre of the Tree Gnome Maze.",
           "worldpoint": {
             "x": 2541,
             "y": 3170,
@@ -25,7 +25,7 @@
       "panelName": "The three trackers",
       "steps": [
         {
-          "stepDescription": "Speak with Commander Montai, north-east of the maze entrance.",
+          "description": "Speak with Commander Montai, north-east of the maze entrance.",
           "worldpoint": {
             "x": 2523,
             "y": 3208,
@@ -33,7 +33,7 @@
           }
         },
         {
-          "stepDescription": "Speak with Commander Montai again to give him the wood.",
+          "description": "Speak with Commander Montai again to give him the wood.",
           "worldpoint": {
             "x": 2523,
             "y": 3208,
@@ -41,7 +41,7 @@
           }
         },
         {
-          "stepDescription": "Speak with Commander Montai.",
+          "description": "Speak with Commander Montai.",
           "worldpoint": {
             "x": 2523,
             "y": 3208,
@@ -49,7 +49,7 @@
           }
         },
         {
-          "stepDescription": "Talk to the first tracker gnome to the north-west of the battlefield for the height coordinate.",
+          "description": "Talk to the first tracker gnome to the north-west of the battlefield for the height coordinate.",
           "worldpoint": {
             "x": 2501,
             "y": 3261,
@@ -57,7 +57,7 @@
           }
         },
         {
-          "stepDescription": "Talk to the second tracker gnome inside the jail for the y coordinate.",
+          "description": "Talk to the second tracker gnome inside the jail for the y coordinate.",
           "worldpoint": {
             "x": 2524,
             "y": 3257,
@@ -65,7 +65,7 @@
           }
         },
         {
-          "stepDescription": "Talk to the third tracker gnome to the south-west of the jail.",
+          "description": "Talk to the third tracker gnome to the south-west of the jail.",
           "worldpoint": {
             "x": 2497,
             "y": 3234,
@@ -73,7 +73,7 @@
           }
         },
         {
-          "stepDescription": "Fire the ballista at the tower.",
+          "description": "Fire the ballista at the tower.",
           "worldpoint": {
             "x": 2509,
             "y": 3211,
@@ -86,7 +86,7 @@
       "panelName": "Retrieving the orbs",
       "steps": [
         {
-          "stepDescription": "Enter the tower by the Crumbled wall and climb the ladder to retrieve the first orb from chest.",
+          "description": "Enter the tower by the Crumbled wall and climb the ladder to retrieve the first orb from chest.",
           "worldpoint": {
             "x": 2506,
             "y": 3259,
@@ -94,7 +94,7 @@
           }
         },
         {
-          "stepDescription": "Return the Orb of protection to King Bolren in the centre of the Tree Gnome Maze.",
+          "description": "Return the Orb of protection to King Bolren in the centre of the Tree Gnome Maze.",
           "worldpoint": {
             "x": 2541,
             "y": 3170,
@@ -102,7 +102,7 @@
           }
         },
         {
-          "stepDescription": "Talk to the Khazard warlord, south west of West Ardougne, ready to fight him.",
+          "description": "Talk to the Khazard warlord, south west of West Ardougne, ready to fight him.",
           "worldpoint": {
             "x": 2456,
             "y": 3301,
@@ -110,7 +110,7 @@
           }
         },
         {
-          "stepDescription": "Defeat the Khazard warlord and retrieve orbs.",
+          "description": "Defeat the Khazard warlord and retrieve orbs.",
           "worldpoint": {
             "x": 2456,
             "y": 3301,
@@ -118,7 +118,7 @@
           }
         },
         {
-          "stepDescription": "Return the Orbs of protection to King Bolren in the centre of the Tree Gnome Maze.",
+          "description": "Return the Orbs of protection to King Bolren in the centre of the Tree Gnome Maze.",
           "worldpoint": {
             "x": 2541,
             "y": 3170,
