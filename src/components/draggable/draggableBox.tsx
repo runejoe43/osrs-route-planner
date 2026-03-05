@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { ActionIcon, Box, Collapse, Group, Paper, Text } from "@mantine/core";
+import { ActionIcon, Box, CloseButton, Collapse, Group, Paper, Text } from "@mantine/core";
 import { IconChevronDown, IconChevronUp } from "@tabler/icons-react";
 // import { IconGripVertical } from "@tabler/icons-react";
 import useDraggable from "../../hooks/useDraggable";
@@ -9,6 +9,7 @@ interface DraggableBoxProps {
   children: React.ReactNode;
   initialPosition?: { x: number; y: number };
   width?: number;
+  onClose?: () => void;
 }
 
 export default function DraggableBox({
@@ -16,6 +17,7 @@ export default function DraggableBox({
   children,
   initialPosition = { x: 100, y: 100 },
   width = 320,
+  onClose,
 }: DraggableBoxProps) {
   const { position, onMouseDown } = useDraggable(initialPosition);
   const [collapsed, setCollapsed] = useState(false);
@@ -56,15 +58,19 @@ export default function DraggableBox({
             {title}
           </Text>
         )}
-        <ActionIcon
-          variant="subtle"
-          size="xs"
-          onMouseDown={(e) => e.stopPropagation()}
-          onClick={() => setCollapsed((c) => !c)}
-          aria-label={collapsed ? "Expand" : "Collapse"}
-        >
-          {collapsed ? <IconChevronDown size={14} /> : <IconChevronUp size={14} />}
-        </ActionIcon>
+        <Group gap={4} onMouseDown={(e) => e.stopPropagation()}>
+          <ActionIcon
+            variant="subtle"
+            size="xs"
+            onClick={() => setCollapsed((c) => !c)}
+            aria-label={collapsed ? "Expand" : "Collapse"}
+          >
+            {collapsed ? <IconChevronDown size={14} /> : <IconChevronUp size={14} />}
+          </ActionIcon>
+          {onClose && (
+            <CloseButton size="xs" onClick={onClose} aria-label="Close" />
+          )}
+        </Group>
       </Group>
 
       {/* Content */}

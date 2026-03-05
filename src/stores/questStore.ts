@@ -22,16 +22,19 @@ export interface StoredQuest extends QuestData {
 
 interface QuestState {
   quests: Record<string, StoredQuest>;
+  selectedQuestId: string | null;
   actions: {
     addQuest: (quest: QuestData) => void;
     advanceStep: (questId: string) => void;
     setActiveStep: (questId: string, index: number) => void;
+    selectQuest: (id: string | null) => void;
     reset: () => void;
   }
 }
 
 export const useQuestStore = create<QuestState>((set) => ({
   quests: {},
+  selectedQuestId: null,
   actions: {
     addQuest: (quest) =>
       set((state) => {
@@ -71,6 +74,7 @@ export const useQuestStore = create<QuestState>((set) => ({
           },
         };
       }),
+    selectQuest: (id) => set({ selectedQuestId: id }),
     reset: () =>
       set((state) => ({
         quests: Object.fromEntries(
@@ -88,6 +92,16 @@ export const useQuestActions = () => useQuestStore(state => state.actions);
 /** Returns quest IDs. Use shallow to avoid over-subscription. */
 export function useQuestIds(): string[] {
   return useQuestStore(useShallow((s) => Object.keys(s.quests)));
+}
+
+export function useSelectedQuestId(): string | null {
+  return useQuestStore((s) => s.selectedQuestId);
+}
+
+export function useSelectedQuest(): StoredQuest | undefined {
+  return useQuestStore(
+    useShallow((s) => (s.selectedQuestId ? s.quests[s.selectedQuestId] : undefined))
+  );
 }
 
 /** Returns active step's WorldPoint for a quest. Use shallow when returning object. */
