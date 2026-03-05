@@ -2,12 +2,14 @@ import { ActionIcon, Button, Group, ScrollArea, Stack, Text } from "@mantine/cor
 import { IconTrashFilled } from "@tabler/icons-react";
 import { useRoute, useRouteActions } from "../../stores/routeStore";
 import { useQuestActions } from "../../stores/questStore";
+import { useDeleteStep } from "../../hooks/useDeleteStep";
 import DraggableBox from "./draggableBox";
 
 export default function RouteViewer() {
   const route = useRoute();
-  const { deleteStep, reset: resetRoute } = useRouteActions();
+  const { reset: resetRoute } = useRouteActions();
   const { reset: resetQuests } = useQuestActions();
+  const deleteStep = useDeleteStep();
 
   const handleReset = () => {
     resetRoute();

@@ -12,10 +12,11 @@ export function createQuestStep(data: Omit<QuestStep, 'kind' | 'xpGained'>): Que
  * Convert a RawStep (from JSON) into a full QuestStep.
  * ID is deterministically generated from the description using UUID v5.
  */
-export function createQuestStepFromRaw(raw: RawStep): QuestStep {
+export function createQuestStepFromRaw(raw: RawStep, questId: string): QuestStep {
   const id = uuidv5(raw.description, STEP_NAMESPACE);
   return {
     id,
+    questId,
     description: raw.description,
     worldpoint: raw.worldpoint,
     kind: "quest",

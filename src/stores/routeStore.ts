@@ -6,7 +6,7 @@ interface RouteState {
   route: Step[];
   actions: {
     appendRoute: (step: Step) => void;
-    deleteStep: (id: string) => void;
+    deleteSteps: (ids: string[]) => void;
     reset: () => void;
   };
 }
@@ -16,8 +16,8 @@ export const useRouteStore = create<RouteState>((set) => ({
   actions: {
     appendRoute: (step) =>
       set((state) => ({ route: [...state.route, step] })),
-    deleteStep: (id) =>
-      set((state) => ({ route: state.route.filter((s) => s.id !== id) })),
+    deleteSteps: (ids) =>
+      set((state) => ({ route: state.route.filter((s) => !ids.includes(s.id)) })),
     reset: () => set({ route: [] }),
   },
 }));

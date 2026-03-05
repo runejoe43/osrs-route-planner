@@ -9,7 +9,7 @@ function flattenSteps(quest: QuestData): QuestStep[] {
   const result: QuestStep[] = [];
   for (const panel of quest.steps) {
     for (const raw of panel.steps) {
-      result.push(createQuestStepFromRaw(raw));
+      result.push(createQuestStepFromRaw(raw, quest.name));
     }
   }
   return result;
@@ -25,6 +25,7 @@ interface QuestState {
   actions: {
     addQuest: (quest: QuestData) => void;
     advanceStep: (questId: string) => void;
+    setActiveStep: (questId: string, index: number) => void;
     reset: () => void;
   }
 }
@@ -56,6 +57,17 @@ export const useQuestStore = create<QuestState>((set) => ({
           quests: {
             ...state.quests,
             [questId]: { ...quest, activeStep: next },
+          },
+        };
+      }),
+    setActiveStep: (questId, index) =>
+      set((state) => {
+        const quest = state.quests[questId];
+        if (!quest) return state;
+        return {
+          quests: {
+            ...state.quests,
+            [questId]: { ...quest, activeStep: index },
           },
         };
       }),

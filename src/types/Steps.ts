@@ -14,6 +14,7 @@ export interface BaseStep {
 
 export interface QuestStep extends BaseStep {
   kind: "quest";
+  questId: string;
   worldpoint?: WorldPoint;
 }
 
