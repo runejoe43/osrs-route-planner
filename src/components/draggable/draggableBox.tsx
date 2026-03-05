@@ -1,11 +1,12 @@
 import { useState } from "react";
-import { ActionIcon, Box, CloseButton, Collapse, Group, Paper, Text } from "@mantine/core";
-import { IconChevronDown, IconChevronUp } from "@tabler/icons-react";
+import { ActionIcon, Box, CloseButton, Collapse, Group, Paper, Text, Tooltip } from "@mantine/core";
+import { IconChevronDown, IconChevronUp, IconInfoCircleFilled } from "@tabler/icons-react";
 // import { IconGripVertical } from "@tabler/icons-react";
 import useDraggable from "../../hooks/useDraggable";
 
 interface DraggableBoxProps {
   title?: string;
+  info?: string;
   children: React.ReactNode;
   initialPosition?: { x: number; y: number };
   width?: number;
@@ -14,6 +15,7 @@ interface DraggableBoxProps {
 
 export default function DraggableBox({
   title,
+  info,
   children,
   initialPosition = { x: 100, y: 100 },
   width = 320,
@@ -52,13 +54,19 @@ export default function DraggableBox({
             : "var(--mantine-radius-default) var(--mantine-radius-default) 0 0",
         }}
       >
-        {/* <IconGripVertical size={14} color="var(--mantine-color-dimmed)" /> */}
-        {title && (
-          <Text size="sm" fw={500}>
-            {title}
-          </Text>
-        )}
+        <Group gap={4} style={{ flex: 1, minWidth: 0 }}>
+          {title && (
+            <Text size="sm" fw={500} style={{ flex: 1, minWidth: 0 }}>
+              {title}
+            </Text>
+          )}
+        </Group>
         <Group gap={4} onMouseDown={(e) => e.stopPropagation()}>
+          {info && (
+            <Tooltip label={info} multiline w={260} withArrow position="bottom-start">
+              <IconInfoCircleFilled size={14} />
+            </Tooltip>
+          )}
           <ActionIcon
             variant="subtle"
             size="xs"

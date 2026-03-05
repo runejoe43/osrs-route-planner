@@ -297,3 +297,10 @@ async function fetchQuestDetails(questName: string) {
 The `template.json()` call returns a flat key/value object corresponding to the named parameters in the wikitext template. Field names match what you see in the raw wikitext (`|difficulty = Intermediate`, etc.), so cross-reference the actual wiki page source if a field isn't appearing.
 
 **Caveats.** `wtf_wikipedia` is a heuristic parser — it handles the common cases well but can trip on heavily nested templates or unusual formatting. The `{{QuestDetails}}` infobox is fairly regular, so coverage should be good. If a field parses as `undefined`, fall back gracefully in the UI rather than crashing. For fields that contain nested wikitext (like the requirements list, which may contain links), call `.text()` on the parsed node to get a plain-text representation.
+
+## CIP List
+1. Last step in a quest won't complete, likely due to no step to update active step to
+2. MapAutoPan could potentially be re-rendering too many times
+3. ~~Some quests aren't meant to be sequential, e.g. Dragon Slayer I you can get map pieces or the shield in any order, forcing users into a specific order limits flexibility (any way to tell this via quest helper?)~~
+   1. This was addressed by making all panels doable in parallel
+4. info hover in draggableBox doesn't work, likely blocked by useDraggable
