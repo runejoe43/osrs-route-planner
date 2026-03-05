@@ -2,8 +2,7 @@ import '../style/App.css'
 import { Box } from '@mantine/core';
 import { useEffect } from 'react';
 import OSRSMap from '../components/map/OSRSMap';
-import RouteViewer from '../components/draggable/RouteViewer';
-import QuestViewer from '../components/draggable/QuestViewer';
+import OverlayLayer from '../components/overlay/OverlayLayer';
 import { useQuestActions } from '../stores/questStore';
 import type { QuestData } from '../types/QuestData';
 
@@ -28,8 +27,7 @@ function App() {
   return (
     <Box h="100%" w="100%">
       <OSRSMap />
-      <RouteViewer />
-      <QuestViewer />
+      <OverlayLayer />
     </Box>
   );
 }

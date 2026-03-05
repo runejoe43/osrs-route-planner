@@ -1,4 +1,4 @@
-import { Paper, Radio, Stack, Text } from "@mantine/core";
+import { Paper, Radio, SimpleGrid, Text } from "@mantine/core";
 import {
   useMapVisibilityActions,
   useShowMapIcons,
@@ -18,37 +18,39 @@ export default function MapLayerToggles() {
       className="map-layer-toggles"
       withBorder
     >
-      <Stack gap="sm">
-        <Stack gap={4}>
-          <Text size="sm" fw={600}>
-            Map Labels
-          </Text>
-          <Radio.Group
-            value={showMapLabels ? "on" : "off"}
-            onChange={(value) => setShowMapLabels(value === "on")}
-          >
-            <Stack gap={4}>
-              <Radio value="on" label="Show" />
-              <Radio value="off" label="Hide" />
-            </Stack>
-          </Radio.Group>
-        </Stack>
+      <SimpleGrid cols={3} spacing={4} verticalSpacing={4}>
+        <Text size="sm" fw={600}>
+          Map Labels
+        </Text>
+        <Radio
+          value="on"
+          label="Show"
+          checked={showMapLabels}
+          onChange={() => setShowMapLabels(true)}
+        />
+        <Radio
+          value="off"
+          label="Hide"
+          checked={!showMapLabels}
+          onChange={() => setShowMapLabels(false)}
+        />
 
-        <Stack gap={4}>
-          <Text size="sm" fw={600}>
-            Map Icons
-          </Text>
-          <Radio.Group
-            value={showMapIcons ? "on" : "off"}
-            onChange={(value) => setShowMapIcons(value === "on")}
-          >
-            <Stack gap={4}>
-              <Radio value="on" label="Show" />
-              <Radio value="off" label="Hide" />
-            </Stack>
-          </Radio.Group>
-        </Stack>
-      </Stack>
+        <Text size="sm" fw={600}>
+          Map Icons
+        </Text>
+        <Radio
+          value="on"
+          label="Show"
+          checked={showMapIcons}
+          onChange={() => setShowMapIcons(true)}
+        />
+        <Radio
+          value="off"
+          label="Hide"
+          checked={!showMapIcons}
+          onChange={() => setShowMapIcons(false)}
+        />
+      </SimpleGrid>
     </Paper>
   );
 }

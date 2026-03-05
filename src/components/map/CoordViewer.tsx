@@ -1,4 +1,4 @@
-import { Paper, Stack, Text } from "@mantine/core";
+import { Group, Paper, Text } from "@mantine/core";
 import { useCoords, useCoordsStoreActions } from "../../stores/coordStore";
 import { useMapEvents } from "react-leaflet";
 
@@ -23,11 +23,11 @@ export default function CoordViewer() {
       className="coord-viewer"
       withBorder
     >
-      <Stack>
+      <Group>
         <Text>X: {coords.x}</Text>
         <Text>Y: {coords.y}</Text>
         <Text>Plane: {coords.plane}</Text>
-      </Stack>
+      </Group>
     </Paper>
   );
 }

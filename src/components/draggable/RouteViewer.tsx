@@ -17,7 +17,7 @@ export default function RouteViewer() {
   };
 
   return (
-    <DraggableBox title="Route" initialPosition={{ x: 20, y: 100 }}>
+    <DraggableBox title="Route" initialPosition={{ x: 12, y: 100 }}>
       <Stack gap="xs">
         <Button variant="light" color="red" size="xs" onClick={handleReset}>
           Reset

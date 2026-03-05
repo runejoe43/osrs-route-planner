@@ -126,7 +126,7 @@ export default function QuestViewer() {
   };
 
   return (
-    <DraggableBox title={quest.name} initialPosition={{ x: 360, y: 100 }} onClose={() => selectQuest(null)}>
+    <DraggableBox title={quest.name} initialPosition={{ x: window.innerWidth - 320 - 12, y: 12 }} onClose={() => selectQuest(null)}>
       <ScrollArea.Autosize mah={1000} offsetScrollbars>
         <Stack gap="xs">
           {quest.steps.map((panel, panelIdx) => renderPanel(panel, panelIdx))}

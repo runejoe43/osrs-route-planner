@@ -6,8 +6,8 @@ import L, { LatLngBounds } from "leaflet";
 import WorldMapLabels from "./WorldMapLabels";
 import WorldMapIcons from "./WorldMapIcons";
 import QuestPins from "./QuestPins";
-import MapLayerToggles from "./MapLayerToggles";
 import CoordViewer from "./CoordViewer";
+import MapAutoPan from "./MapAutoPan";
 
 export default function OSRSMap() {
   const bounds = new LatLngBounds([0, 0], [-1428, 405]);
@@ -44,8 +44,7 @@ export default function OSRSMap() {
         <WorldMapLabels />
 
         <CoordViewer />
-
-        <MapLayerToggles />
+        <MapAutoPan />
       </MapContainer>
     </Box>
   );
