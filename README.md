@@ -304,3 +304,13 @@ The `template.json()` call returns a flat key/value object corresponding to the 
 3. ~~Some quests aren't meant to be sequential, e.g. Dragon Slayer I you can get map pieces or the shield in any order, forcing users into a specific order limits flexibility (any way to tell this via quest helper?)~~
    1. This was addressed by making all panels doable in parallel
 4. info hover in draggableBox doesn't work, likely blocked by useDraggable
+
+## Moving business logic into hooks and out of components
+* draggable/QuestViewer.tsx
+  * PARALLEL_PANELS config should be at business logic level
+  * It may be hard to move all logic into a hook, but we could have a usePanelRender hook that outputs a set of functions based on parallel/sequential step execution
+  * Then component just calls the returned functions without knowledge of if it is parallel or not
+* hooks/useDeleteStep.ts
+  * not a component but I notice the hook uses useQuestStore(s => s.quests) but only needs a single quest, should update store actions to give a single quest provider so we don't need to over subscribe
+* overlay/
+  * move the overlay components into this dir
