@@ -128,6 +128,7 @@ export default function QuestViewer() {
           w={260}
           withArrow
           position="bottom"
+          zIndex={1001}
         >
           <Group gap="xs" align="center" mb="xs" wrap="nowrap">
             <Text size="xs" c={parallelPanels && !hasStepsInRoute ? undefined : "dimmed"}>Parallel steps</Text>

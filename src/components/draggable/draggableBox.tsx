@@ -63,7 +63,7 @@ export default function DraggableBox({
         </Group>
         <Group gap={4} onMouseDown={(e) => e.stopPropagation()}>
           {info && (
-            <Tooltip label={info} multiline w={260} withArrow position="bottom-start">
+            <Tooltip label={info} multiline w={260} withArrow position="bottom-start" zIndex={1001}>
               <IconInfoCircleFilled size={14} />
             </Tooltip>
           )}
