@@ -1,10 +1,19 @@
 # OSRS Route Builder
 
-## App Description
+## Overview
 
-A web app that renders the Old School RuneScape world map and allows users to plan routes through the game. Users can place pins tied to the native OSRS coordinate system, attach NPCs, objects, and items to each step, and compose multi-step routes or quest walkthroughs. The app draws on existing quest step data from Quest Helper including step descriptions and coordinates as well as diary steps.
+### Objective
 
-The end goal is a shareable, exportable route that can be imported into RuneLite — either directly into the Quest Helper plugin or a complementary plugin — to guide a player through their planned route in-game with on-screen arrows and tile highlights.
+A web app that renders the OSRS world map and surfaces various in-game activities — quests, achievement diaries, and other tasks — directly on the map. Users can build a personalised route through those activities that can then be exported and imported into RuneLite for visual in-game guidance.
+
+### High Level Goals
+
+1. **Show OSRS map via Leaflet** with scrolling, world map icons, and labels ✅
+2. **Extract quest steps and coordinates** from `Quest Helper` and render them on the map 🔄
+3. **Extract or build Diary coordinates** and render them on the map
+4. **Add an interface for other steps** — bosses, combat achievements, clues, and collection log entries
+5. **Add a route builder** where all steps can be added, reordered, and exported
+6. **RuneLite integration** *(stretch goal)*
 
 ---
 
@@ -17,8 +26,6 @@ The end goal is a shareable, exportable route that can be imported into RuneLite
 | WorldPoint coordinate math                                                                   | Jagex native tile grid                                                                                                      | Pure arithmetic in JS                                                                                                            | Linear fitting from five reference points (least-squares calibration); reference points are listed in the table below. Same system used by RuneLite, Explv's Map, and Quest Helper |
 | NPC, Object, and Item IDs + names                                                            | OSRS Wiki [NPC_IDs](https://oldschool.runescape.wiki/w/NPC_IDs) and [Item_IDs](https://oldschool.runescape.wiki/w/Item_IDs) | Build-time script fetches wiki pages via MediaWiki API, parses the main table on each page, writes to `/public/data/`            | Name taken from first column (split on `#`, use first segment); only numeric IDs kept; output is `npcs-summary.json` and `items-summary.json`. Object IDs out of scope for now.    |
 | Quest metadata + step coordinates (requirements, rewards, panels, WorldPoints, instructions) | [Quest Helper](https://github.com/Zoinkwiz/quest-helper) Java source                                                        | Build-time script `scripts/parse-quest-helper.ts` fetches raw Java from GitHub, parses methods, writes to `/public/data/quests/` | Approved quests listed in `scripts/approved-quests.json`; one JSON file per quest (`<slug>.json`). Run `npm run build:quests`.                                                     |
-| Grand Exchange pricing + general game data                                                   | OSRS Wiki Weird Gloop API                                                                                                   | Public REST API                                                                                                                  | Structured and clean; useful for item enrichment                                                                                                                                   |
-| Player quest completion status                                                               | WikiSync API                                                                                                                | **Off limits** for third-party use                                                                                               | Wiki internal use only — do not use                                                                                                                                                |
 
 
 ### Coordinate calibration reference points
@@ -55,38 +62,6 @@ The end goal is a shareable, exportable route that can be imported into RuneLite
 
 - `**file-saver`** or native `Blob` API — for exporting route files
 - URL state encoding (base64 or query params) — for shareable route links without a backend
-
----
-
-## Features
-
-### Interactive OSRS Map
-
-Display the full OSRS world map in the browser using Leaflet and community map tiles. Support plane switching (surface, underground levels) and show the current tile coordinate (`WorldPoint x, y, plane`) as the user hovers.
-
-### Coordinate-Pinned Steps
-
-Allow users to click the map to place a step pin. Each pin is stored with its native OSRS `WorldPoint` and can be annotated with a step type (Talk To, Use Object, Walk To, etc.), a text instruction, and an optional NPC, object, or item attachment.
-
-### NPC / Object / Item Attachment
-
-Searchable dropdowns populated from the JSON in `/public/data/` (generated from OSRS Wiki NPC_IDs and Item_IDs tables) let users attach a named, ID-backed entity to each step — matching exactly how Quest Helper's `NpcStep` and `ObjectStep` reference `NpcID` and `ObjectID` constants.
-
-### Pre-loaded Quest Steps
-
-Known quests (e.g. Waterfall Quest) can be pre-loaded as pin sequences extracted from Quest Helper's source. These serve as read-only reference routes or starting points for customisation.
-
-### Quest Metadata Display
-
-For any official quest, display the Wiki infobox metadata (requirements, difficulty, length, rewards) alongside the route steps, fetched live from the OSRS Wiki MediaWiki API.
-
-### Route Export
-
-Export a completed route as a structured JSON file whose schema mirrors what Quest Helper expects — `WorldPoint`, step type, entity ID, and instruction text per step. This file could be imported into a companion RuneLite plugin or used as a Quest Helper data source.
-
-### Route Sharing via URL
-
-Encode the current route into the URL (compressed query param or hash) so users can share a link that restores the exact route state without requiring a backend or user accounts.
 
 ---
 
@@ -147,156 +122,91 @@ Encode the current route into the URL (compressed query param or hash) so users 
 
 ---
 
-## Design Decisions
-
-### Backend vs Single-Page App
-
-A backend is not needed for the initial version. All data sources are either static files (NPC/item JSON in `/public/data/` from the wiki ID script, pre-extracted quest step JSON) that can be bundled or served from the `/public` directory, or public APIs (OSRS Wiki) that can be called directly from the browser. Zustand handles all runtime state, and route export/sharing works entirely client-side via file download and URL encoding.
-
-The case for adding a backend later would be route persistence (saving named routes to a user account), community sharing (a gallery of public routes), or if the RuneLite GitHub source or your static data becomes unavailable and you want to self-host the entity ID data behind your own API. For now, a fully static SPA deployed to GitHub Pages or Vercel covers all the described features without any server infrastructure.
-
-The one CORS caveat: the OSRS Wiki MediaWiki API must be called with an appropriate `User-Agent` header per their guidelines. This is possible from the browser but if they ever restrict cross-origin requests, a lightweight serverless function (Vercel Edge Function or Cloudflare Worker) acting as a proxy would be the minimal addition needed — not a full backend.
-
----
-
 ## Tool Usage
 
-### OSRS Wiki NPC and Item ID tables
+### OSRS Wiki NPC and Item ID tables (`scripts/parse-wiki-ids.ts`)
 
-A standalone TypeScript script fetches the OSRS Wiki [NPC_IDs](https://oldschool.runescape.wiki/w/NPC_IDs) and [Item_IDs](https://oldschool.runescape.wiki/w/Item_IDs) pages and writes name-to-IDs JSON to `public/data/`.
+A standalone TypeScript script fetches the OSRS Wiki [NPC_IDs](https://oldschool.runescape.wiki/w/NPC_IDs) and [Item_IDs](https://oldschool.runescape.wiki/w/Item_IDs) pages and writes name-to-IDs JSON to `public/data/`. It runs at build time and is not shipped to the browser.
 
-**How the data is obtained.** The script calls the MediaWiki API (`action=parse&page=<PAGE>&prop=text&format=json`) for each page, then parses the main HTML table on the page.
+**How the data is obtained.** The script calls the MediaWiki API (`action=parse&page=<PAGE>&prop=text&format=json`) for each page, which returns the fully rendered HTML of the page.
 
-**How it's parsed.** One reusable parser handles both pages. Each table row has a name (first column) and one or more IDs (second column). The **name** is the first column's text **split on `#`**, using only `**split("#")[0]**` (the part after `#` is ignored so variants like "Name#Banker" and "Name#Pirate" merge under "Name"). **IDs** are taken from links in the second column; **only numeric IDs** are kept (e.g. `hist6479`, `interface8036` are ignored). A name is only added to the output when at least one numeric ID is found for it; rows with no numeric IDs do not create a new key, and invalid IDs on a row are not added to an existing key's list. Rows with the same display name are merged into one key with an array of all numeric IDs.
+**How it's parsed.** [Cheerio](https://cheerio.js.org/) (a server-side jQuery-like HTML parser, devDependency only) loads the rendered HTML and selects the first `table.wikitable`. For each `tbody tr` row:
+- **Name** — column 0 text, split on `#` and trimmed (so `Name#Variant` becomes `Name`).
+- **IDs** — extracted from `?id=N` query params on `<a>` links in column 1; only purely numeric values are kept (`hist6479`, `interface8036`, etc. are discarded).
+- Rows with an empty name or no numeric IDs are skipped. Rows sharing a display name are merged into a single key with deduplicated IDs.
 
-**Output format.** JSON equivalent to `Map<string, number[]>`: keys = display names (strings), values = arrays of numeric IDs. Written to `public/data/npcs-summary.json` and `public/data/items-summary.json`.
+**Output format.** `Record<string, number[]>` — display name → array of numeric IDs. Written (compact, no indentation) to `public/data/npcs-summary.json` and `public/data/items-summary.json`.
 
 **How to run.** `npm run build:data` or `npx tsx scripts/parse-wiki-ids.ts`
 
-**User-Agent.** All requests to the OSRS Wiki API must send a valid User-Agent header; the script sets this (see `scripts/parse-wiki-ids.ts`).
+**User-Agent.** All OSRS Wiki API requests include a `User-Agent` header as required by their usage guidelines.
 
 ---
 
-### Leaflet.js and react-leaflet
+### Quest Helper parser (`scripts/parse-quest-helper.ts`)
 
-Use Leaflet with `CRS.Simple` so the map is a flat tile grid with no geographic projection. Tiles are served from **JoeGandy/RSMap** at `https://joegandy.github.io/RSMap/tiles/{plane}/{z}/{x}/{y}.png`. Leaflet requests tiles automatically via the `TileLayer` URL template as the viewport changes.
+A build-time Node script that fetches raw Java source from the [zoinkwiz/quest-helper](https://github.com/Zoinkwiz/quest-helper) repo and extracts quest steps and coordinates into JSON. Run with `npm run build:quests`.
 
-**React component setup** (see `src/map/OSRSMap.tsx`)
+**Input.** `scripts/approved-quests.json` — a `Record<string, boolean>` allowlist. Only quests set to `true` are processed.
 
-- **MapContainer:** Use `crs={L.CRS.Simple}`, `bounds={new LatLngBounds([0, 0], [-1428, 405])}`, `center={[-1173, 273]}`, `zoom={4}`, `minZoom={1}`, `maxZoom={6}`, and `maxBoundsViscosity={1.0}` so the map matches the RSMap tile extent. Optionally set `zoomControl={false}` and `attributionControl={false}`.
-- **TileLayer:** Set `url="https://joegandy.github.io/RSMap/tiles/0/{z}/{x}/{y}.png"` (use `{plane}` in the path for plane switching). Use `tileSize={256}`, `noWrap={true}`, and `tms={true}` (y-axis flip for tile row indexing). Key the layer by plane (e.g. `key="plane-0"`) so react-leaflet remounts when the plane changes.
-- **Map events:** Use the `useMapEvents` hook (e.g. `useMapEvents({ click(e) { ... } })`) to get `e.latlng` (lat, lng) on click and pass it to `leafletToWorldPoint(lat, lng, plane)` from `src/util/Coordinates.tsx` to obtain the OSRS `WorldPoint` and log or store it.
+**Source fetching.** Files are pulled from `raw.githubusercontent.com` using two naming conventions: `camelCaseFolder/PascalCaseFile.java`.
 
-**Coordinate conversion** (see `src/util/Coordinates.tsx`)
+**Parsing pipeline** (pure string/regex — no Java AST):
+1. **`stripCommentsAndStrings()`** — blanks out `//` and `/* */` comments and string literal contents while preserving character indices.
+2. **`extractMethodBody()`** — finds a target method by regex and extracts its body using brace-depth tracking.
+3. **`parseAllSteps()`** — scans `setupSteps()` and `loadQuestSteps()` for `WorldPoint` variable declarations and step constructors (`NpcStep`, `ObjectStep`, `ConditionalStep`, `DetailedQuestStep`, etc.), then resolves descriptions and WorldPoints per step type. Steps without a direct WorldPoint walk their `addStep()` chains to inherit one from a sub-step.
+4. **`parsePanels()`** — reads `getPanels()` for `PanelDetails` calls and resolves their step variable lists.
+5. **`buildPanels()` / `toQuestData()`** — assembles the final `QuestData` shape with panels → steps.
 
-Conversion between Leaflet (lat, lng) and OSRS WorldPoint (x, y, plane) uses a **five-point least-squares linear fit**: the `CAL_POINTS` array holds Leaflet coordinates and expected WorldPoint for each calibration POI; `linearFit()` computes scale and offset per axis at module load; `leafletToWorldPoint(lat, lng, plane)` and `worldPointToLeaflet(wp)` apply these. Map bounds for RSMap are lng [0, 405], lat [-1428, 0]. If the tile source or bounds change, update `CAL_POINTS` in `Coordinates.tsx` and re-verify using the coordinate calibration reference points table in the Data Sources section; you can also compare clicked WorldPoints to Explv's map (explv.github.io) for the same locations.
-
----
-
-### Zustand — Granular Store Subscriptions
-
-Zustand stores are plain JavaScript objects. By default, any component that calls `useStore()` re-renders whenever any part of the store changes — which is fine for tiny stores but becomes a problem when the reference data slice holds tens of thousands of NPC/object records and the map is constantly updating hover state.
-
-**The core pattern: always pass a selector.** Never call `useStore()` without a selector. Every component should subscribe to exactly the fields it reads:
-
-```ts
-// Bad — re-renders on any store change
-const store = useRouteStore();
-
-// Good — re-renders only when `steps` changes
-const steps = useRouteStore(s => s.steps);
-
-// Good — re-renders only when the active step index changes
-const activeStepIndex = useRouteStore(s => s.activeStepIndex);
-```
-
-**Derived/computed values.** If a component needs a value that is computed from store state (e.g. the currently active step object), compute it inside the selector rather than in the component body. Zustand's selector runs on every store update but only triggers a re-render if the returned value changed (by reference equality):
-
-```ts
-const activeStep = useRouteStore(s => s.steps[s.activeStepIndex] ?? null);
-```
-
-**Shallow equality for object and array selectors.** Reference equality breaks for selectors that return a new object or array literal on every call, even if the contents haven't changed. Use Zustand's `shallow` comparator for these cases:
-
-```ts
-import { shallow } from 'zustand/shallow';
-
-// Without shallow, this re-renders every time because `{}` is a new reference each call
-const { plane, viewport } = useMapStore(
-  s => ({ plane: s.plane, viewport: s.viewport }),
-  shallow
-);
-```
-
-**Store slices.** For this app, define three separate stores — `useMapStore`, `useRouteStore`, and `useDataStore` — rather than one monolithic store. This means a component that only cares about the current plane never has to be concerned with what `useDataStore` is doing, and the slices can be reasoned about and tested independently. Each store is created with the standard `create()` call:
-
-```ts
-// stores/mapStore.ts
-import { create } from 'zustand';
-
-interface MapState {
-  plane: number;
-  setPlane: (plane: number) => void;
-}
-
-export const useMapStore = create<MapState>(set => ({
-  plane: 0,
-  setPlane: plane => set({ plane }),
-}));
-```
-
-**The reference data store and large payloads.** The NPC, object, and item tables (potentially 50k+ entries combined) should live in `useDataStore` behind a `Map<number, EntityRef>` keyed by ID. Components doing entity search should never subscribe to the entire map — instead, expose a `getById` action or a `searchByName` utility that operates on the store's data without subscribing the calling component to the store's full contents. For the search autocomplete, run the search in a `useMemo` keyed on the query string rather than re-subscribing the component to the raw data map.
+**Output.** One JSON file per quest in `public/data/quests/` (e.g. `treeGnomeVillage.json`) shaped as `QuestData` with `panels[].steps[]` each containing `description` and an optional `worldpoint`.
 
 ---
 
-### wtf_wikipedia
+### Leaflet.js and react-leaflet (`src/components/map/OSRSMap.tsx`)
 
-`wtf_wikipedia` is a wikitext parser that runs in the browser. The OSRS Wiki MediaWiki API returns raw wikitext when you fetch a page's section 0, and the `{{QuestDetails}}` infobox is embedded in that wikitext as a template. `wtf_wikipedia` parses the wikitext into a structured document object, from which you can extract template parameters by name.
+Leaflet is used with `CRS.Simple` — a flat tile grid with no geographic projection. Tiles are served from **JoeGandy/RSMap** at `https://joegandy.github.io/RSMap/tiles/0/{z}/{x}/{y}.png`.
 
-**Installation.**
+**MapContainer configuration:**
+- `crs={L.CRS.Simple}`, `bounds={new LatLngBounds([0, 0], [-1428, 405])}`, `center={[-1173, 273]}`
+- `zoom={4}`, `minZoom={1}`, `maxZoom={6}`, `maxBoundsViscosity={1.0}`
+- `zoomControl={false}`, `attributionControl={false}`
 
-```bash
-npm install wtf_wikipedia
-```
+**TileLayer:** `tileSize={256}`, `noWrap={true}`, `tms={true}` (Y-axis flip for TMS row indexing). The plane is currently hardcoded to `0` in the tile URL path; plane switching is not yet implemented.
 
-**Fetching and parsing a quest infobox.** The MediaWiki API endpoint for a section's wikitext is:
+**Map events** are handled in dedicated child components using react-leaflet hooks — never in `OSRSMap` itself:
+- `useMapEvents({ mousemove })` in `CoordViewer` — converts `e.latlng` to a `WorldPoint` via `leafletToWorldPoint` and writes it to `coordStore`.
+- `eventHandlers={{ click }}` on individual `<Marker>` elements (e.g. `QuestPin`) — handles per-pin interactions.
+- `useMap()` in `WorldMapIcons`, `WorldMapLabels`, and `MapAutoPan` — listens to `zoomend` or calls `map.panTo(...)`.
 
-```
-https://oldschool.runescape.wiki/api.php?action=parse&page=Waterfall%20Quest&prop=wikitext&section=0&format=json&origin=*
-```
+**Coordinate conversion** (`src/util/Coordinates.tsx`) uses a **five-point least-squares linear fit**. The `CAL_POINTS` array pairs known Leaflet (lat, lng) values with their OSRS `WorldPoint`; `linearFit()` derives `scale` and `offset` per axis at module load. `leafletToWorldPoint(lat, lng, plane)` and `worldPointToLeaflet(wp)` apply these. If the tile source or bounds ever change, update `CAL_POINTS` and cross-check against the calibration table in the Data Sources section or [Explv's Map](https://explv.github.io).
 
-Pass the returned `wikitext` string to `wtf_wikipedia` and navigate to the infobox template:
+---
+
+### Zustand stores (`src/stores/`)
+
+The app uses four separate stores rather than one monolithic store. Actions are grouped into a nested `actions` object inside each store and exposed via dedicated selector hooks, so consumers never accidentally subscribe to the whole store.
+
+| Store | File | State |
+| --- | --- | --- |
+| `coordStore` | `coordStore.ts` | `coords: WorldPoint` — current mouse position on the map (updated on `mousemove` by `CoordViewer`) |
+| `routeStore` | `routeStore.ts` | `route: Step[]` — ordered list of user-added waypoints |
+| `mapVisibilityStore` | `mapVisibilityStore.ts` | `showMapLabels`, `showMapIcons` — toggles for overlay layers |
+| `questStore` | `questStore.ts` | `quests: Record<string, StoredQuest>`, `selectedQuestId` — loaded quests and active step tracking |
+
+**`questStore` detail.** `StoredQuest` extends `QuestData` with a pre-flattened `flatSteps: QuestStep[]` array (built at `addQuest` time). `useActiveStep(questId)` walks backwards through `flatSteps` when the active step has no `WorldPoint`, returning the nearest prior step that does — so the map always has a position to pan to.
+
+**Selector pattern.** Every component subscribes to exactly the slice it needs. Arrays and objects use `useShallow` to avoid re-renders from new references with identical contents:
 
 ```ts
-import wtf from 'wtf_wikipedia';
+// primitive — no shallow needed
+const selectedQuestId = useSelectedQuestId();
 
-async function fetchQuestDetails(questName: string) {
-  const url = `https://oldschool.runescape.wiki/api.php?action=parse&page=${encodeURIComponent(questName)}&prop=wikitext&section=0&format=json&origin=*`;
+// array — use useShallow
+const questIds = useQuestIds(); // internally: useQuestStore(s => Object.keys(s.quests), useShallow)
 
-  const res = await fetch(url, {
-    headers: { 'User-Agent': 'osrs-route-builder/1.0 (your@email.com)' },
-  });
-  const data = await res.json();
-  const wikitext = data.parse.wikitext['*'];
-
-  const doc = wtf(wikitext);
-  const template = doc.template('QuestDetails');
-
-  if (!template) return null;
-
-  return {
-    difficulty: template.json().difficulty,
-    length:     template.json().length,
-    questPoints: template.json().questpoints,
-    requirements: template.json().requirements,
-    rewards:    template.json().rewards,
-  };
-}
+// actions are never reactive — just call the hook once
+const { addQuest, advanceStep } = useQuestActions();
 ```
-
-The `template.json()` call returns a flat key/value object corresponding to the named parameters in the wikitext template. Field names match what you see in the raw wikitext (`|difficulty = Intermediate`, etc.), so cross-reference the actual wiki page source if a field isn't appearing.
-
-**Caveats.** `wtf_wikipedia` is a heuristic parser — it handles the common cases well but can trip on heavily nested templates or unusual formatting. The `{{QuestDetails}}` infobox is fairly regular, so coverage should be good. If a field parses as `undefined`, fall back gracefully in the UI rather than crashing. For fields that contain nested wikitext (like the requirements list, which may contain links), call `.text()` on the parsed node to get a plain-text representation.
 
 ## CIP List
 1. Last step in a quest won't complete, likely due to no step to update active step to
