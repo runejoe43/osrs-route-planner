@@ -5,7 +5,7 @@ import { useQuestViewer } from "../../hooks/useQuestViewer";
 import DraggableBox from "./draggableBox";
 
 export default function QuestViewer() {
-  const { quest, panelStartIndices, parallelPanels, setParallelPanels, hasStepsInRoute, isPanelFullyAdded, isStepPast, handleAddStep, handleAddPanel, closeViewer } = useQuestViewer();
+  const { quest, panelStartIndices, parallelPanels, setParallelPanels, hasStepsInRoute, isPanelFullyAdded, isStepPast, handleAddStep, handleAddPanel, isQuestComplete, closeViewer } = useQuestViewer();
   const [collapsedPanels, setCollapsedPanels] = useState<Set<number>>(new Set());
 
   if (!quest) return null;
@@ -117,37 +117,45 @@ export default function QuestViewer() {
       initialPosition={{ x: window.innerWidth - 320 - 12, y: 12 }}
       onClose={closeViewer}
     >
-      <Center>
-        <Tooltip
-          label={
-            hasStepsInRoute
-              ? "Cannot change mode after steps have been added to the route."
-              : "When sequential, steps must be added in order within each group. When parallel, groups can be completed in any order and steps added independently."
-          }
-          multiline
-          w={260}
-          withArrow
-          position="bottom"
-          zIndex={1001}
-        >
-          <Group gap="xs" align="center" mb="xs" wrap="nowrap">
-            <Text size="xs" c={parallelPanels && !hasStepsInRoute ? undefined : "dimmed"}>Parallel steps</Text>
-            <Switch
-              size="xs"
-              checked={!parallelPanels}
-              disabled={hasStepsInRoute}
-              onChange={(e) => setParallelPanels(!e.currentTarget.checked)}
-            />
-            <Text size="xs" c={!parallelPanels && !hasStepsInRoute ? undefined : "dimmed"}>Sequential steps</Text>
-          </Group>
-        </Tooltip>
-      </Center>
-      <ScrollArea.Autosize mah={1000} offsetScrollbars>
-        <Stack gap="xs">
-          <Divider />
-          {quest.steps.map((panel, panelIdx) => renderPanel(panel, panelIdx))}
-        </Stack>
-      </ScrollArea.Autosize>
+      {isQuestComplete ? (
+        <Center py="xl">
+          <Text size="lg" fw={700} c="teal">Quest Complete</Text>
+        </Center>
+      ) : (
+        <>
+          <Center>
+            <Tooltip
+              label={
+                hasStepsInRoute
+                  ? "Cannot change mode after steps have been added to the route."
+                  : "When sequential, steps must be added in order within each group. When parallel, groups can be completed in any order and steps added independently."
+              }
+              multiline
+              w={260}
+              withArrow
+              position="bottom"
+              zIndex={1001}
+            >
+              <Group gap="xs" align="center" mb="xs" wrap="nowrap">
+                <Text size="xs" c={parallelPanels && !hasStepsInRoute ? undefined : "dimmed"}>Parallel steps</Text>
+                <Switch
+                  size="xs"
+                  checked={!parallelPanels}
+                  disabled={hasStepsInRoute}
+                  onChange={(e) => setParallelPanels(!e.currentTarget.checked)}
+                />
+                <Text size="xs" c={!parallelPanels && !hasStepsInRoute ? undefined : "dimmed"}>Sequential steps</Text>
+              </Group>
+            </Tooltip>
+          </Center>
+          <ScrollArea.Autosize mah={1000} offsetScrollbars>
+            <Stack gap="xs">
+              <Divider />
+              {quest.steps.map((panel, panelIdx) => renderPanel(panel, panelIdx))}
+            </Stack>
+          </ScrollArea.Autosize>
+        </>
+      )}
     </DraggableBox>
   );
 }

@@ -210,11 +210,11 @@ const { addQuest, advanceStep } = useQuestActions();
 
 ## CIP List
 1. Last step in a quest won't complete, likely due to no step to update active step to
-2. MapAutoPan could potentially be re-rendering too many times
-3. ~~Some quests aren't meant to be sequential, e.g. Dragon Slayer I you can get map pieces or the shield in any order, forcing users into a specific order limits flexibility (any way to tell this via quest helper?)~~
-   1. This was addressed by making all panels doable in parallel
-4. info hover in draggableBox doesn't work, likely blocked by useDraggable
-5. hooks/useDeleteStep.ts
-  1. 1not a component but I notice the hook uses useQuestStore(s => s.quests) but only needs a single quest, should update store actions to give a single quest provider so we don't need to over subscribe
-6. overlay/
-  1. move the overlay components into this dir
+1. MapAutoPan could potentially be re-rendering too many times
+1. ~~Some quests aren't meant to be sequential, e.g. Dragon Slayer I you can get map pieces or the shield in any order, forcing users into a specific order limits flexibility (any way to tell this via quest helper?)~~
+  - Quest panel now has a toggle to allow panels to be completed out of order
+  -  I can instead keep a static list of quest names that can be done in parallel to avoid use confusion and avoid needing to determine this via QuestHelper
+1. info hover in draggableBox doesn't work, likely blocked by useDraggable
+1. hooks/useDeleteStep.ts
+  - not a component but I notice the hook uses useQuestStore(s => s.quests) but only needs a single quest, should update store actions to give a single quest provider so we don't need to over subscribe
+1. quest steps are keyed on step description, but it is possible the description is re-used

@@ -39,6 +39,19 @@ function parallelPanelFullyAdded(
   return true;
 }
 
+function allStepsWillBeInRoute(
+  quest: StoredQuest,
+  routeStepIds: Set<string>,
+  addedFrom: number,
+  addedTo: number
+): boolean {
+  for (let i = 0; i < quest.flatSteps.length; i++) {
+    if (i >= addedFrom && i <= addedTo) continue;
+    if (!routeStepIds.has(quest.flatSteps[i].id)) return false;
+  }
+  return true;
+}
+
 function parallelHandleAddStep(
   flatIndex: number,
   panelStartIndex: number,
@@ -48,7 +61,8 @@ function parallelHandleAddStep(
   setActiveStep: (questId: string, index: number) => void
 ): void {
   addStepsInRange(panelStartIndex, flatIndex, quest, routeStepIds, appendRoute);
-  setActiveStep(quest.name, flatIndex);
+  const done = allStepsWillBeInRoute(quest, routeStepIds, panelStartIndex, flatIndex);
+  setActiveStep(quest.name, done ? quest.flatSteps.length : flatIndex);
 }
 
 function parallelHandleAddPanel(
@@ -60,7 +74,8 @@ function parallelHandleAddPanel(
   setActiveStep: (questId: string, index: number) => void
 ): void {
   addStepsInRange(panelStartIndex, panelEndIndex, quest, routeStepIds, appendRoute);
-  setActiveStep(quest.name, panelEndIndex);
+  const done = allStepsWillBeInRoute(quest, routeStepIds, panelStartIndex, panelEndIndex);
+  setActiveStep(quest.name, done ? quest.flatSteps.length : panelEndIndex);
 }
 
 // ── Sequential helpers ────────────────────────────────────────────────────────
@@ -74,7 +89,7 @@ function sequentialHandleAddStep(
   setActiveStep: (questId: string, index: number) => void
 ): void {
   addStepsInRange(activeStep, flatIndex, quest, routeStepIds, appendRoute);
-  setActiveStep(quest.name, Math.min(flatIndex + 1, quest.flatSteps.length - 1));
+  setActiveStep(quest.name, flatIndex + 1);
 }
 
 function sequentialHandleAddPanel(
@@ -88,7 +103,7 @@ function sequentialHandleAddPanel(
 ): void {
   const firstStepToAdd = Math.max(activeStep, panelStartIndex);
   addStepsInRange(firstStepToAdd, panelEndIndex, quest, routeStepIds, appendRoute);
-  setActiveStep(quest.name, Math.min(panelEndIndex + 1, quest.flatSteps.length - 1));
+  setActiveStep(quest.name, panelEndIndex + 1);
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -103,6 +118,7 @@ export interface QuestViewerState {
   isStepPast: (flatIndex: number, panelStartIndex: number) => boolean;
   handleAddStep: (flatIndex: number, panelStartIndex: number) => void;
   handleAddPanel: (panelStartIndex: number, panelEndIndex: number) => void;
+  isQuestComplete: boolean;
   closeViewer: () => void;
 }
 
@@ -167,6 +183,8 @@ export function useQuestViewer(): QuestViewerState {
     }
   };
 
+  const isQuestComplete = quest ? activeStep >= quest.flatSteps.length : false;
+
   const closeViewer = () => selectQuest(null);
 
   return {
@@ -179,6 +197,7 @@ export function useQuestViewer(): QuestViewerState {
     isStepPast,
     handleAddStep,
     handleAddPanel,
+    isQuestComplete,
     closeViewer,
   };
 }
